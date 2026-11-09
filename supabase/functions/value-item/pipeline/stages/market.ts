@@ -9,7 +9,7 @@ import { policyKey } from "../../../_shared/connector-learn.ts";
 import { planSearches } from "../../search-ai.ts";
 import { productionSourceBeliefs } from "../../../_shared/search-ai/local-engine.ts";
 import { runMarketLive } from "../../market-live.ts";
-import { withEyeSearch } from "../eye-search.ts";
+import { candidateSearch, withEyeSearch } from "../eye-search.ts";
 import type { RunState } from "../state.ts";
 
 /** MISS: Market Live <-> Search AI (contains the Connector hook, unchanged). Sets plan, connectorRecord, report, marketState and findings on the state. */
@@ -71,6 +71,13 @@ export async function marketStage(rs: RunState): Promise<BrainRun | null> {
         if (rs.detailState === null || rs.authState === null) await raceTimeout(Promise.all([detailP, authP]), Math.max(0, cfg.eyesMs - elapsed()));
         const ds0 = rs.detailState as Settled<DetailReport> | null;
         const as0 = rs.authState as Settled<AuthenticityReport> | null;
+        // The visual best guess (Identification's 2nd query) comes first: it is the one that can find the exact product.
+        const guess = candidateSearch(basePlan, ident.google_queries);
+        if (guess) {
+          eyeLaunch.search = guess;
+          eyeLaunch.atMs = elapsed();
+          return guess;
+        }
         const withEye = withEyeSearch(basePlan, ds0 && ds0.ok ? ds0.value : null, as0 && as0.ok ? as0.value : null);
         const added = (withEye.extraSearches?.length ?? 0) > (basePlan.extraSearches?.length ?? 0);
         const extra = added ? withEye.extraSearches![withEye.extraSearches!.length - 1] : null;
