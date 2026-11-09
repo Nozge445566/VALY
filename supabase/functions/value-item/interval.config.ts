@@ -83,6 +83,8 @@ export const CONF_MIN = 5;
 export const CONF_MAX = 95;
 /** with no market data the answer is a bounded estimate (marks, material, era). Calibrate later from l_feedback. */
 export const CONF_CAP_NO_MARKET = 40;
+/** With no market data the range never goes beyond mid x this and mid / this. */
+export const NO_MARKET_MAX_RATIO = 3;
 
 // ---------------------------------------------------------------- width drivers
 export const DRIVER_MIN_SHARE = 0.25;

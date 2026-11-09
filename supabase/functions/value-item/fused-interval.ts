@@ -84,10 +84,16 @@ export function buildFusedInterval(input: FusedIntervalInput): IntervalOutput {
   const bucket = bucketOf(input.category, strengthOf(nEff, !marketAbsent), basis, input.mode);
   const kWanted = input.kOf ? input.kOf(bucket) : input.k;
   const k = clamp(fin(kWanted ?? C.K_DEFAULT, C.K_DEFAULT), C.K_MIN, C.K_MAX);
-  const t = t90(f.df);
+  // With no ads the only evidence is the model's own stated spread. That spread is not estimated from a few samples, so the small-sample t (df 2 gives 1.89) would count the doubt twice. Use the normal 90th percentile.
+  const t = marketAbsent ? C.Z80 : t90(f.df);
 
   let lnLow = f.mu - k * t * Math.sqrt(sLow2);
   let lnHigh = f.mu + k * t * Math.sqrt(sTot2);
+  // No market data: never wider than a factor NO_MARKET_MAX_RATIO each way from the mid (a 25 kr item must not show 320 kr).
+  if (marketAbsent) {
+    lnHigh = Math.min(lnHigh, f.mu + Math.log(C.NO_MARKET_MAX_RATIO));
+    lnLow = Math.max(lnLow, f.mu - Math.log(C.NO_MARKET_MAX_RATIO));
+  }
   let w = lnHigh - lnLow;
   if (w < C.MIN_LOG_WIDTH) {
     const delta = (C.MIN_LOG_WIDTH - w) / 2;
