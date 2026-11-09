@@ -1,0 +1,5 @@
+project_id = "valy"
+
+# Stripe calls this endpoint without a Supabase JWT; it checks the Stripe signature itself.
+[functions.stripe-webhook]
+verify_jwt = false
