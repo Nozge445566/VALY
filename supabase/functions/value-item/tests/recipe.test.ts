@@ -84,12 +84,12 @@ type SavedInterval = {
 
 describe("interval recipe: replay equals what was shown", () => {
   it("rebuilding from the saved steps.interval gives the same low, mid and high (within 0.01%)", async () => {
-    // 12 listings: storage keeps at most 15 (INTERVAL_COMPS_STORED), so nothing is cut off here.
+    // 12 listings found, the best 7 go to the Judge (select-ads.ts), so 7 are labelled and stored (storage keeps at most 15).
     // Prices are stored rounded to cents, which is why the tolerance is 0.01% and not exact.
-    const run = await runWith([6, 6], { same: Array.from({ length: 12 }, (_, i) => i + 1) });
+    const run = await runWith([6, 6], { same: Array.from({ length: 7 }, (_, i) => i + 1) });
     const saved = run.steps.interval as SavedInterval;
     assert.ok(saved, "steps.interval was saved");
-    assert.equal(saved.comps.length, 12, "all 12 listings were stored");
+    assert.equal(saved.comps.length, 7, "the Judge's 7 listings were stored");
 
     const replay = buildInterval({ ...saved.input, comps: saved.comps, fallbackLevel: saved.fallbackLevel, k: 1 });
     for (const key of ["low", "mid", "high"] as const) {
@@ -101,9 +101,9 @@ describe("interval recipe: replay equals what was shown", () => {
 
   it("the rounding in storage is real: the live comps are not whole cents", async () => {
     // Guards the test above against passing for the wrong reason.
-    const run = await runWith([6, 6], { same: Array.from({ length: 12 }, (_, i) => i + 1) });
+    const run = await runWith([6, 6], { same: Array.from({ length: 7 }, (_, i) => i + 1) });
     const saved = run.steps.interval as SavedInterval;
-    const live = intervalRecipeOf(args({ findings: Array.from({ length: 12 }, (_, i) => finding(i + 1, "sold", 50.123456 + i)), verdict: sampleVerdict({ same: Array.from({ length: 12 }, (_, i) => i + 1) }) }));
+    const live = intervalRecipeOf(args({ findings: Array.from({ length: 7 }, (_, i) => finding(i + 1, "sold", 50.123456 + i)), verdict: sampleVerdict({ same: Array.from({ length: 7 }, (_, i) => i + 1) }) }));
     assert.ok(live.comps.some((c) => Math.abs(c.priceUsd * 100 - Math.round(c.priceUsd * 100)) > 1e-9), "fixture has sub-cent prices");
     assert.ok(saved.comps.every((c) => Math.abs(c.priceUsd * 100 - Math.round(c.priceUsd * 100)) < 1e-9), "stored prices are whole cents");
   });
