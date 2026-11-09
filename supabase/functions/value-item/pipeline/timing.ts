@@ -14,7 +14,5 @@ export const JUDGE_MIN_MS = 1500;
 export const SEARCH_MIN_MS = 400;
 /** After the search, the Judge may wait this long for a Detail eye that is still working (and the same again for the Authenticity eye). This wait is taken out of the Judge's time: it happens before judgeMs is calculated. */
 export const DETAIL_GRACE_MS = 250;
-/** Before the Judge call it may wait this long for Judge-A (Haiku, photo only) so Judge-A's labels reach it. This wait is taken out of the Judge's time: it happens before judgeMs is calculated, so the 7 s limit does not move but the Judge gets less time. */
-export const JUDGE_A_GRACE_MS = 400;
 /** Memory is one quick database call. If it is slower than this, treat it as a miss. */
 export const MEMORY_TIMEOUT_MS = 500;

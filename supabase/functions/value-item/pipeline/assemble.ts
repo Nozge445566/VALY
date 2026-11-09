@@ -111,7 +111,7 @@ export interface AssembleArgs {
    * Save the recipe you are handed; never rebuild it (see IntervalRecipe).
    */
   onInterval?: (out: IntervalOutput, recipe: IntervalRecipe) => void;
-  /** Independent anchors (Judge-A, Identification) for the fused engine, as ln-USD sources. Stored in the recipe. */
+  /** Independent anchors (Identification, neighbours) for the fused engine, as ln-USD sources. Stored in the recipe. */
   fusionSources?: RecipeSource[];
 }
 

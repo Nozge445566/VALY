@@ -1,7 +1,6 @@
 import type { AuthenticityReport, BrainInput, BrainRun, ConnectorLogRow, DetailReport, Finding, Fingerprint, Identification, JudgeVerdict, MarketReport, SearchLogRow, SearchPlan } from "../types.ts";
 import { type BrainConfig, type Deps } from "../config.ts";
 import type { ConnectorRecord } from "../connector.ts";
-import type { JudgeAReport } from "../judge-a.ts";
 import type { MarketState } from "../present.ts";
 import type { NeighbourRow } from "../neighbour-prior.ts";
 import type { RunOptions } from "./options.ts";
@@ -10,7 +9,6 @@ import { FINISH_RESERVE_MS } from "./timing.ts";
 import type { StoredValuation } from "../memory.ts";
 import { estimateVerdict, mergeEyeFacts, neighbourEstimateVerdict } from "../anchor.ts";
 import { neighbourSource } from "../neighbour-prior.ts";
-import { identWithJudgeA } from "./helpers.ts";
 import { buildConnectorLog, buildSearchLog } from "./logs.ts";
 import { BRAIN_VERSION } from "../config.ts";
 import { haikuWeightFor } from "../../_shared/connector-learn.ts";
@@ -40,16 +38,14 @@ export interface RunState {
   readonly detailAbort: AbortController;
   readonly authAbort: AbortController;
 
-  // set by eyes (detailState, authState and judgeASeen are written later, by the promises' own callbacks)
+  // set by eyes (detailState and authState are written later, by the promises' own callbacks)
   detailState: Settled<DetailReport> | null;
   authState: Settled<AuthenticityReport> | null;
-  judgeASeen: JudgeAReport | null;
   detailP: Promise<Settled<DetailReport>>;
   authP: Promise<Settled<AuthenticityReport>>;
   ident: Identification | null;
   fp: Fingerprint | null;
   key: string | null;
-  judgeAP: Promise<JudgeAReport | null>;
   neighboursP: Promise<NeighbourRow[] | null>;
 
   // set by memory
@@ -87,14 +83,12 @@ export function createRunState(input: BrainInput, cfg: BrainConfig, deps: Deps, 
     authAbort: new AbortController(),
     detailState: null,
     authState: null,
-    judgeASeen: null,
     // placeholders only: the eyes stage replaces all of these before any other code reads them
     detailP: Promise.resolve({ ok: false, error: null }),
     authP: Promise.resolve({ ok: false, error: null }),
     ident: null,
     fp: null,
     key: null,
-    judgeAP: Promise.resolve(null),
     neighboursP: Promise.resolve(null),
     softStored: null,
     plan: null,
@@ -120,11 +114,11 @@ export function logsFor(rs: RunState, verdict: JudgeVerdict): { searchLog: Searc
   return { searchLog, connectorLog };
 }
 
-/** Estimate ladder: rung 1-2 the anchor (Identification / Judge-A facts), rung 4 the neighbour prior; null = nothing usable. */
+/** Estimate ladder: rung 1-2 the anchor (Identification facts), rung 4 the neighbour prior; null = nothing usable. */
 export async function estimateLadder(rs: RunState) {
-  const { ident, judgeAP, authenticity, details, input, deps, steps, degraded, neighboursP } = rs;
+  const { ident, authenticity, details, input, deps, steps, degraded, neighboursP } = rs;
   if (!ident) return null;
-  const viaAnchor = estimateVerdict(mergeEyeFacts(await identWithJudgeA(ident, judgeAP), authenticity), details, input.lang);
+  const viaAnchor = estimateVerdict(mergeEyeFacts(ident, authenticity), details, input.lang);
   if (viaAnchor) return viaAnchor;
   const nb = neighbourSource((await neighboursP) ?? [], deps.now());
   const viaNb = neighbourEstimateVerdict(ident, details, nb, input.lang);
