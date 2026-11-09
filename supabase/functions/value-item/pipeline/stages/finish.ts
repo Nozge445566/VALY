@@ -2,7 +2,6 @@ import { ASKING_TO_SOLD, CONDITION_FACTOR, INTERVAL_COMPS_STORED } from "../../i
 import { type BrainResult, type BrainRun, type JudgeVerdict } from "../../types.ts";
 import { HARD_CAPS } from "../../config.ts";
 import { FINISH_RESERVE_MS } from "../timing.ts";
-import { judgeAAnchor } from "../../judge-a.ts";
 import { freshDetailFactors } from "../../present.ts";
 import { neighbourSource } from "../../neighbour-prior.ts";
 import { type RecipeSource } from "../../fused-interval.ts";
@@ -22,7 +21,7 @@ import { estimateLadder, logsFor, type RunState } from "../state.ts";
 /** Maths and checks, then check and exchange rates (code only). Returns the final BrainRun. */
 export async function finishStage(rs: RunState): Promise<BrainRun> {
   const { input, cfg, deps, opts, degraded, steps, marks, elapsed } = rs;
-  const { ident, fp, key, judgeAP, neighboursP } = rs;
+  const { ident, fp, key, neighboursP } = rs;
   const { findings, details, authenticity, judgeRan, softStored, marketState } = rs;
   let verdict = rs.verdict as JudgeVerdict;
   let estimateMode = rs.estimateMode;
@@ -47,16 +46,12 @@ export async function finishStage(rs: RunState): Promise<BrainRun> {
   let fusionSources: RecipeSource[] = [];
   if (judgeRan && verdict.ads) {
     // Consistency adjudicator (pure): deterministic cross-checks of the Judge against the ads, Identification and the eyes.
-    // Rule R3 needs an INDEPENDENT anchor. Judge-A (photo only, never saw the ads) is preferred when it is not unsure; otherwise the
-    // bounded facts of Identification (also never saw the ads) qualify when the model is known.
-    const ja = await judgeAP;
-    steps.judgeA = ja ?? { missing: true };
-    const jaAnchor = ja && ja.certainty !== "low" ? judgeAAnchor(ja) : null;
+    // Rule R3 needs an INDEPENDENT anchor: the bounded facts of Identification (never saw the ads) qualify when the model is known.
     const anchorForR3 = ident && ident.identifiable
       ? anchorEstimate({ new_price_usd: ident.new_price_usd, new_price_basis: ident.new_price_basis, category: ident.category.toLowerCase(), age_class: ident.age_class ?? mergeEyeFacts(ident, authenticity)?.age_class, condition: verdict.condition?.grade ?? null, rarity: ident.rarity ?? mergeEyeFacts(ident, authenticity)?.rarity })
       : null;
     // Collectible, antique or rare items: their real listings may sit far above a depreciated anchor, so R3 must not demote them.
-    const anchorUsdR3 = isCollectorLike(mergeEyeFacts(ident, authenticity), ja?.new_price_basis) ? null : jaAnchor ? jaAnchor.usd : anchorForR3 && anchorForR3.basis === "known_model" ? anchorForR3.mid : null;
+    const anchorUsdR3 = isCollectorLike(mergeEyeFacts(ident, authenticity)) ? null : anchorForR3 && anchorForR3.basis === "known_model" ? anchorForR3.mid : null;
     const adj = adjudicate(verdict, findings, ident, authenticity, anchorUsdR3);
     verdict = { ...verdict, ads: adj.ads, authenticity_risk: adj.risk };
     // Second look (tighten-only, 600 ms, only when time is left): ads demoted by a soft rule are asked once more; "different" demotes, nothing is ever promoted.
@@ -87,13 +82,12 @@ export async function finishStage(rs: RunState): Promise<BrainRun> {
         .filter((f) => f.priceUsd > 0 && lab.has(f.id) && (lab.get(f.id)!.match === "same" || lab.get(f.id)!.match === "similar"))
         .map((f) => ({ y: Math.log(f.priceUsd * adFactor(lab.get(f.id)!, CONDITION_FACTOR) * (f.kind === "sold" ? 1 : a2s)), se2: adNoise({ match: lab.get(f.id)!.match, pSame: lab.get(f.id)!.p_same, reliability: lab.get(f.id)!.ad_reliability, relative: lab.get(f.id)!.relative_value, asking: f.kind !== "sold" }) ?? 0.12 }));
       const srcs: RecipeSource[] = [];
-      if (jaAnchor) srcs.push({ name: "judge_a", mu: Math.log(jaAnchor.usd), sd: jaAnchor.lnStd });
-      else if (anchorForR3) srcs.push({ name: "identification", mu: Math.log(anchorForR3.mid), sd: anchorForR3.lnStd });
+      if (anchorForR3) srcs.push({ name: "identification", mu: Math.log(anchorForR3.mid), sd: anchorForR3.lnStd });
       const nb = neighbourSource((await neighboursP) ?? [], deps.now());
       steps.neighbours = nb ? { n: nb.n, mid: Math.round(Math.exp(nb.mu)), sd: Math.round(nb.sd * 1000) / 1000 } : { none: true };
       if (nb) srcs.push({ name: "neighbours", mu: nb.mu, sd: nb.sd });
       fusionSources = srcs;
-      const fz = fuse({ ads: fAds, sources: srcs, variantAmbiguity: variantAmbiguityOf({ identConfidence: ident?.confidence ?? null, similarShare: fAds.length ? findings.filter((f) => lab.get(f.id)?.match === "similar").length / fAds.length : null, certainty: (jaAnchor as { certainty?: "high" | "medium" | "low" } | null)?.certainty ?? null }) });
+      const fz = fuse({ ads: fAds, sources: srcs, variantAmbiguity: variantAmbiguityOf({ identConfidence: ident?.confidence ?? null, similarShare: fAds.length ? findings.filter((f) => lab.get(f.id)?.match === "similar").length / fAds.length : null }) });
       steps.fusion = fz ? { low: Math.round(fz.low), mid: Math.round(fz.mid), high: Math.round(fz.high), df: fz.df, tau2: fz.tau2, nEff: fz.nEff, influence: fz.influence, sourceWeights: fz.sourceWeights, tempered: fz.tempered, shadow: false } : { none: true };
     } catch (e) {
       steps.fusion = { error: errText(e) };

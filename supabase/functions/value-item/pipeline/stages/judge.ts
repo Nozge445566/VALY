@@ -1,8 +1,7 @@
 import { type AuthenticityReport, type BrainResult, type BrainRun, type DetailReport, type JudgeVerdict, StepError } from "../../types.ts";
 import { HARD_CAPS } from "../../config.ts";
-import { DETAIL_GRACE_MS, JUDGE_A_GRACE_MS, JUDGE_MIN_MS } from "../timing.ts";
+import { DETAIL_GRACE_MS, JUDGE_MIN_MS } from "../timing.ts";
 import { checkResult, EMPTY_EVIDENCE } from "../../check.ts";
-import { type JudgeAReport } from "../../judge-a.ts";
 import { errText, raceTimeout, type Settled } from "../async.ts";
 import { ageDecay } from "../../memory.ts";
 import { labelsOf, T } from "../../lang.ts";
@@ -14,7 +13,7 @@ import { estimateLadder, type RunState } from "../state.ts";
 /** The Judge: photo + details + findings, then the fallbacks (stored answer, emergency verdict, estimate ladder). Sets verdict, judgeRan and estimateMode on the state. */
 export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
   const { input, cfg, deps, degraded, steps, marks, elapsed, judgeEnd } = rs;
-  const { ident, fp, judgeAP, detailP, authP, detailAbort, authAbort, report } = rs;
+  const { ident, fp, detailP, authP, detailAbort, authAbort, report } = rs;
 
   // Detail eye -> Judge (and the eye search). If it is still working, give it a short moment.
   const { findings, softStored } = rs;
@@ -49,20 +48,13 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
   rs.authenticity = authenticity;
 
   let verdict: JudgeVerdict | null = null;
-  // Judge-A -> Judge: both are Haiku and fast; give Judge-A a short moment to finish so its labels reach the Judge. Late = missing.
-  // Only while the Judge keeps its minimum time. These waits (DETAIL_GRACE_MS 250 ms for the Detail eye, 250 ms for the Authenticity eye
-  // and JUDGE_A_GRACE_MS 400 ms for Judge-A, up to 0.9 s in total) all happen BEFORE judgeMs is calculated, so they are taken out of the
-  // Judge's time. The 7 s limit does not move, but the Judge gets less time.
-  if (rs.judgeASeen === null && judgeEnd - elapsed() - JUDGE_A_GRACE_MS >= JUDGE_MIN_MS) await raceTimeout(judgeAP, JUDGE_A_GRACE_MS);
   const judgeMs = judgeEnd - elapsed();
   if (judgeMs >= JUDGE_MIN_MS) {
-    const judgeALabels = rs.judgeASeen as JudgeAReport | null;
-    // How hard the Judge thinks (JUDGE_EFFORT=auto): chosen here, by code, from what is already known. No extra model call, no waiting
-    // (Judge-A is only peeked at). Identification is used for this choice only: the Judge never receives it.
+    // How hard the Judge thinks (JUDGE_EFFORT=auto): chosen here, by code, from what is already known. No extra model call, no waiting.
+    // Identification is used for this choice only: the Judge never receives it.
     const effortPick = pickEffort(cfg.judgeEffort, {
       ident,
       authenticity,
-      judgeA: rs.judgeASeen as JudgeAReport | null,
       findings,
       memoryHit: softStored !== null && softStored.hit,
       memoryAgeDays: softStored ? softStored.ageDays : null,
@@ -71,7 +63,7 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
     const effortLog = { effort: effortPick.effort, effortAuto: effortPick.auto, effortReasons: effortPick.reasons };
     deps.log("[Judge] start", { judgeMs, startedAtMs: elapsed(), ...effortLog });
     try {
-      const outcome = await judge(deps, cfg, input, ident, details, findings, stats, judgeMs, softStored ? softStored.ageDays : null, authenticity, effortPick.effort, judgeALabels);
+      const outcome = await judge(deps, cfg, input, ident, details, findings, stats, judgeMs, softStored ? softStored.ageDays : null, authenticity, effortPick.effort);
       verdict = outcome.verdict;
       if (outcome.partial) degraded.push("judge_partial");
       steps.judgeMs = outcome.ms;
