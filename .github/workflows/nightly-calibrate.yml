@@ -1,0 +1,28 @@
+# The nightly interval calibration (writes l_calibration from l_runs + l_feedback). 04:15 UTC, after the Connector (03:45).
+# Also by hand: Actions -> "Nightly interval calibration" -> Run workflow.
+# Needs the GitHub secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (the same two the Search AI job uses) and the
+# deployed Edge Function:  supabase functions deploy calibrate
+# Retries short problems by itself (see scripts/call-edge-function.sh); a lasting problem fails the run with a plain message.
+name: Nightly interval calibration
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 4 * * *"
+concurrency:
+  group: nightly-calibrate
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run calibrate
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "Secrets SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are not set: skipping."; exit 0; fi
+          bash scripts/call-edge-function.sh calibrate calibrate.json

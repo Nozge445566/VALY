@@ -1,0 +1,21 @@
+# The nightly learner of the Search AI (TypeScript). Runs every night at 03:17 UTC, and by hand
+# (Actions -> Run workflow). Needs the GitHub secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.
+name: search-ai-nightly-ts
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "Secrets SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are not set: skipping."; exit 0; fi
+          node --experimental-strip-types supabase/functions/_shared/search-ai/nightly-entry.ts

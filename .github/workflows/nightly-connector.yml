@@ -1,0 +1,28 @@
+# The nightly learner of the Connector (turns the dials, learns the Haiku weight). 03:45 UTC, after the Search AI (03:17).
+# Also by hand: Actions -> "Nightly Connector learner" -> Run workflow.
+# Needs the GitHub secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (the same two the Search AI job uses) and the
+# deployed Edge Function:  supabase functions deploy connector-learn
+# Retries short problems by itself (see scripts/call-edge-function.sh); a lasting problem fails the run with a plain message.
+name: Nightly Connector learner
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 3 * * *"
+concurrency:
+  group: nightly-connector
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run connector-learn
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "Secrets SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are not set: skipping."; exit 0; fi
+          bash scripts/call-edge-function.sh connector-learn connector-learn.json
