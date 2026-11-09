@@ -105,13 +105,12 @@ export function testConfig(over: Partial<BrainConfig> = {}): BrainConfig {
 }
 
 /** Which step of the Brain a Claude call belongs to, read from its system prompt. */
-export function stepOf(call: Call): "detail" | "ident" | "judge" | "judgeA" | "secondLook" | "auth" | "other" {
+export function stepOf(call: Call): "detail" | "ident" | "judge" | "secondLook" | "auth" | "other" {
   const system = String(call.body?.system ?? "");
   if (system.includes("You are the Detail eye")) return "detail";
   if (system.includes("You are Identification")) return "ident";
   if (system.includes("You are the Judge")) return "judge";
   if (system.includes("You are the Authenticity eye")) return "auth";
-  if (system.includes("You are Judge-A")) return "judgeA";
   if (system.includes("You are Second Look")) return "secondLook";
   return "other";
 }

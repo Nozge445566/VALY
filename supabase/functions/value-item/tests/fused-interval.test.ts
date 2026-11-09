@@ -31,12 +31,12 @@ describe("fused-interval.ts", () => {
     assert.ok(wide.confidenceScore < tight.confidenceScore);
   });
   it("an independent source that contradicts the ads does not drag the price and is flagged", () => {
-    const withBad = buildFusedInterval({ ...base(), sources: [{ name: "judge_a", mu: Math.log(900), sd: 0.3 }] });
+    const withBad = buildFusedInterval({ ...base(), sources: [{ name: "identification", mu: Math.log(900), sd: 0.3 }] });
     assert.ok(withBad.mid < 130, String(withBad.mid));
     assert.ok(withBad.widthDrivers.includes("sources_disagree") || withBad.confidenceScore < buildFusedInterval(base()).confidenceScore);
   });
   it("no ads: uses the anchor source, flags model_only, confidence capped like the old no-market path", () => {
-    const r = buildFusedInterval(base({ comps: [], sources: [{ name: "judge_a", mu: Math.log(90), sd: 0.5 }] }));
+    const r = buildFusedInterval(base({ comps: [], sources: [{ name: "identification", mu: Math.log(90), sd: 0.5 }] }));
     assert.ok(Math.abs(r.mid - 90) < 1);
     assert.ok(r.widthDrivers.includes("model_only"));
     assert.ok(r.confidenceScore <= 40);

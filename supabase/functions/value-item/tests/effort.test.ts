@@ -7,7 +7,6 @@ import type { EffortSignals } from "../judge.ts";
 import { runBrain } from "../pipeline.ts";
 import { getFxTable } from "../fx.ts";
 import type { AuthenticityReport, BrainInput, Finding, Identification } from "../types.ts";
-import type { JudgeAReport } from "../judge-a.ts";
 import {
   FAKE_JPEG_B64, SAMPLE_AUTH, SAMPLE_DETAILS, SAMPLE_IDENT, claudeReply, fakeEngine, json, makeDeps, sampleVerdict, serperSold, sleepMs,
   stepOf, streamJudge, testConfig,
@@ -22,7 +21,7 @@ const sold = (n: number, over: Partial<Finding> = {}) => Array.from({ length: n 
 const identOk: Identification = { ...SAMPLE_IDENT, category: "backpack", brand: "Fjallraven", model: "Kanken", era: null, confidence: 90, new_price_usd: 80, new_price_basis: "known_model" };
 const authOk: AuthenticityReport = { signs: [], era: null, risk_hint: "low", search_terms: [] };
 const kanken = (n: number, over: Partial<Finding> = {}) => sold(n, { title: "Fjallraven Kanken backpack", ...over });
-const easy = (): EffortSignals => ({ ident: identOk, authenticity: authOk, judgeA: null, findings: kanken(6), memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
+const easy = (): EffortSignals => ({ ident: identOk, authenticity: authOk, findings: kanken(6), memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
 
 describe("JUDGE_EFFORT setting", () => {
   it("auto is the default; unknown and empty values mean auto; the manual levels stay", () => {
@@ -88,23 +87,13 @@ describe("pickEffort", () => {
   }
 
   it("everything missing at once (no Identification, no Authenticity eye, no ads) is still MEDIUM", () => {
-    const p = pickEffort("auto", { ident: null, authenticity: null, judgeA: null, findings: [], memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
+    const p = pickEffort("auto", { ident: null, authenticity: null, findings: [], memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
     assert.deepEqual(p, { effort: "medium", auto: true, reasons: ["default_medium"] });
   });
 
   it("a fresh Memory HIT (not older than half the max age) stays MEDIUM; a non-HIT age does not count", () => {
     assert.equal(pickEffort("auto", { ...easy(), memoryHit: true, memoryAgeDays: 14, memoryMaxAgeDays: 30 }).effort, "medium");
     assert.equal(pickEffort("auto", { ...easy(), memoryHit: false, memoryAgeDays: 29, memoryMaxAgeDays: 30 }).effort, "medium");
-  });
-
-  it("Identification and Judge-A price anchors: strong disagreement is HIGH, agreement or a missing Judge-A is not", () => {
-    const ja = (usd: number | null, basis: JudgeAReport["new_price_basis"] = "known_model"): JudgeAReport => ({ new_price_usd: usd, new_price_basis: basis, used_price_band: "mid", rarity: null, age_class: null, material: null, certainty: "medium" });
-    assert.ok(pickEffort("auto", { ...easy(), judgeA: ja(200) }).reasons.includes("anchor_disagree"), "80 vs 200 is a factor 2.5");
-    assert.ok(pickEffort("auto", { ...easy(), judgeA: ja(30) }).reasons.includes("anchor_disagree"), "80 vs 30, either direction");
-    assert.equal(pickEffort("auto", { ...easy(), judgeA: ja(100) }).effort, "medium", "80 vs 100 agree");
-    assert.equal(pickEffort("auto", { ...easy(), judgeA: null }).effort, "medium", "Judge-A not ready: no signal");
-    assert.equal(pickEffort("auto", { ...easy(), judgeA: ja(null, "none") }).effort, "medium", "Judge-A without an anchor: no signal");
-    assert.equal(pickEffort("auto", { ...easy(), ident: { ...identOk, new_price_usd: null, new_price_basis: "none" }, judgeA: ja(500) }).effort, "medium", "Identification without an anchor: no signal");
   });
 
   it("conflicting brands or models among the ads no longer raise the effort: MEDIUM", () => {
@@ -118,7 +107,7 @@ describe("pickEffort", () => {
     const auths: (AuthenticityReport | null)[] = [null, authOk, { ...authOk, risk_hint: "high" }];
     const finds = [[], kanken(2), kanken(8)];
     for (const ident of idents) for (const authenticity of auths) for (const findings of finds) for (const memoryHit of [false, true]) {
-      const p = pickEffort("auto", { ident, authenticity, judgeA: null, findings, memoryHit, memoryAgeDays: 20, memoryMaxAgeDays: 30 });
+      const p = pickEffort("auto", { ident, authenticity, findings, memoryHit, memoryAgeDays: 20, memoryMaxAgeDays: 30 });
       assert.ok(p.effort === "medium" || p.effort === "high", p.effort);
       assert.ok(p.reasons.length > 0);
     }
@@ -189,7 +178,6 @@ describe("pipeline: the effort is chosen before the Judge call and logged", () =
         if (step === "detail") return claudeReply(SAMPLE_DETAILS);
         if (step === "auth") return claudeReply({ ...SAMPLE_AUTH, ...authOver });
         if (step === "ident") return claudeReply({ ...bag, ...identOver });
-        if (step === "judgeA") return json({ error: "x" }, 500);
         if (step === "judge") return streamJudge(sampleVerdict({ brand: "Fjallraven", model: "Kanken", category: "backpack", display_name: "Fjallraven Kanken" }), signal);
       }
       if (call.url.includes("serper")) {
@@ -217,7 +205,7 @@ describe("pipeline: the effort is chosen before the Judge call and logged", () =
     assert.equal(trace.effortAuto, true);
     assert.deepEqual(judgeCall.body?.output_config, { effort: "medium" });
     assert.equal(calls.filter((c) => stepOf(c) === "judge").length, 1, "one Judge call only");
-    assert.equal(calls.filter((c) => c.url.includes("anthropic")).length, calls.filter((c) => ["detail", "ident", "auth", "judge", "judgeA", "secondLook"].includes(stepOf(c))).length, "no new kind of model call");
+    assert.equal(calls.filter((c) => c.url.includes("anthropic")).length, calls.filter((c) => ["detail", "ident", "auth", "judge", "secondLook"].includes(stepOf(c))).length, "no new kind of model call");
   });
 
   it("a risky scan: the Authenticity eye says medium risk, so HIGH is sent and the reason is logged", async () => {
@@ -245,15 +233,7 @@ describe("pipeline: the effort is chosen before the Judge call and logged", () =
   });
 });
 
-describe("Judge-A -> Judge (labels only) and Authenticity eye search", () => {
-  it("the Judge request carries Judge-A's labels but never its price numbers", async () => {
-    const { judgeUserText } = await import("../judge-prompt.ts");
-    const ja = { new_price_usd: 123456, new_price_basis: "known_model" as const, used_price_band: "mid" as const, rarity: "rare", age_class: "vintage", material: "steel", certainty: "high" as const };
-    const t = judgeUserText(null, [], false, null, ja);
-    assert.ok(t.includes("JUDGE-A") && t.includes("rare") && t.includes("steel"));
-    assert.ok(!t.includes("123456") && !t.includes("used_price_band") && !t.includes("new_price"));
-    assert.ok(judgeUserText(null, [], false, null, null).includes("not available"));
-  });
+describe("Authenticity eye search", () => {
   it("withEyeSearch uses only the Authenticity eye (never Detail eye text) and adds nothing without terms", async () => {
     const { withEyeSearch } = await import("../pipeline.ts");
     const plan = { searches: [{ id: "s1", query: "seiko snk809", template_id: "t", kind: "fixed", gl: "se", hl: "sv", reason: "x" }], stop: { soldPrices: 5, maxMs: 3000 } } as never;

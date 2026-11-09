@@ -31,8 +31,6 @@ interface Over {
   /** The Search AI engine's answer (a function so it can throw or take time). Default: the good PLAN. */
   plan?: () => Record<string, unknown> | Promise<Record<string, unknown>>;
   serper?: (call: Call, signal?: AbortSignal) => Response | Promise<Response>;
-  /** Judge-A (photo-only price anchor). Default: the call fails, which must simply mean "no anchor". */
-  judgeA?: () => Response | Promise<Response>;
   /** Second look (text-only re-check of ads a soft consistency rule demoted). Default: fails = no change. */
   secondLook?: (call: Call, signal?: AbortSignal) => Response | Promise<Response>;
 }
@@ -44,7 +42,6 @@ function route(o: Over = {}): Route {
       if (step === "detail") return o.detail ? o.detail() : claudeReply(SAMPLE_DETAILS);
       if (step === "auth") return claudeReply(SAMPLE_AUTH);
       if (step === "secondLook") return o.secondLook ? o.secondLook(call, signal) : json({ error: "x" }, 500);
-      if (step === "judgeA") return o.judgeA ? o.judgeA() : json({ error: "x" }, 500);
       if (step === "ident") return o.ident ? o.ident() : claudeReply(SAMPLE_IDENT);
       if (step === "judge") return o.judge ? o.judge(call, signal) : streamJudge(sampleVerdict(), signal);
     }
@@ -316,28 +313,14 @@ describe("the Brain, arrow by arrow", () => {
 
 void claudeReply;
 
-describe("Judge-A and the shadow fusion (v5.1)", () => {
-  const JA = { new_price_usd: 300, new_price_basis: "known_model", used_price_band: "mid", rarity: "common", age_class: "mid", material: null, certainty: "high" };
-  it("runs beside Market Live, sees NO ads, and its report is logged", async () => {
-    const { out, calls } = await run({ judgeA: () => claudeReply(JA) });
-    assert.equal(out.result.status, "ok");
-    const ja = calls.filter((c) => stepOf(c) === "judgeA");
-    assert.equal(ja.length, 1);
-    assert.ok(!JSON.stringify(ja[0].body).includes("snk809 sold"), "Judge-A must not receive listings");
-    assert.equal((out.steps.judgeA as { new_price_usd: number }).new_price_usd, 300);
-  });
-  it("a failed Judge-A is only a missing source: same answer, logged as missing", async () => {
-    const { out } = await run({});
-    assert.equal(out.result.status, "ok");
-    assert.deepEqual(out.steps.judgeA, { missing: true });
-  });
+describe("The fused engine (v5.1)", () => {
   it("the fused engine sets the price, recipe shape is v2, anchors are stored, and the stored recipe replays to the same price", async () => {
     const { buildFusedInterval } = await import("../fused-interval.ts");
-    const { out } = await run({ judgeA: () => claudeReply(JA) });
+    const { out } = await run({});
     assert.equal(out.result.status, "ok");
     const iv = out.steps.interval as { v: number; input: Record<string, unknown> & { sources: unknown[] }; comps: { priceUsd: number; kind: "sold" | "asking"; match: "same" | "similar"; tier: "local" | "regional" | "global"; shiftLn: number; extraStd: number | null }[] };
     assert.equal(iv.v, 2);
-    assert.ok(Array.isArray(iv.input.sources) && iv.input.sources.length === 1);
+    assert.ok(Array.isArray(iv.input.sources));
     assert.equal((out.steps.fusion as { shadow: boolean }).shadow, false);
     const r = out.result;
     assert.ok(r.low > 0 && r.low < r.mid && r.mid < r.high);
@@ -442,16 +425,6 @@ describe("estimate ladder rung 4: neighbour prior without ads and without anchor
     const eyeCalls = calls.filter((c) => c.url.includes("serper") && String(c.body?.q).includes("2010s"));
     assert.equal(eyeCalls.length, 1);
     assert.ok(!JSON.stringify(eyeCalls[0].body).includes("Seiko 5 logo"), "no Detail eye text in the eye query");
-  });
-
-  it("Judge-A -> Judge: its labels reach the Judge, its price numbers never do", async () => {
-    const ja = { new_price_usd: 987654, new_price_basis: "known_model", used_price_band: "mid", rarity: "rare", age_class: "vintage", material: "steel", certainty: "high" };
-    const { calls } = await run({ judgeA: () => claudeReply(ja) });
-    const sent = JSON.stringify(calls.find((c) => stepOf(c) === "judge")!.body);
-    assert.ok(sent.includes("JUDGE-A (photo-only labels)") && sent.includes("steel"));
-    assert.ok(!sent.includes("987654"));
-    const none = await run({});
-    assert.ok(JSON.stringify(none.calls.find((c) => stepOf(c) === "judge")!.body).includes("not available"));
   });
 });
 

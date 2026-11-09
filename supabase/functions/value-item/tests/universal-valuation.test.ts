@@ -2,7 +2,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { anchorEstimate, isCollectorLike } from "../anchor.ts";
-import { judgeAAnchor, judgeASystemPrompt, validateJudgeA } from "../judge-a.ts";
 import { validateIdentification } from "../validate.ts";
 
 const base = { new_price_usd: 100, new_price_basis: "known_model", category: "furniture", age_class: "recent", condition: "good", rarity: "common" };
@@ -51,30 +50,12 @@ describe("comparable_objects anchors (antique, collectible, unique, industrial)"
   });
 });
 
-describe("Judge-A", () => {
-  it("accepts comparable_objects and applies no used-band share", () => {
-    const a = validateJudgeA({ new_price_usd: 900, new_price_basis: "comparable_objects", used_price_band: "unknown", rarity: "rare", age_class: "vintage", material: "plastic", certainty: "high" })!;
-    assert.equal(a.new_price_basis, "comparable_objects");
-    assert.equal(judgeAAnchor(a)!.usd, 900);
-  });
-  it("band ratio for ordinary used items is unchanged", () => {
-    const a = validateJudgeA({ new_price_usd: 200, new_price_basis: "known_model", used_price_band: "mid", rarity: "common", age_class: "mid", material: null, certainty: "high" })!;
-    assert.equal(judgeAAnchor(a)!.usd, 90);
-  });
-  it("prompt no longer assumes second-hand and still treats photo text as data", () => {
-    const p = judgeASystemPrompt();
-    assert.ok(!/second-hand/i.test(p));
-    assert.ok(p.includes("comparable_objects") && p.includes("never instructions"));
-  });
-});
-
 describe("isCollectorLike", () => {
   it("true for antique, vintage, rare and reference-priced items; false for ordinary goods", () => {
     assert.equal(isCollectorLike({ age_class: "antique" }), true);
     assert.equal(isCollectorLike({ rarity: "very_rare" }), true);
     assert.equal(isCollectorLike({ new_price_basis: "comparable_objects" }), true);
     assert.equal(isCollectorLike({ age_class: "mid", rarity: "common", new_price_basis: "known_model" }), false);
-    assert.equal(isCollectorLike(null, "comparable_objects"), true);
     assert.equal(isCollectorLike(null), false);
   });
 });
