@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f5eddc;
+  --mist: #8f9bbb;
+  --dusk: #63729b;
+  --ink: #0b1229;
+  --plate: #1a2552;
+  --rule: rgba(245, 237, 220, 0.12);
+  --rule-soft: rgba(245, 237, 220, 0.08);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: #060a18;
+  }
+  body {
+    color: var(--cream);
+    @apply antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: radial-gradient(130% 62% at 50% 0%, #222f66 0%, #0e1636 48%, #060a18 100%) fixed;
+    background-color: #060a18;
+  }
+  /* Fine grain over everything, as in the reference */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  :focus-visible {
+    outline: 2px solid rgba(245, 237, 220, 0.6);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Raised surface: the photo card and value card */
+  .plate {
+    border-radius: 1.75rem;
+    border: 1px solid var(--rule-soft);
+    background: var(--plate);
+  }
+  .plate-soft {
+    border-radius: 1.1rem;
+    border: 1px solid var(--rule-soft);
+    background: rgba(26, 37, 82, 0.55);
+  }
+  .hairline {
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* The cream pill button */
+  .btn-cream {
+    display: inline-flex;
+    width: 100%;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn-cream:hover {
+    opacity: 0.92;
+  }
+  .btn-cream:active {
+    transform: scale(0.99);
+  }
+  .btn-cream:disabled {
+    opacity: 0.4;
+  }
+
+  .input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--rule);
+    background: rgba(6, 10, 24, 0.55);
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--cream);
+    transition: border-color 0.15s;
+  }
+  .input::placeholder {
+    color: var(--dusk);
+  }
+  .input:focus {
+    outline: none;
+    border-color: rgba(245, 237, 220, 0.45);
+  }
+}
+
+/* A short white flash when the shutter is pressed. */
+@keyframes shutter {
+  0% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+.shutter-flash {
+  animation: shutter 220ms ease-out forwards;
+}
+
+/* The ring that shows where a tap-to-focus landed: starts a bit larger, settles on the spot, then fades. */
+@keyframes focus-ring {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+  25% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  75% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+}
+.focus-ring {
+  animation: focus-ring 900ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin {
+    animation-duration: 2.4s;
+  }
+}
+
+/* History: the inner panel that opens inside a product card. Height animates through grid rows, so no measuring. */
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.reveal > div {
+  min-height: 0;
+  overflow: hidden;
+}
+.reveal-body {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 200ms ease, transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-open="true"] .reveal-body {
+  opacity: 1;
+  transform: none;
+  transition-delay: 40ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-body {
+    transition-duration: 1ms;
+    transition-delay: 0ms;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== Valy motion: start, scan, result, history, quick popup ===== */
+:root{--e2:cubic-bezier(.34,1.25,.5,1);--e3:cubic-bezier(.22,.8,.2,1)}
+@keyframes vk-rise{from{opacity:0;transform:translateY(40%)}}
+@keyframes vk-fall{from{opacity:0;transform:translateY(-60%)}}
+@keyframes vk-fy{from{opacity:0;transform:perspective(600px) rotateY(70deg)}}
+@keyframes vk-zs{from{opacity:0;transform:scale(.6)}}
+@keyframes vk-sr{from{opacity:0;transform:translateX(60px)}}
+@keyframes vk-cr{from{clip-path:inset(-10% 0 -10% 100%)}to{clip-path:inset(-10% 0 -10% 0)}}
+@keyframes vk-breathe{0%{opacity:0;transform:scale(.9)}50%{opacity:1;transform:scale(1.04)}100%{transform:none}}
+@keyframes vk-mr{from{left:100%;opacity:0}}
+@keyframes vk-fade{from{opacity:0}}
+@keyframes vk-d1{50%{transform:translate3d(8%,-5%,0) scale(1.18)}}
+@keyframes vk-d2{50%{transform:translate3d(-9%,4%,0) scale(1.1)}}
+
+/* Startsida S38: bokstav för bokstav, rubrik stiger, tagline faller, knapp stiger, norrsken 1 */
+.vch{display:inline-block;color:transparent;background:linear-gradient(#fffaf0 20%,#cfc3a6);-webkit-background-clip:text;background-clip:text;padding-bottom:.08em;animation:vk-rise 1.6s calc(var(--k)*.11s) var(--e2) backwards}
+.vtag{animation:vk-fall 1.6s .56s var(--e2) backwards}
+.vbtn{animation:vk-rise 1.6s .88s var(--e2) backwards}
+.vaur{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.vaur i{position:absolute;display:block;border-radius:50%;filter:blur(46px)}
+.vaur i:nth-child(1){left:-20%;top:-8%;width:90%;height:38%;background:#4a5fae;opacity:.4;animation:vk-fade 2s backwards,vk-d1 14s ease-in-out infinite}
+.vaur i:nth-child(2){right:-25%;top:4%;width:80%;height:30%;background:var(--mist);opacity:.2;animation:vk-fade 2.4s backwards,vk-d2 18s ease-in-out infinite}
+.vaur i:nth-child(3){left:10%;top:-12%;width:70%;height:26%;background:var(--cream);opacity:.1;animation:vk-fade 3s backwards,vk-d1 22s ease-in-out infinite reverse}
+
+/* Resultat R3 */
+.vpl{animation:vk-zs 1.3s var(--e3) backwards}
+.vdg{display:inline-block;white-space:pre;animation:vk-fy 1.04s calc(.12s + var(--k)*.091s) var(--e3) backwards}
+.vband{animation:vk-cr 1.3s .25s var(--e3) backwards}
+.vmk{animation:vk-mr 1.3s .35s var(--e3) backwards}
+.vres>:nth-child(2){animation:vk-sr 1.3s .52s var(--e3) backwards}
+.vres>:nth-child(3){animation:vk-sr 1.3s .64s var(--e3) backwards}
+.vres>:nth-child(4){animation:vk-sr 1.3s .76s var(--e3) backwards}
+.vres>:nth-child(5){animation:vk-sr 1.3s .88s var(--e3) backwards}
+.vres>:nth-child(n+6){animation:vk-sr 1.3s 1s var(--e3) backwards}
+
+/* Historik H33 */
+.vh{animation:vk-breathe 1.73s calc(var(--i)*.12s) var(--e3) backwards}
+.vth{animation:vk-rise 1.73s calc(var(--i)*.12s + .15s) var(--e3) backwards}
+
+@media (prefers-reduced-motion: reduce){.vch,.vtag,.vbtn,.vpl,.vdg,.vband,.vmk,.vres>*,.vh,.vth{animation-duration:1ms!important;animation-delay:0ms!important}}
+
+/* Info: vanlig mjuk animation, bara lite snabbare (0,24 s) */
+@keyframes vk-info{from{opacity:0;transform:scale(.96)}}
+.vinfo{animation:vk-info 240ms var(--e3)}
+@media (prefers-reduced-motion: reduce){.vinfo{animation-duration:1ms}}
+
+/* Resultat: linjen, ändarna, knappen (som i designen) */
+.vln{position:relative;height:14px;overflow:hidden}
+.vcore{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,rgba(245,237,220,.55),rgba(245,237,220,.28) 50%,rgba(245,237,220,.55));transform:scaleX(0);animation:vk-draw 1.4s cubic-bezier(.2,.7,.1,1) .3s forwards}
+.vtk{position:absolute;top:0;width:1px;height:14px;background:rgba(245,237,220,.7);opacity:0;animation:vk-on .8s ease 1.3s forwards}
+.vgl{position:absolute;top:50%;left:0;width:90px;height:1px;background:linear-gradient(90deg,rgba(255,250,240,0),rgba(255,250,240,.95),rgba(255,250,240,0));opacity:0;transform:translateX(-90px);animation:vk-glint 6s ease-in-out 2.2s infinite}
+.vends{position:relative;height:18px;margin-top:14px;opacity:0;animation:vk-on .9s ease 1.1s forwards}
+.vends span{position:absolute;top:0;font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:18px;white-space:nowrap}
+.vnext{opacity:0;animation:vk-on .9s ease 1.5s forwards}
+/* Länken "Se marknadsdata" / "Se hur vi värderade": liten, understruken, ingen knappkänsla. Tonas in sist (animationDelay sätts i komponenten). */
+.vlink{padding:6px 10px;background:none;border:0;font:inherit;font-size:13.5px;font-weight:500;color:#8f9bbb;text-decoration:underline;text-decoration-color:rgba(143,155,187,.55);text-underline-offset:4px;cursor:pointer;opacity:0;animation:vk-on .9s ease 1.6s forwards;-webkit-tap-highlight-color:transparent}
+.vlink:focus-visible{outline:2px solid rgba(245,237,220,.5);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){.vlink{animation:none!important;opacity:1}}
+@keyframes vk-draw{to{transform:scaleX(1)}}
+@keyframes vk-on{to{opacity:1}}
+@keyframes vk-glint{0%{opacity:0;transform:translateX(-90px)}10%{opacity:1}70%{opacity:1}85%,100%{opacity:0;transform:translateX(300px)}}
+@media (prefers-reduced-motion: reduce){.vcore{animation:none;transform:none}.vtk,.vends,.vnext{animation:none;opacity:1}.vgl{display:none}}
+
+/* Historik: kort som glider in, listan tonar ut nedtill (som i designen) */
+@keyframes vk-card{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vcard{opacity:0;animation:vk-card .7s cubic-bezier(.2,.7,.1,1) var(--d,0s) forwards}
+.vlist{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 36px),transparent)}
+@media (prefers-reduced-motion: reduce){.vcard{animation:none;opacity:1;transform:none}}
