@@ -28,3 +28,20 @@ export function withEyeSearch(plan: SearchPlan, _details: DetailReport | null, a
   const extra: PlannedSearch = { id, query, template_id: "eyes_evidence", kind: "fixed", gl: base.gl, hl: base.hl, reason };
   return { ...plan, extraSearches: [...(plan.extraSearches ?? []), extra] };
 }
+
+/**
+ * Visual-guess search. Identification may add a second Google query (its best guess of the exact product line from design alone,
+ * with no brand printed). The Search AI only ever uses the FIRST Identification query, so this second one is added here as one extra
+ * search. Pure. Returns null when there is no second query or the plan already runs it.
+ */
+export function candidateSearch(plan: SearchPlan, identQueries: readonly string[]): PlannedSearch | null {
+  if (plan.searches.length === 0) return null;
+  const q = (identQueries[1] ?? "").replace(/\s+/g, " ").trim().slice(0, 120);
+  if (q.length < 3) return null;
+  const all = [...plan.searches, ...(plan.extraSearches ?? [])];
+  if (all.some((x) => x.query.trim().toLowerCase() === q.toLowerCase())) return null;
+  const base = plan.searches[0];
+  const used = new Set(all.map((x) => x.id));
+  const id = ["s5", "s6", "s7", "s8"].find((x) => !used.has(x)) ?? "s5x";
+  return { id, query: q, template_id: "eyes_evidence", kind: "fixed", gl: base.gl, hl: base.hl, reason: "visual_candidate" };
+}
