@@ -1,15 +1,12 @@
 import type { Fingerprint } from "../types.ts";
 import type { FxTable } from "../fx.ts";
 import type { LocalPlanFn } from "../search-ai.ts";
-import type { NeighbourRow } from "../neighbour-prior.ts";
 import type { OffsetTable } from "../../_shared/offsets.ts";
 import type { StoredValuation } from "../memory.ts";
 
 export interface MemoryPort {
   /** The newest saved valuations of this item (newest first). Which one may answer is decided by memory.ts. */
   find(key: string, maxAgeMs: number): Promise<StoredValuation[]>;
-  /** Past kept results of similar items (same category + brand), for the neighbour prior. Optional; failure or timeout = no prior. */
-  findNeighbours?(fp: Fingerprint, maxAgeMs: number): Promise<NeighbourRow[]>;
 }
 
 export interface RunOptions {

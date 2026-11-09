@@ -111,7 +111,7 @@ export interface AssembleArgs {
    * Save the recipe you are handed; never rebuild it (see IntervalRecipe).
    */
   onInterval?: (out: IntervalOutput, recipe: IntervalRecipe) => void;
-  /** Independent anchors (Identification, neighbours) for the fused engine, as ln-USD sources. Stored in the recipe. */
+  /** Independent anchors (Identification) for the fused engine, as ln-USD sources. Stored in the recipe. */
   fusionSources?: RecipeSource[];
 }
 
@@ -127,8 +127,7 @@ export function compsForInterval(
   const similar = new Set(verdict.similar);
   const labelOf = new Map((verdict.ads ?? []).map((a) => [a.id, a]));
   const usable = findings.filter((f) => f.priceUsd > 0);
-  // Without a Judge nothing is sorted: every priced listing counts, and the emergency range is
-  // built from those same listings.
+  // Without a Judge nothing is sorted: every priced listing counts.
   const picked = judgeRan ? usable.filter((f) => same.has(f.id) || similar.has(f.id)) : usable;
   return picked.map((f) => {
     // Only a FOREIGN listing can carry a learned shift or noise, and only when its country pair has evidence.
@@ -283,42 +282,4 @@ export function assemble(a: AssembleArgs): BrainResult {
     return { ...checked, needsMoreInfo, factors: [...checked.factors, { label: T(a.lang).labels.improve, detail: needsMoreInfo }] };
   }
   return checked;
-}
-
-/**
- * Emergency answer when the Judge cannot run or fails: only possible when Market Live found at
- * least three priced listings. Nothing is invented: the range is the spread of real listings,
- * the confidence is low, and the result says so. Never saved to Memory.
- */
-export function emergencyVerdict(
-  ident: Identification | null,
-  details: DetailReport | null,
-  findings: Finding[],
-  lang?: Lang,
-  askingToSold = 0.9,
-): JudgeVerdict | null {
-  const usable = findings.filter((f) => f.kind === "sold" || f.priceUsd > 0);
-  const prices = usable.map((f) => (f.kind === "sold" ? f.priceUsd : f.priceUsd * askingToSold));
-  if (!ident || !ident.identifiable || prices.length < 3) return null;
-  const low = quantile(prices, 0.25);
-  const mid = quantile(prices, 0.5);
-  const high = quantile(prices, 0.75);
-  if (!(low > 0)) return null;
-  return {
-    identifiable: true,
-    display_name: ident.display_name,
-    category: ident.category,
-    brand: ident.brand,
-    model: ident.model,
-    condition: details?.condition ?? { grade: "good", details: "" },
-    same: [],
-    similar: [],
-    price: { low, mid, high },
-    confidence: 30,
-    authenticity_risk: "unknown",
-    authenticity_note: "",
-    unknowns: [T(lang).emergency.unknown],
-    extra_photo_request: null,
-    reason: T(lang).emergency.reason,
-  };
 }

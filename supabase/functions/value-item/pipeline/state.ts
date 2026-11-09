@@ -2,13 +2,10 @@ import type { AuthenticityReport, BrainInput, BrainRun, ConnectorLogRow, DetailR
 import { type BrainConfig, type Deps } from "../config.ts";
 import type { ConnectorRecord } from "../connector.ts";
 import type { MarketState } from "../present.ts";
-import type { NeighbourRow } from "../neighbour-prior.ts";
 import type { RunOptions } from "./options.ts";
 import type { Settled } from "./async.ts";
 import { FINISH_RESERVE_MS } from "./timing.ts";
 import type { StoredValuation } from "../memory.ts";
-import { estimateVerdict, mergeEyeFacts, neighbourEstimateVerdict } from "../anchor.ts";
-import { neighbourSource } from "../neighbour-prior.ts";
 import { buildConnectorLog, buildSearchLog } from "./logs.ts";
 import { BRAIN_VERSION } from "../config.ts";
 import { haikuWeightFor } from "../../_shared/connector-learn.ts";
@@ -46,7 +43,6 @@ export interface RunState {
   ident: Identification | null;
   fp: Fingerprint | null;
   key: string | null;
-  neighboursP: Promise<NeighbourRow[] | null>;
 
   // set by memory
   softStored: SoftStored | null;
@@ -63,7 +59,6 @@ export interface RunState {
   authenticity: AuthenticityReport | null;
   verdict: JudgeVerdict | null;
   judgeRan: boolean;
-  estimateMode: boolean;
 }
 
 export function createRunState(input: BrainInput, cfg: BrainConfig, deps: Deps, opts: RunOptions): RunState {
@@ -89,7 +84,6 @@ export function createRunState(input: BrainInput, cfg: BrainConfig, deps: Deps, 
     ident: null,
     fp: null,
     key: null,
-    neighboursP: Promise.resolve(null),
     softStored: null,
     plan: null,
     connectorRecord: null,
@@ -100,7 +94,6 @@ export function createRunState(input: BrainInput, cfg: BrainConfig, deps: Deps, 
     authenticity: null,
     verdict: null,
     judgeRan: false,
-    estimateMode: false,
   };
 }
 
@@ -112,16 +105,4 @@ export function logsFor(rs: RunState, verdict: JudgeVerdict): { searchLog: Searc
   const searchLog = buildSearchLog(plan, report, fp, judgeRan ? verdict : null, cfg.searchCostUsd, originals);
   const connectorLog = connectorRecord ? buildConnectorLog(connectorRecord, searchLog, report, fp, BRAIN_VERSION, haikuWeightFor(opts.connectorPolicy?.(), connectorRecord.bucket)) : null;
   return { searchLog, connectorLog };
-}
-
-/** Estimate ladder: rung 1-2 the anchor (Identification facts), rung 4 the neighbour prior; null = nothing usable. */
-export async function estimateLadder(rs: RunState) {
-  const { ident, authenticity, details, input, deps, steps, degraded, neighboursP } = rs;
-  if (!ident) return null;
-  const viaAnchor = estimateVerdict(mergeEyeFacts(ident, authenticity), details, input.lang);
-  if (viaAnchor) return viaAnchor;
-  const nb = neighbourSource((await neighboursP) ?? [], deps.now());
-  const viaNb = neighbourEstimateVerdict(ident, details, nb, input.lang);
-  if (viaNb && nb) { steps.neighbours = { n: nb.n, mid: Math.round(Math.exp(nb.mu)), sd: Math.round(nb.sd * 1000) / 1000, usedAsEstimate: true }; degraded.push("neighbour_estimate"); }
-  return viaNb;
 }
