@@ -29,7 +29,6 @@ THREE EYES in parallel (0 to 1.5 s)  ·  Haiku
    Authenticity eye ··· fake signs, age, repairs, rarity ──► Judge, Market Live
    Identification ····· what it is, brand, country, wording
    │
-   ├──► Judge-A (photo only, never sees ads)  ·  Haiku ─────► Judge
    ├──► Neighbour prior (similar past scans)  ·  code ──────► Math
    └──► Memory: seen this item before?  ·  database
           HIT ─────────────────────────────────────────────► Judge
@@ -43,7 +42,7 @@ THREE EYES in parallel (0 to 1.5 s)  ·  Haiku
                                    ▼
    JUDGE  ·  Haiku
    gets: photo, Detail eye, Authenticity eye, the listings,
-         Judge-A's labels.  Labels every listing, never a price
+         Labels every listing, never a price
                                    ▼
    MATH  ·  code
    checks R1-R3 → second look → fusion of the labelled listings,
@@ -73,9 +72,8 @@ Everything that reads evidence ends up at the **Judge**. The Judge's labels are 
 - **Connector** (`connector.ts`): corrects the search queries with three rule sets (R1 local name, RG global, RH Haiku's own search). Each rule runs on a share of traffic against an untreated control group, and keeps its share only if it does not hurt.
 - **Serper:** sold listings per country, all searches in parallel. Stops at 5 sold prices or 2.0 s and cancels the rest. A thin market widens the hunt in steps (local, then regional, then global), with at most 7 searches in total.
 
-**5. Judge and Judge-A** (`judge.ts`, `judge-a.ts`). Two Haiku calls with different jobs, and neither writes a price:
-- **Judge** sees the evidence: the photo, the Detail and Authenticity eyes, the listings and Judge-A's labels. It labels every listing by *band*: same / similar / different, condition relative to the photo, authenticity risk.
-- **Judge-A** sees only the photo and never the ads, so it is an independent opinion: a photo-only price band that goes to the Judge as labels.
+**5. Judge** (`judge.ts`). A Haiku call that does not write a price:
+- **Judge** sees the evidence: the photo, the Detail and Authenticity eyes and the listings. It labels every listing by *band*: same / similar / different, condition relative to the photo, authenticity risk.
 
 **6. Math** (`math.ts`, `fusion.ts`, `fused-interval.ts`). Takes the Judge's labels (and nothing else from the Judge), checks them against the listings and Identification, and fuses listings, Identification and neighbour prior into one interval. See the next section.
 
@@ -95,7 +93,7 @@ Everything numeric lives in `interval.config.ts`. All of it works on **ln(USD)**
 | Location | **Huber** robust location over the ads. |
 | Spread between ads | **DerSimonian-Laird** tau-squared (random-effects meta-analysis), with an influence cap per ad. |
 | Shared bias | A guard for the variant ambiguity that all ads share and that more ads cannot average away. |
-| Independent sources | **Precision-weighted Bayesian fusion** of the labelled ads with independent sources: the Identification anchor, the neighbour prior and Judge-A's photo-only anchor (its price comes from code, from bands). A source is *tempered* when it contradicts the ads. |
+| Independent sources | **Precision-weighted Bayesian fusion** of the labelled ads with independent sources: the Identification anchor and the neighbour prior. A source is *tempered* when it contradicts the ads. |
 | Interval | **Satterthwaite-style** degrees of freedom, **Student-t** quantiles: the central 80 % range (10th to 90th percentile). |
 | Neighbour prior | **Recency-weighted median** (90-day half-life) of similar past scans, deliberately wide (sd floor 0.3), never allowed to overrule real ads. |
 | No listings | **Estimate ladder**: Haiku supplies bounded facts (typical new price, age class, rarity), code turns them into a number via lookup tables, then neighbour prior, else "needs a better photo". |
@@ -126,7 +124,7 @@ Every failure has a defined, tested answer, so the user never sees an error scre
 | No Serper key or no time | `market_skipped`, estimate |
 | Judge too slow | Saved answer (Memory) or a fallback judgement from ad prices |
 | No comparable listings | Estimate ladder, otherwise ask for a better photo |
-| Identification fails | Continues without Memory and Judge-A |
+| Identification fails | Continues without Memory |
 
 ## Plans and status
 
@@ -196,6 +194,6 @@ Add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` as GitHub Actions secrets (th
 |---|---|
 | **Brain** | The valuation pipeline in `value-item` |
 | **Eyes** | Photo reads: Detail eye, Authenticity eye, Identification |
-| **Judge / Judge-A** | Labels listings (Judge) or the photo alone (Judge-A) by band |
+| **Judge** | Labels listings by band |
 | **Recipe** | The stored inputs of an interval, replayable in backtests and calibration |
 | **Bucket** | A country / category / plan-source group that calibration is fitted per |
