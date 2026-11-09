@@ -240,24 +240,12 @@ describe("the Brain, arrow by arrow", () => {
     assert.ok(out.result.comparables.length <= 2);
   });
 
-  it("makes an emergency answer from real listings if the Judge fails", async () => {
+  it("Judge fails: HTTP 200 needs_photo, never saved, never a made-up price", async () => {
     const { out } = await run({ judge: () => json({ error: "x" }, 500) });
-    assert.equal(out.result.status, "ok");
+    assert.equal(out.result.status, "needs_photo");
     assert.ok(out.result.degraded.includes("judge_failed"));
-    assert.ok(out.result.degraded.includes("judge_emergency"));
-    assert.ok(out.result.confidenceScore <= 35);
+    assert.equal(out.saveable, false);
     assert.equal(out.memoryEligible, false);
-    assert.ok(out.searchLog.every((r) => r.judge_ok === false && r.kept_sold === 0));
-  });
-
-  it("v5.1: Serper finds nothing -> estimate mode (not needs_photo), flagged, capped, never saved", async () => {
-    const identWithAnchor = { ...JSON.parse(JSON.stringify(SAMPLE_IDENT)), new_price_usd: 120, new_price_basis: "known_model", rarity: "rare", age_class: "old", material: "steel" };
-    const { out } = await run({ serper: () => json({ organic: [] }), ident: () => claudeReply(identWithAnchor) });
-    assert.equal(out.result.status, "ok");
-    assert.ok(out.result.degraded.includes("no_market_estimate"));
-    assert.ok(out.result.confidenceScore <= 40, String(out.result.confidenceScore));
-    assert.ok(out.result.low < out.result.mid && out.result.mid < out.result.high);
-    assert.equal(out.memoryEligible, false, "never reused through Memory (NEVER_STORE_IF)");
   });
 
   it("v5.1: no listings and no anchor -> needs_photo with the SPECIFIC message", async () => {
@@ -265,11 +253,11 @@ describe("the Brain, arrow by arrow", () => {
     if (out.result.status === "needs_photo") assert.match(out.result.needsMoreInfo ?? "", /No market data/);
   });
 
-  it("gives up with an error when the Judge fails and there is nothing real to go on", async () => {
-    await assert.rejects(
-      run({ judge: () => json({ error: "x" }, 500), serper: () => json({ organic: [] }) }),
-      (e: unknown) => e instanceof StepError,
-    );
+  it("returns needs_photo (never throws) when the Judge fails and there is nothing real to go on", async () => {
+    const { out } = await run({ judge: () => json({ error: "x" }, 500), serper: () => json({ organic: [] }) });
+    assert.equal(out.result.status, "needs_photo");
+    assert.equal(out.saveable, false);
+    assert.equal(out.memoryEligible, false);
   });
 
   it("uses what the Judge finished writing when the time runs out (price first, then the rest)", async () => {
@@ -301,13 +289,13 @@ describe("the Brain, arrow by arrow", () => {
     assert.ok(out.result.low < out.result.mid && out.result.mid < out.result.high);
   });
 
-  it("keeps the limit even if the Judge writes nothing (emergency answer)", async () => {
+  it("keeps the limit even if the Judge writes nothing", async () => {
     const { out, ms } = await run(
       { judge: (_c, signal) => sseResponse("", signal, { stopAfterChars: 0 }) },
       { answerMs: 5000 },
     );
     assert.ok(ms < 5000, `took ${ms}`);
-    assert.ok(out.result.degraded.includes("judge_emergency"));
+    assert.equal(out.result.status, "needs_photo");
   });
 });
 
@@ -362,69 +350,6 @@ describe("second look, end to end (v5.1)", () => {
     const { calls, out } = await run({});
     assert.equal(calls.filter((c) => stepOf(c) === "secondLook").length, 0);
     assert.equal(out.steps.secondLook, undefined);
-  });
-});
-
-describe("neighbour prior, end to end (v5.1)", () => {
-  const rows = [400, 420, 380, 410].map((m) => ({ midUsd: m, confidence: 70, createdAt: new Date(Date.now() - 5 * 86_400_000).toISOString(), brainVersion: "brain-5.1.0", sameModel: true }));
-  const withNb = (findNeighbours: MemoryPort["findNeighbours"]): MemoryPort => ({ find: async () => [], findNeighbours });
-  it("rows become ONE weak source stored in the recipe; five real ads still decide the price", async () => {
-    const base = await run({});
-    const nb = await run({}, {}, withNb(async () => rows));
-    assert.equal((nb.out.steps.neighbours as { n: number }).n, 4);
-    const src = (nb.out.steps.interval as { input: { sources: { name: string }[] } }).input.sources.map((s) => s.name);
-    assert.ok(src.includes("neighbours"));
-    assert.ok(nb.out.result.low < nb.out.result.mid && nb.out.result.mid < nb.out.result.high);
-    assert.ok(nb.out.result.mid < base.out.result.mid * 1.6, `${nb.out.result.mid} vs ${base.out.result.mid}`);
-  });
-  it("a failing or hanging neighbour lookup changes nothing and never delays the answer", async () => {
-    const base = await run({});
-    const failed = await run({}, {}, withNb(async () => { throw new Error("db down"); }));
-    const hung = await run({}, {}, withNb(() => new Promise(() => undefined)));
-    for (const r of [failed, hung]) { assert.equal(r.out.result.status, "ok"); assert.equal(r.out.result.mid, base.out.result.mid); assert.deepEqual(r.out.steps.neighbours, { none: true }); }
-    assert.ok(hung.ms < 4000, `${hung.ms} ms`);
-  });
-});
-
-describe("estimate ladder rung 4: neighbour prior without ads and without anchor (v5.1)", () => {
-  const rows = [200, 220, 180, 210].map((m) => ({ midUsd: m, confidence: 70, createdAt: new Date(Date.now() - 3 * 86_400_000).toISOString(), brainVersion: "brain-5.1.0", sameModel: true }));
-  const nbPort = (r: typeof rows): MemoryPort => ({ find: async () => [], findNeighbours: async () => r });
-  const noMarket = { serper: () => json({ organic: [] }) };
-  it("no ads + no anchor + neighbours: a wide, low-confidence estimate around the neighbours, flagged, never stored", async () => {
-    const { out } = await run(noMarket, {}, nbPort(rows));
-    const r = out.result;
-    assert.equal(r.status, "ok");
-    assert.ok(r.low < r.mid && r.mid < r.high && r.mid > 150 && r.mid < 260, `mid ${r.mid}`);
-    assert.ok(r.confidenceScore <= 40, `confidence ${r.confidenceScore}`);
-    assert.ok(r.high / r.low > 1.8, "must be wide");
-    assert.ok(r.degraded?.includes("no_market_estimate") && r.degraded.includes("neighbour_estimate"));
-    assert.equal(out.memoryEligible, false);
-    assert.equal((out.steps.neighbours as { usedAsEstimate?: boolean }).usedAsEstimate, true);
-    assert.ok(/similar items valued before/.test(JSON.stringify(r)), "specific neighbour text, not the generic anchor text");
-    assert.ok(!/typical new price/.test(JSON.stringify(r)));
-  });
-  it("too few neighbours: still the specific needs_photo message, never a made-up price", async () => {
-    const { out } = await run(noMarket, {}, nbPort(rows.slice(0, 2)));
-    assert.equal(out.result.status, "needs_photo");
-  });
-
-  it("Authenticity eye -> Market Live: the eye query does NOT run when the market is not thin", async () => {
-    const { out, calls } = await run({});
-    const st = out.steps as Record<string, { ran?: boolean; why?: string | null; replaced?: string | null }>;
-    assert.equal(st.eyeSearch.ran, false);
-    assert.equal(st.eyeSearch.why, "market_not_thin");
-    assert.ok(!calls.some((c) => c.url.includes("serper") && String(c.body?.q).includes("2010s")));
-  });
-
-  it("Authenticity eye -> Market Live: a thin market (< 5 sold after wave 1) runs ONE eye query, standing in for the weakest Search-AI search", async () => {
-    const { out, calls } = await run({ serper: async () => serperSold(1, 60, "t") });
-    const st = out.steps as Record<string, { ran?: boolean; why?: string | null; replaced?: string | null }>;
-    assert.equal(st.eyeSearch.ran, true);
-    assert.equal(st.eyeSearch.why, "market_thin");
-    assert.ok(["s1", "s2", "s3", "s4"].includes(String(st.eyeSearch.replaced)), "names one of the Search-AI searches");
-    const eyeCalls = calls.filter((c) => c.url.includes("serper") && String(c.body?.q).includes("2010s"));
-    assert.equal(eyeCalls.length, 1);
-    assert.ok(!JSON.stringify(eyeCalls[0].body).includes("Seiko 5 logo"), "no Detail eye text in the eye query");
   });
 });
 

@@ -117,14 +117,14 @@ describe("what counts", () => {
     assert.deepEqual(store.counted, []);
   });
 
-  it("an error does not count", async () => {
+  it("a Judge failure with nothing to go on is a needs_photo answer (200), and does not count", async () => {
     const route: Route = async (call, s) => {
       if (call.url.includes("anthropic") && (stepOf(call) === "judge")) return json({ error: "x" }, 500);
       return call.url.includes("serper") ? json({ organic: [] }) : happy(call, s);
     };
     const { ctx, store } = setup(route);
     const { res } = await scan(ctx);
-    assert.equal(res.status, 502);
+    assert.equal(res.status, 200);
     assert.equal(store.usageCalls.length, 1);
     assert.equal(store.settleCalls.length, 0);
     assert.deepEqual(store.counted, []);

@@ -149,7 +149,7 @@ describe("Answer and Saved in Supabase", () => {
     assert.equal(saved, true);
   });
 
-  it("returns a plain error when the item cannot be valued at all", async () => {
+  it("a Judge that gives nothing and no data is a needs_photo answer, never a 502", async () => {
     const route: Route = async (call) => {
       if (call.url.includes("anthropic") && (stepOf(call) === "judge")) return json({ error: "x" }, 500);
       return happy(call, undefined);
@@ -157,7 +157,8 @@ describe("Answer and Saved in Supabase", () => {
     const r2: Route = async (call, s) => (call.url.includes("serper") ? json({ organic: [] }) : route(call, s));
     const { ctx } = ctxOf(r2);
     const res = await handleRequest(request({ image: FAKE_DATA_URL, deviceId: DEVICE }), ctx);
-    assert.equal(res.status, 502);
+    assert.equal(res.status, 200);
+    assert.equal(((await res.json()) as { result: { status: string } }).result.status, "needs_photo");
   });
 
   it("only accepts POST and answers CORS preflight", async () => {

@@ -253,7 +253,7 @@ describe("Memory: what may be stored for reuse", () => {
   it("keeps out every kind of doubt", () => {
     assert.equal(storableReason(args({ key: null })), "no_key");
     assert.equal(storableReason(args({ judgeRan: false })), "no_judge");
-    for (const flag of ["judge_partial", "judge_emergency", "detail_eye_failed", "detail_eye_late", "fx_fallback", "memory_judged"]) {
+    for (const flag of ["judge_partial", "detail_eye_failed", "detail_eye_late", "fx_fallback", "memory_judged"]) {
       assert.equal(storableReason(args({ degraded: [flag] })), flag);
     }
     assert.equal(storableReason(args({ ident: { ...SAMPLE_IDENT, confidence: 70 } })), "identification_unsure");

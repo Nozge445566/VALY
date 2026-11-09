@@ -50,8 +50,8 @@ describe("pickEffort", () => {
   });
 
   const cases: [string, Partial<EffortSignals>, string][] = [
-    ["Identification not identifiable", { ident: { ...identOk, identifiable: false } }, "ident_not_identifiable"],
-    ["Identification certainty low", { ident: { ...identOk, confidence: 40 } }, "ident_certainty_low"],
+    ["visibly damaged item", { details: { details: [], condition: { grade: "poor", details: "cracked and chipped" }, authenticity_signals: [] } }, "high_damage_or_repair"],
+    ["repair sign from the Authenticity eye", { authenticity: { ...authOk, signs: [{ kind: "repair", text: "glued handle" }] } }, "high_damage_or_repair"],
     ["Authenticity eye risk medium", { authenticity: { ...authOk, risk_hint: "medium" } }, "authenticity_risk_medium"],
     ["Authenticity eye risk high", { authenticity: { ...authOk, risk_hint: "high" } }, "authenticity_risk_high"],
     ["watches", { ident: { ...identOk, category: "watch" } }, "high_value_category"],
@@ -85,6 +85,16 @@ describe("pickEffort", () => {
       assert.deepEqual(pickEffort("auto", { ...easy(), ...over }), { effort: "medium", auto: true, reasons: ["default_medium"] });
     });
   }
+
+  it("low ident confidence / not identifiable alone is MEDIUM and only logged (the black mug)", () => {
+    const mug = { ...identOk, category: "mug", brand: null, model: null, confidence: 35 };
+    const p = pickEffort("auto", { ...easy(), ident: mug });
+    assert.equal(p.effort, "medium");
+    assert.deepEqual(p.reasons, ["default_medium", "ident_certainty_low_ignored"]);
+    const q = pickEffort("auto", { ...easy(), ident: { ...mug, identifiable: false } });
+    assert.deepEqual(q, { effort: "medium", auto: true, reasons: ["default_medium", "ident_not_identifiable_ignored"] });
+  });
+
 
   it("everything missing at once (no Identification, no Authenticity eye, no ads) is still MEDIUM", () => {
     const p = pickEffort("auto", { ident: null, authenticity: null, findings: [], memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
@@ -197,6 +207,20 @@ describe("pipeline: the effort is chosen before the Judge call and logged", () =
     return { out, calls, judgeCall };
   }
 
+  it("T1: Judge gives nothing, no priced ads, no anchor -> needs_photo (HTTP 200 path), never a StepError/502", async () => {
+    const r = route({ confidence: 35, brand: null, model: null, category: "gadget", display_name: "unknown gadget", new_price_usd: null, new_price_basis: "none" }, {}, 0);
+    const wrapped = async (call: { url: string; body?: Record<string, unknown> }, signal?: AbortSignal) => {
+      if (call.url.includes("anthropic") && stepOf(call as never) === "judge") return json({ error: "boom" }, 500);
+      return r(call, signal);
+    };
+    const { out } = await run(wrapped as never);
+    const res = (out as { result: { status: string } }).result;
+    assert.equal(res.status, "needs_photo");
+    assert.equal((out as { saveable: boolean }).saveable, false);
+    assert.equal((out as { memoryEligible: boolean }).memoryEligible, false);
+    assert.ok((res as unknown as { degraded: string[] }).degraded.some((d) => d === "judge_cut_no_anchor" || d === "no_market_no_anchor"));
+  });
+
   it("an easy scan: MEDIUM is sent and logged with its reason, and there is no extra model call", async () => {
     const { out, calls, judgeCall } = await run(route());
     const trace = out.steps.judgeTrace as Record<string, unknown>;
@@ -241,5 +265,22 @@ describe("Authenticity eye search", () => {
     assert.equal(withEyeSearch(plan, details, null), plan, "Detail eye alone adds nothing");
     const out = withEyeSearch(plan, details, { signs: [], era: "1970s", risk_hint: "low", search_terms: ["vintage"] } as never) as { extraSearches: { query: string }[] };
     assert.ok(out.extraSearches[0].query.includes("vintage") && !out.extraSearches[0].query.includes("ZQXSTAMP"));
+  });
+
+});
+
+describe("pickEffort edge triggers (round 3)", () => {
+  const hard = { ...easy(), authenticity: { ...authOk, risk_hint: "high" as const } };
+  it("era contradiction + rare item with weak eyes -> eyes_conflict_interesting", () => {
+    const p = pickEffort("auto", { ...easy(), ident: { ...identOk, era: "1900" }, authenticity: { ...authOk, era: "1950", rarity_hint: "rare" as const } });
+    assert.ok(p.reasons.includes("eyes_conflict_interesting"));
+  });
+  it("era contradiction alone (nothing interesting) stays medium", () => {
+    const p = pickEffort("auto", { ...easy(), ident: { ...identOk, era: "1900" }, authenticity: { ...authOk, era: "1950" } });
+    assert.equal(p.effort, "medium");
+  });
+  it("damage note + poor grade -> high_damage_or_repair", () => {
+    const d = { details: [{ kind: "damage" as const, text: "crack" }], condition: { grade: "poor" as const, details: "" }, authenticity_signals: [] };
+    assert.ok(pickEffort("auto", { ...easy(), details: d as never }).reasons.includes("high_damage_or_repair"));
   });
 });

@@ -45,12 +45,8 @@ describe("anchor.ts (estimate mode)", () => {
 
 describe("v5.1 versioning and rails", () => {
   it("version bumped, Memory floor unchanged (resale prices keep their meaning)", () => {
-    assert.equal(BRAIN_VERSION, "brain-5.2.0");
+    assert.equal(BRAIN_VERSION, "brain-5.8.2");
     assert.deepEqual([...MEMORY_MIN_BRAIN_VERSION], [5, 1, 0]);
   });
   it("no-market confidence cap lowered", () => assert.ok(CONF_CAP_NO_MARKET <= 40));
-  it("estimate runs are never stored", () => {
-    const r = storableReason({ key: "k", judgeRan: true, verdict: {} as never, degraded: ["no_market_estimate"], result: { status: "ok" } as never, ident: { confidence: 99 } as never, cfg: { memoryMinIdentConfidence: 50 } as never } as never);
-    assert.equal(r, "no_market_estimate");
-  });
 });

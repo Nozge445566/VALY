@@ -154,7 +154,7 @@ describe("judge() (labels only, Haiku)", () => {
     assert.deepEqual(r.verdict.condition, SAMPLE_DETAILS.condition);
   });
 
-  it("fails (so the emergency answer can take over) when not even one field was finished", async () => {
+  it("fails when not even one field was finished", async () => {
     const full = judgeJson(sampleVerdict());
     const { deps } = makeDeps((_c, signal) => sseResponse(full, signal, { stopAfterChars: 10 }));
     await assert.rejects(judge(deps, testConfig(), input, SAMPLE_IDENT, SAMPLE_DETAILS, sevenAds, stats, 400), StepError);
