@@ -191,8 +191,8 @@ export async function judge(
     // token budget). Thinking tokens count toward maxTokens, so the cap leaves room for thinking AND the JSON (about 1300).
     // The Judge only ever runs at medium or high effort (thinking is never off).
     maxTokens: JUDGE_THINKING_MAX_TOKENS,
-    thinking: { type: "adaptive" },
-    effort,
+    // TEMPORARY: thinking is OFF. In production logs the Judge thought for the whole window and wrote nothing (judge failed 6 of 6).
+    thinking: { type: "disabled" },
     timeoutMs,
     retries: 0,
   });
