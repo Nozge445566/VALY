@@ -139,6 +139,8 @@ export interface StreamTrace {
   thinkingStartMs: number | null;
   /** How many characters of thinking text the API actually sent. 0 with a started block = the API does not return it. */
   thinkingChars: number;
+  /** ms after the request started until the thinking block was closed (null: it never was). */
+  thinkingEndMs: number | null;
   /** ms after the request started until the first character of the answer text (null: none arrived). */
   firstTextMs: number | null;
 }
@@ -153,13 +155,15 @@ export interface StreamReply extends ClaudeReply {
 async function readStream(
   res: Response,
   onText: (t: string) => void,
-  meta: { stopReason: string | null; outputTokens: number | null; inputTokens: number | null; thinkingStartAt: number | null; thinkingChars: number; firstTextAt: number | null },
+  meta: { stopReason: string | null; outputTokens: number | null; inputTokens: number | null; thinkingStartAt: number | null; thinkingChars: number; thinkingEndAt: number | null; firstTextAt: number | null },
   now: () => number,
 ): Promise<void> {
   if (!res.body) throw new Error("the model sent no stream");
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
+  // Block indexes (from content_block_start) that are thinking blocks, so content_block_stop can tell when thinking ended.
+  const thinkingBlocks = new Set<number>();
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -187,7 +191,12 @@ async function readStream(
             meta.thinkingChars += d.thinking.length;
           }
         } else if (ev.type === "content_block_start") {
-          if (rec(ev.content_block)?.type === "thinking" && meta.thinkingStartAt === null) meta.thinkingStartAt = now();
+          if (rec(ev.content_block)?.type === "thinking") {
+            if (meta.thinkingStartAt === null) meta.thinkingStartAt = now();
+            if (typeof ev.index === "number") thinkingBlocks.add(ev.index);
+          }
+        } else if (ev.type === "content_block_stop") {
+          if (typeof ev.index === "number" && thinkingBlocks.has(ev.index) && meta.thinkingEndAt === null) meta.thinkingEndAt = now();
         } else if (ev.type === "message_start") {
           meta.inputTokens = numberOrNull(rec(rec(ev.message)?.usage)?.input_tokens);
         } else if (ev.type === "message_delta") {
@@ -243,11 +252,12 @@ export async function callClaudeStream(deps: Deps, cfg: BrainConfig, req: Claude
     let text = "";
     const meta = {
       stopReason: null as string | null, outputTokens: null as number | null, inputTokens: null as number | null,
-      thinkingStartAt: null as number | null, thinkingChars: 0, firstTextAt: null as number | null,
+      thinkingStartAt: null as number | null, thinkingChars: 0, thinkingEndAt: null as number | null, firstTextAt: null as number | null,
     };
     const traceOf = (): StreamTrace => ({
       thinkingStartMs: meta.thinkingStartAt === null ? null : meta.thinkingStartAt - started,
       thinkingChars: meta.thinkingChars,
+      thinkingEndMs: meta.thinkingEndAt === null ? null : meta.thinkingEndAt - started,
       firstTextMs: meta.firstTextAt === null ? null : meta.firstTextAt - started,
     });
     try {

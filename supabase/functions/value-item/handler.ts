@@ -386,6 +386,7 @@ export async function handleRequest(req: Request, ctx: HandlerContext): Promise<
   const userHash = deviceId ? await sha256Hex(`${deviceId}:user`) : ipHash;
   let attemptId: number | null = null;
   let authUserId: string | null = null;
+  const protectionStart = ctx.deps.now();
   // ---- Plan limits (hard, server side): before the attempt is written and before any paid work. Never trust the client.
   // Fails open like the protection check below: if the database is slow or broken the request goes through and is logged.
   if (ctx.planLimitsEnabled && ctx.store?.planAndUsage) {
@@ -419,6 +420,7 @@ export async function handleRequest(req: Request, ctx: HandlerContext): Promise<
       ctx.deps.log("protection check failed", errorMessage(e));
     }
   }
+  const protectionMs = ctx.deps.now() - protectionStart;
 
   // Exchange rates are fetched at the same moment as everything else (cached for an hour).
   const fxPromise = getFxTable(ctx.deps, cfg.fxUrl, ctx.store?.loadFx && ctx.store?.saveFx ? { load: () => ctx.store!.loadFx!(), save: (t) => ctx.store!.saveFx!(t) } : null);
@@ -430,6 +432,7 @@ export async function handleRequest(req: Request, ctx: HandlerContext): Promise<
     : null;
 
   // ---- The Brain, inside the hard limit.
+  ctx.deps.log("[Protection]", { protectionMs, preBrainMs: ctx.deps.now() - started });
   let run: BrainRun;
   try {
     const outcome = await withinHardLimit(

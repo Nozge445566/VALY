@@ -5,10 +5,8 @@
 import { callClaudeStream, imageBlock, textBlock } from "./claude.ts";
 import type { StreamTrace } from "./claude.ts";
 import type { BrainConfig, Deps, JudgeEffort, JudgeEffortSetting } from "./config.ts";
-import { HARD_CAPS } from "./config.ts";
 import * as C from "./interval.config.ts";
 import { ageClassFromEra } from "./anchor.ts";
-import { effectiveSold } from "./market-tiers.ts";
 import type { JudgeAReport } from "./judge-a.ts";
 import { judgeSystemPrompt, judgeUserText } from "./judge-prompt.ts";
 import type { FindingStats } from "./judge-prompt.ts";
@@ -31,8 +29,6 @@ export const EFFORT = {
   identLowConfidence: 60,
   /** Identification's and Judge-A's typical-new-price anchors that differ by this factor or more disagree strongly. */
   anchorRatio: 2,
-  /** effectiveSold below this = thin market (the sold-price target of the Search AI). */
-  thinSold: HARD_CAPS.soldPrices,
   /** A Memory HIT whose saved ads are older than this share of the maximum age is judged hard. */
   memoryAgeShare: 0.5,
   /** Ads conflict when at least this share of them agree with Identification's brand/model AND at least this share do not. */
@@ -40,8 +36,6 @@ export const EFFORT = {
   conflictMinAds: 3,
 } as const;
 
-/** OWNER DECISION PENDING (REMAINING-WORK item 1): the high_value_cap effort trigger used to read ANCHOR_CATEGORY_MAX_USD >= 20_000. Caps are gone, so the same categories are pinned here so resale effort picks stay identical. Replace once the owner decides what drives this trigger. */
-const HIGH_CAP_CATEGORIES: ReadonlySet<string> = new Set(["electronics", "jewelry", "watches"]);
 const HIGH_VALUE_WORDS = /\b(watch|watches|wristwatch|wristwatches|timepiece|jewel+e?ry|jewels|ring|rings|necklace|bracelet|brooch|earrings?|pendant|art|artwork|painting|paintings|sculpture|lithograph|etching|antiques?)\b/;
 
 /** What is already known before the Judge call. Nothing here is fetched: a missing source is simply null. */
@@ -88,8 +82,13 @@ export function adsConflict(findings: readonly Finding[], ident: Identification 
 
 /**
  * JUDGE_EFFORT=auto: the effort for THIS scan. Pure, no model call, decided before the Judge call from what is already known.
- * Only medium or high: HIGH when any trigger fires, else MEDIUM. A manual setting (medium/high) is returned as is.
- * The Judge itself never receives Identification: these signals only steer how long it thinks.
+ * Only medium or high. MEDIUM is the default. HIGH only when the item is genuinely hard, i.e. when any of these triggers fires:
+ * Identification says not identifiable or low certainty; the Authenticity eye reports medium or high risk; Identification and
+ * Judge-A disagree strongly on the price anchor; the item is a high-value kind (watches, jewellery, art, antiques); a Memory HIT
+ * has old saved ads; the ads conflict on brand or model.
+ * A missing Identification or Authenticity eye, few or no sold ads, and electronics do NOT raise the effort: missing evidence
+ * means time is already short, and few ads make the labelling easier, not harder.
+ * A manual setting (medium/high) is returned as is. The Judge itself never receives Identification: these signals only steer how long it thinks.
  */
 export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): EffortPick {
   if (setting !== "auto") return { effort: setting, auto: false, reasons: ["manual"] };
@@ -97,13 +96,11 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
   const { ident, authenticity: au, judgeA: ja, findings } = s;
 
   // Identification unsure
-  if (!ident) reasons.push("ident_missing");
-  else if (!ident.identifiable) reasons.push("ident_not_identifiable");
-  else if (!(ident.confidence >= EFFORT.identLowConfidence)) reasons.push("ident_certainty_low");
+  if (ident && !ident.identifiable) reasons.push("ident_not_identifiable");
+  else if (ident && !(ident.confidence >= EFFORT.identLowConfidence)) reasons.push("ident_certainty_low");
 
   // Authenticity eye
-  if (!au) reasons.push("authenticity_missing");
-  else if (au.risk_hint === "medium" || au.risk_hint === "high") reasons.push(`authenticity_risk_${au.risk_hint}`);
+  if (au && (au.risk_hint === "medium" || au.risk_hint === "high")) reasons.push(`authenticity_risk_${au.risk_hint}`);
 
   // Identification and Judge-A disagree strongly on the price anchor (both photo-only, both without ads)
   if (ident && ja) {
@@ -114,17 +111,11 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
     if (okA && okB && Math.max(a as number, b as number) / Math.min(a as number, b as number) >= EFFORT.anchorRatio) reasons.push("anchor_disagree");
   }
 
-  // Market: thin or no sold ads
-  const soldAds = findings.filter((f) => f.kind === "sold").length;
-  if (soldAds === 0) reasons.push("no_sold_ads");
-  else if (effectiveSold(findings) < EFFORT.thinSold) reasons.push("thin_market");
-
   // High-value kinds of item
   if (ident) {
     const cat = ident.category.toLowerCase().trim();
     const antique = ident.age_class === "antique" || ageClassFromEra(eraOf(au, ident)) === "antique";
     if (HIGH_VALUE_WORDS.test(cat) || antique) reasons.push("high_value_category");
-    else if (HIGH_CAP_CATEGORIES.has(cat)) reasons.push("high_value_cap");
   }
 
   // Memory HIT with older saved ads
@@ -196,8 +187,8 @@ export async function judge(
     retries: 0,
   });
 
-  deps.log("[Judge] raw", { stopReason: reply.stopReason, complete: reply.complete, outputTokens: reply.outputTokens, textChars: reply.text.length, preview: reply.text.slice(0, 600), trace: reply.trace });
-  const trace = { complete: reply.complete, stopReason: reply.stopReason, outputTokens: reply.outputTokens, thinkingStartMs: reply.trace?.thinkingStartMs ?? null, thinkingChars: reply.trace?.thinkingChars ?? 0, firstTextMs: reply.trace?.firstTextMs ?? null };
+  deps.log("[Judge] raw", { effort, stopReason: reply.stopReason, complete: reply.complete, outputTokens: reply.outputTokens, textChars: reply.text.length, preview: reply.text.slice(0, 600), trace: reply.trace });
+  const trace = { complete: reply.complete, stopReason: reply.stopReason, outputTokens: reply.outputTokens, thinkingStartMs: reply.trace?.thinkingStartMs ?? null, thinkingEndMs: reply.trace?.thinkingEndMs ?? null, thinkingChars: reply.trace?.thinkingChars ?? 0, firstTextMs: reply.trace?.firstTextMs ?? null };
   const obj = parseTruncatedObject(reply.text);
   if (!obj) throw new StepError("judge", reply.complete ? "no JSON in the answer" : "cut off before any field was finished");
 

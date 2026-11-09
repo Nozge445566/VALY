@@ -41,8 +41,8 @@ export interface BrainConfig {
   judgeModel: string;
   /**
    * How hard the Judge thinks: adaptive thinking steered by output_config.effort (Haiku 5.5 takes no token budget).
-   * Default "auto": code picks medium or high per scan from signals that are already known (judge.ts::pickEffort, no extra
-   * model call, never off). "off", "low", "medium" and "high" are manual overrides that apply to every scan ("off" = thinking disabled).
+   * Valid values: "auto" (the default: code picks medium or high per scan via judge.ts::pickEffort, no extra model call),
+   * "medium" and "high" (one fixed level for every scan). Thinking is never off for the Judge.
    */
   judgeEffort: JudgeEffortSetting;
   /** Hard time limit for the whole answer, in ms. Diagram: 7 s. */
@@ -93,12 +93,12 @@ export interface BrainConfig {
   connectorRules: ConnectorRuleId[];
 }
 
-/** What is sent to the model: "off" means thinking disabled. */
+/** What is sent to the model: the Judge always gets "medium" or "high"; thinking is never switched off for the Judge. */
 export type JudgeEffort = "medium" | "high";
 /** What JUDGE_EFFORT may say: "auto" (code picks per scan) or one fixed level for every scan. */
 export type JudgeEffortSetting = JudgeEffort | "auto";
 
-/** JUDGE_EFFORT: medium or high = fixed for every scan. Anything else (unset, empty, off, low, unknown) = auto: code picks medium or high per scan. */
+/** JUDGE_EFFORT: "medium" and "high" are fixed levels for every scan. Anything else (unset, empty, unknown, and also "off" and "low", which are not supported) is treated as auto: code picks medium or high per scan. */
 export function judgeEffortOf(raw: string | undefined): JudgeEffortSetting {
   const v = (raw ?? "").trim().toLowerCase();
   return v === "medium" || v === "high" ? v : "auto";

@@ -84,7 +84,7 @@ Rules you must follow:
 - Never identify or describe people. Value objects only.
 - Never write a price, a range, a confidence or any calculation. If you feel an urge to, put it in none of the fields.
 - If eyes or ads are missing you are not stuck: label what you have. With no ads, "ads" is [].
-- Think it through before you answer: settle what the item is first, then label every ad against that item, then the risk and the condition. After your thinking the reply is the JSON object and nothing else.
+- The reply is the JSON object and nothing else.
 - The answer has a hard time limit and the end may be cut off. Write the fields in exactly the order below, with no text before or after the JSON; "reason" at most 15 words.
 
 Reply with ONE JSON object with exactly these fields, in this order:

@@ -74,7 +74,8 @@ export async function judgeA(deps: Deps, cfg: BrainConfig, input: BrainInput, id
       retries: 0,
     });
     return validateJudgeA(parseTruncatedObject(reply.text));
-  } catch {
+  } catch (e) {
+    deps.log("[Judge-A] failed", e instanceof Error ? e.message : String(e));
     return null; // Judge-A is optional: a failed call is simply a missing source
   }
 }
