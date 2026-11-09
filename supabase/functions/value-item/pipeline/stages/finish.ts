@@ -3,7 +3,6 @@ import { type BrainResult, type BrainRun, type JudgeVerdict } from "../../types.
 import { HARD_CAPS } from "../../config.ts";
 import { FINISH_RESERVE_MS } from "../timing.ts";
 import { freshDetailFactors } from "../../present.ts";
-import { neighbourSource } from "../../neighbour-prior.ts";
 import { type RecipeSource } from "../../fused-interval.ts";
 import { applySecondLook, SECOND_LOOK_MS, secondLook, softContested } from "../../second-look.ts";
 import { errText } from "../async.ts";
@@ -18,15 +17,14 @@ import { fuse } from "../../fusion.ts";
 import { priceFromLabels } from "../../math.ts";
 import { judgeEvidence, JUDGE_STRENGTH } from "../../../_shared/search-ai/beliefs.ts";
 import { productionSourceBeliefs } from "../../../_shared/search-ai/local-engine.ts";
-import { estimateLadder, logsFor, type RunState } from "../state.ts";
+import { logsFor, type RunState } from "../state.ts";
 
 /** Maths and checks, then check and exchange rates (code only). Returns the final BrainRun. */
 export async function finishStage(rs: RunState): Promise<BrainRun> {
   const { input, cfg, deps, opts, degraded, steps, marks, elapsed } = rs;
-  const { ident, fp, key, neighboursP } = rs;
+  const { ident, fp, key } = rs;
   const { findings, details, authenticity, judgeRan, softStored, marketState } = rs;
   let verdict = rs.verdict as JudgeVerdict;
-  let estimateMode = rs.estimateMode;
 
   if (!verdict.identifiable) {
     steps.timing = { ...marks, end: elapsed() };
@@ -92,9 +90,6 @@ export async function finishStage(rs: RunState): Promise<BrainRun> {
         .map((f) => ({ y: Math.log(f.priceUsd * adFactor(lab.get(f.id)!, CONDITION_FACTOR) * (f.kind === "sold" ? 1 : a2s)), se2: adNoise({ match: lab.get(f.id)!.match, pSame: lab.get(f.id)!.p_same, reliability: lab.get(f.id)!.ad_reliability, relative: lab.get(f.id)!.relative_value, asking: f.kind !== "sold" }) ?? 0.12 }));
       const srcs: RecipeSource[] = [];
       if (anchorForR3) srcs.push({ name: "identification", mu: Math.log(anchorForR3.mid), sd: anchorForR3.lnStd });
-      const nb = neighbourSource((await neighboursP) ?? [], deps.now());
-      steps.neighbours = nb ? { n: nb.n, mid: Math.round(Math.exp(nb.mu)), sd: Math.round(nb.sd * 1000) / 1000 } : { none: true };
-      if (nb) srcs.push({ name: "neighbours", mu: nb.mu, sd: nb.sd });
       fusionSources = srcs;
       const fz = fuse({ ads: fAds, sources: srcs, variantAmbiguity: variantAmbiguityOf({ identConfidence: ident?.confidence ?? null, similarShare: fAds.length ? findings.filter((f) => lab.get(f.id)?.match === "similar").length / fAds.length : null }) });
       steps.fusion = fz ? { low: Math.round(fz.low), mid: Math.round(fz.mid), high: Math.round(fz.high), df: fz.df, tau2: fz.tau2, nEff: fz.nEff, influence: fz.influence, sourceWeights: fz.sourceWeights, tempered: fz.tempered, shadow: false } : { none: true };
@@ -104,14 +99,8 @@ export async function finishStage(rs: RunState): Promise<BrainRun> {
     if (!m) {
       // No ad that is the same or similar: a price would have to be guessed by a model, which is not allowed. Ask for a better photo.
       degraded.push("no_comparable_ads");
-      const est = await estimateLadder(rs);
-      if (est) {
-        degraded.push("no_market_estimate");
-        verdict = est.verdict;
-        estimateMode = true;
-      }
     }
-    if (!m && !estimateMode) {
+    if (!m) {
       steps.timing = { ...marks, end: elapsed() };
       return { result: needsPhotoResult(ident, degraded, input.lang, T(input.lang).estimate.noAnchor), memoryHit: false, fingerprint: fp, saveable: false, memoryEligible: false, memoryRunId: null, steps, ...logsFor(rs, verdict) };
     }

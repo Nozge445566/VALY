@@ -1,17 +1,17 @@
 import { type AuthenticityReport, type BrainResult, type BrainRun, type DetailReport, type JudgeVerdict, StepError } from "../../types.ts";
 import { HARD_CAPS } from "../../config.ts";
-import { DETAIL_GRACE_MS, JUDGE_MIN_MS } from "../timing.ts";
+import { DETAIL_GRACE_MS } from "../timing.ts";
 import { checkResult, EMPTY_EVIDENCE } from "../../check.ts";
 import { errText, raceTimeout, type Settled } from "../async.ts";
 import { ageDecay } from "../../memory.ts";
 import { labelsOf, T } from "../../lang.ts";
-import { emergencyVerdict, needsPhotoResult } from "../assemble.ts";
+import { needsPhotoResult } from "../assemble.ts";
 import { riskFromFlag } from "../helpers.ts";
 import { judge, pickEffort } from "../../judge.ts";
-import { JUDGE_MAX_ADS } from "../../select-ads.ts";
-import { estimateLadder, type RunState } from "../state.ts";
+import { judgeMaxAds } from "../../select-ads.ts";
+import { type RunState } from "../state.ts";
 
-/** The Judge: photo + details + findings, then the fallbacks (stored answer, emergency verdict, estimate ladder). Sets verdict, judgeRan and estimateMode on the state. */
+/** The Judge: photo + details + findings, then the fallbacks (stored answer). Sets verdict, judgeRan on the state. */
 export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
   const { input, cfg, deps, degraded, steps, marks, elapsed, judgeEnd } = rs;
   const { ident, fp, detailP, authP, detailAbort, authAbort, report } = rs;
@@ -19,7 +19,7 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
   // Detail eye -> Judge (and the eye search). If it is still working, give it a short moment.
   // Market Live lists its best ads first (select-ads.ts): the Judge gets the first JUDGE_MAX_ADS, the rest stay on the state.
   const { softStored } = rs;
-  const findings = rs.findings.slice(0, JUDGE_MAX_ADS);
+  const findings = rs.findings.slice(0, judgeMaxAds(judgeEnd - elapsed()));
   let details: DetailReport | null = null;
   if (rs.detailState === null) await raceTimeout(detailP, DETAIL_GRACE_MS);
   const ds = rs.detailState as Settled<DetailReport> | null;
@@ -52,7 +52,7 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
 
   let verdict: JudgeVerdict | null = null;
   const judgeMs = judgeEnd - elapsed();
-  if (judgeMs >= JUDGE_MIN_MS) {
+  {
     // How hard the Judge thinks (JUDGE_EFFORT=auto): chosen here, by code, from what is already known. No extra model call, no waiting.
     // Identification is used for this choice only: the Judge never receives it.
     const effortPick = pickEffort(cfg.judgeEffort, {
@@ -62,25 +62,27 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
       memoryHit: softStored !== null && softStored.hit,
       memoryAgeDays: softStored ? softStored.ageDays : null,
       memoryMaxAgeDays: softStored ? softStored.maxAgeDays : null,
+      details,
     });
-    const effortLog = { effort: effortPick.effort, effortAuto: effortPick.auto, effortReasons: effortPick.reasons };
+    const effortLog: Record<string, unknown> = { effort: effortPick.effort, effortAuto: effortPick.auto, effortReasons: effortPick.reasons };
     deps.log("[Judge] start", { judgeMs, startedAtMs: elapsed(), ...effortLog });
     try {
-      const outcome = await judge(deps, cfg, input, ident, details, findings, stats, judgeMs, softStored ? softStored.ageDays : null, authenticity, effortPick.effort);
+      const memAge = softStored ? softStored.ageDays : null;
+      const outcome = await judge(deps, cfg, input, ident, details, findings, stats, judgeMs, memAge, authenticity, effortPick.effort);
+      steps.memoryOutcome = softStored ? (softStored.hit ? "HIT" : "JUDGE") : "MISS";
       verdict = outcome.verdict;
       if (outcome.partial) degraded.push("judge_partial");
       steps.judgeMs = outcome.ms;
-      steps.judgeTrace = { ...effortLog, partial: outcome.partial, ...outcome.trace };
+      steps.judgeTrace = { ...effortLog, judgeMs, adsSent: findings.length, partial: outcome.partial, ...outcome.trace };
     } catch (e) {
       degraded.push("judge_failed");
       steps.judgeTrace = { ...effortLog, failed: true };
       deps.log("judge failed", errText(e));
     }
-  } else {
-    degraded.push("judge_no_time");
   }
   marks.judge = elapsed();
   steps.judge = verdict ?? { failed: true };
+  if (steps.memoryOutcome === undefined) steps.memoryOutcome = softStored ? (softStored.hit ? "HIT" : "JUDGE") : "MISS";
 
   const judgeRan = verdict !== null;
   if (!verdict && softStored && softStored.hitFallback) return softStored.hitFallback();
@@ -112,27 +114,13 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
     };
   }
   if (!verdict) {
-    // Emergency answer from raw listing prices, only when there is real data behind it.
-    verdict = emergencyVerdict(ident, details, findings, input.lang);
-    if (verdict) degraded.push("judge_emergency");
+    // T1: a Judge that ran out of time must never end in a 502. Worst case is HTTP 200 with needs_photo (never saved, never Memory).
+    degraded.push(judgeRan || !ident ? "no_market_no_anchor" : "judge_cut_no_anchor");
+    steps.timing = { ...marks, end: elapsed() };
+    const msg = ident?.identifiable ? T(input.lang).estimate.noAnchor : T(input.lang).needsPhoto;
+    return { result: needsPhotoResult(ident ?? null, degraded, input.lang, msg), memoryHit: false, fingerprint: fp, saveable: false, memoryEligible: false, memoryRunId: null, steps, searchLog: [], connectorLog: null } as never;
   }
-  // No market data (no listings, Serper down, Judge cut before the ads): estimate from the eyes + Identification, never needs_photo first.
-  let estimateMode = false;
-  if (!verdict && ident && !findings.some((f) => f.priceUsd > 0)) {
-    const est = await estimateLadder(rs);
-    if (est) {
-      verdict = est.verdict;
-      estimateMode = true;
-      degraded.push("no_market_estimate");
-    } else if (ident.identifiable && judgeRan) {
-      degraded.push("no_market_no_anchor");
-      steps.timing = { ...marks, end: elapsed() };
-      return { result: needsPhotoResult(ident, degraded, input.lang, T(input.lang).estimate.noAnchor), memoryHit: false, fingerprint: fp, saveable: false, memoryEligible: false, memoryRunId: null, steps, searchLog: [], connectorLog: null } as never;
-    }
-  }
-  if (!verdict) throw new StepError("judge", "no answer could be made in time", degraded);
   rs.verdict = verdict;
   rs.judgeRan = judgeRan;
-  rs.estimateMode = estimateMode;
   return null;
 }

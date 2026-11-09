@@ -1,6 +1,5 @@
 import { type BrainRun, type Fingerprint, type Identification } from "../../types.ts";
-import { NEIGHBOUR_MAX_AGE_MS, NEIGHBOUR_WAIT_MS, SEARCH_MIN_MS } from "../timing.ts";
-import { type NeighbourRow } from "../../neighbour-prior.ts";
+import { SEARCH_MIN_MS } from "../timing.ts";
 import { errText, settle } from "../async.ts";
 import { buildFingerprint, memoryKey } from "../../memory.ts";
 import { needsPhotoResult } from "../assemble.ts";
@@ -8,7 +7,7 @@ import { valuationModeOf } from "../../anchor.ts";
 import { authenticityEye, detailEye, identify } from "../../eyes.ts";
 import type { RunState } from "../state.ts";
 
-/** Eyes: Detail eye + Authenticity eye + Identification start together; the neighbour prior starts right after Identification. Returns a BrainRun only when there is nothing to value. */
+/** Eyes: Detail eye + Authenticity eye + Identification start together. Returns a BrainRun only when there is nothing to value. */
 export async function eyesStage(rs: RunState): Promise<BrainRun | null> {
   const { input, cfg, deps, opts, degraded, steps, marks, elapsed, judgeEnd } = rs;
 
@@ -62,16 +61,10 @@ export async function eyesStage(rs: RunState): Promise<BrainRun | null> {
   const key = fp ? memoryKey(fp, input.lang) : null;
   steps.fingerprint = fp;
 
-  // Neighbour prior: saved results of similar items (same category + brand) as one weak, wide source. Beside everything else, 600 ms
-  // give-up, never delays the Judge; any failure = no source.
-  const neighboursP: Promise<NeighbourRow[] | null> = fp && opts.memory?.findNeighbours
-    ? Promise.race([opts.memory.findNeighbours(fp, NEIGHBOUR_MAX_AGE_MS).catch(() => null), new Promise<null>((res) => setTimeout(() => res(null), NEIGHBOUR_WAIT_MS))])
-    : Promise.resolve(null);
   rs.detailP = detailP;
   rs.authP = authP;
   rs.ident = ident;
   rs.fp = fp;
   rs.key = key;
-  rs.neighboursP = neighboursP;
   return null;
 }
