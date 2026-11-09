@@ -1,0 +1,5028 @@
+[
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "SE",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "SE",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:watch",
+   "cc:watch|SE",
+   "cb:watch|rolex|SE"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "SE",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "SE",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:guitar",
+   "cc:guitar|SE",
+   "cb:guitar|fender|SE"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "SE",
+   "language": "da"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "SE",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:furniture",
+   "cc:furniture|SE",
+   "cb:furniture|åhlén söner|SE"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "SE",
+   "language": "de"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "SE",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:vinyl",
+   "cc:vinyl|SE",
+   "cb:vinyl|beyoncé|SE"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "SE",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "SE",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:camera",
+   "cc:camera|SE",
+   "cb:camera|canon|SE"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "NO",
+   "language": "es"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "NO",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:NO",
+   "c:silver",
+   "cc:silver|NO",
+   "cb:silver|łódź silver|NO"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "NO",
+   "language": "it"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "NO",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:NO",
+   "c:porcelain",
+   "cc:porcelain|NO",
+   "cb:porcelain|rörstrand|NO"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "NO",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "NO",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:NO",
+   "c:camera",
+   "cc:camera|NO",
+   "cb:camera|ニコン|NO"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "NO",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "NO",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:NO",
+   "c:lego",
+   "cc:lego|NO",
+   "cb:lego|lego|NO"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "NO",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "NO",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:NO",
+   "c:bag",
+   "cc:bag|NO",
+   "cb:bag|louis vuitton|NO"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "DK",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "DK",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:DK",
+   "c:book",
+   "cc:book|DK",
+   "cb:book|-|DK"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "DK",
+   "language": "en"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "DK",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:DK",
+   "c:coin",
+   "cc:coin|DK",
+   "cb:coin|-|DK"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "DK",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "DK",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:DK",
+   "c:phone",
+   "cc:phone|DK",
+   "cb:phone|apple|DK"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "DK",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "DK",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:DK",
+   "c:art",
+   "cc:art|DK",
+   "cb:art|-|DK"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "DK",
+   "language": ""
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "DK",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:DK",
+   "c:shoe",
+   "cc:shoe|DK",
+   "cb:shoe|nike|DK"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "FI",
+   "language": " "
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "FI",
+   "language": "fi"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:FI",
+   "c:watch",
+   "cc:watch|FI",
+   "cb:watch|rolex|FI"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "FI",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "FI",
+   "language": "fi"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:FI",
+   "c:guitar",
+   "cc:guitar|FI",
+   "cb:guitar|fender|FI"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "FI",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "FI",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:FI",
+   "c:furniture",
+   "cc:furniture|FI",
+   "cb:furniture|åhlén söner|FI"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "FI",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "FI",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:FI",
+   "c:vinyl",
+   "cc:vinyl|FI",
+   "cb:vinyl|beyoncé|FI"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "FI",
+   "language": "da"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "FI",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:FI",
+   "c:camera",
+   "cc:camera|FI",
+   "cb:camera|canon|FI"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "IS",
+   "language": "de"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "IS",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:IS",
+   "c:silver",
+   "cc:silver|IS",
+   "cb:silver|łódź silver|IS"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "IS",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "IS",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:IS",
+   "c:porcelain",
+   "cc:porcelain|IS",
+   "cb:porcelain|rörstrand|IS"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "IS",
+   "language": "es"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "IS",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:IS",
+   "c:camera",
+   "cc:camera|IS",
+   "cb:camera|ニコン|IS"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "IS",
+   "language": "it"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "IS",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:IS",
+   "c:lego",
+   "cc:lego|IS",
+   "cb:lego|lego|IS"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "IS",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "IS",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:IS",
+   "c:bag",
+   "cc:bag|IS",
+   "cb:bag|louis vuitton|IS"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "DE",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "DE",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:book",
+   "cc:book|DE",
+   "cb:book|-|DE"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "DE",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "DE",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:coin",
+   "cc:coin|DE",
+   "cb:coin|-|DE"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "DE",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "DE",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:phone",
+   "cc:phone|DE",
+   "cb:phone|apple|DE"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "DE",
+   "language": "en"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "DE",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:art",
+   "cc:art|DE",
+   "cb:art|-|DE"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "DE",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "DE",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:shoe",
+   "cc:shoe|DE",
+   "cb:shoe|nike|DE"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "AT",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "AT",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:AT",
+   "c:watch",
+   "cc:watch|AT",
+   "cb:watch|rolex|AT"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "AT",
+   "language": ""
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "AT",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:AT",
+   "c:guitar",
+   "cc:guitar|AT",
+   "cb:guitar|fender|AT"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "AT",
+   "language": " "
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "AT",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:AT",
+   "c:furniture",
+   "cc:furniture|AT",
+   "cb:furniture|åhlén söner|AT"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "AT",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "AT",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:AT",
+   "c:vinyl",
+   "cc:vinyl|AT",
+   "cb:vinyl|beyoncé|AT"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "AT",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "AT",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:AT",
+   "c:camera",
+   "cc:camera|AT",
+   "cb:camera|canon|AT"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "CH",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "CH",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:CH",
+   "c:silver",
+   "cc:silver|CH",
+   "cb:silver|łódź silver|CH"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "CH",
+   "language": "da"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "CH",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:CH",
+   "c:porcelain",
+   "cc:porcelain|CH",
+   "cb:porcelain|rörstrand|CH"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "CH",
+   "language": "de"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "CH",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:CH",
+   "c:camera",
+   "cc:camera|CH",
+   "cb:camera|ニコン|CH"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "CH",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "CH",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:CH",
+   "c:lego",
+   "cc:lego|CH",
+   "cb:lego|lego|CH"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "CH",
+   "language": "es"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "CH",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:CH",
+   "c:bag",
+   "cc:bag|CH",
+   "cb:bag|louis vuitton|CH"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "NL",
+   "language": "it"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "NL",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:NL",
+   "c:book",
+   "cc:book|NL",
+   "cb:book|-|NL"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "NL",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "NL",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:NL",
+   "c:coin",
+   "cc:coin|NL",
+   "cb:coin|-|NL"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "NL",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "NL",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:NL",
+   "c:phone",
+   "cc:phone|NL",
+   "cb:phone|apple|NL"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "NL",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "NL",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:NL",
+   "c:art",
+   "cc:art|NL",
+   "cb:art|-|NL"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "NL",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "NL",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:NL",
+   "c:shoe",
+   "cc:shoe|NL",
+   "cb:shoe|nike|NL"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "BE",
+   "language": "en"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "BE",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:BE",
+   "c:watch",
+   "cc:watch|BE",
+   "cb:watch|rolex|BE"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "BE",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "BE",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:BE",
+   "c:guitar",
+   "cc:guitar|BE",
+   "cb:guitar|fender|BE"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "BE",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "BE",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:BE",
+   "c:furniture",
+   "cc:furniture|BE",
+   "cb:furniture|åhlén söner|BE"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "BE",
+   "language": ""
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "BE",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:BE",
+   "c:vinyl",
+   "cc:vinyl|BE",
+   "cb:vinyl|beyoncé|BE"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "BE",
+   "language": " "
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "BE",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:BE",
+   "c:camera",
+   "cc:camera|BE",
+   "cb:camera|canon|BE"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "FR",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "FR",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:FR",
+   "c:silver",
+   "cc:silver|FR",
+   "cb:silver|łódź silver|FR"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "FR",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "FR",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:FR",
+   "c:porcelain",
+   "cc:porcelain|FR",
+   "cb:porcelain|rörstrand|FR"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "FR",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "FR",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:FR",
+   "c:camera",
+   "cc:camera|FR",
+   "cb:camera|ニコン|FR"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "FR",
+   "language": "da"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "FR",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:FR",
+   "c:lego",
+   "cc:lego|FR",
+   "cb:lego|lego|FR"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "FR",
+   "language": "de"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "FR",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:FR",
+   "c:bag",
+   "cc:bag|FR",
+   "cb:bag|louis vuitton|FR"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "ES",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "ES",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:ES",
+   "c:book",
+   "cc:book|ES",
+   "cb:book|-|ES"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "ES",
+   "language": "es"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "ES",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:ES",
+   "c:coin",
+   "cc:coin|ES",
+   "cb:coin|-|ES"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "ES",
+   "language": "it"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "ES",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:ES",
+   "c:phone",
+   "cc:phone|ES",
+   "cb:phone|apple|ES"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "ES",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "ES",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:ES",
+   "c:art",
+   "cc:art|ES",
+   "cb:art|-|ES"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "ES",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "ES",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:ES",
+   "c:shoe",
+   "cc:shoe|ES",
+   "cb:shoe|nike|ES"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "IT",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "IT",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:IT",
+   "c:watch",
+   "cc:watch|IT",
+   "cb:watch|rolex|IT"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "IT",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "IT",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:IT",
+   "c:guitar",
+   "cc:guitar|IT",
+   "cb:guitar|fender|IT"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "IT",
+   "language": "en"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "IT",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:IT",
+   "c:furniture",
+   "cc:furniture|IT",
+   "cb:furniture|åhlén söner|IT"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "IT",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "IT",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:IT",
+   "c:vinyl",
+   "cc:vinyl|IT",
+   "cb:vinyl|beyoncé|IT"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "IT",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "IT",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:IT",
+   "c:camera",
+   "cc:camera|IT",
+   "cb:camera|canon|IT"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "PT",
+   "language": ""
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "PT",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:PT",
+   "c:silver",
+   "cc:silver|PT",
+   "cb:silver|łódź silver|PT"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "PT",
+   "language": " "
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "PT",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:PT",
+   "c:porcelain",
+   "cc:porcelain|PT",
+   "cb:porcelain|rörstrand|PT"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "PT",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "PT",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:PT",
+   "c:camera",
+   "cc:camera|PT",
+   "cb:camera|ニコン|PT"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "PT",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "PT",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:PT",
+   "c:lego",
+   "cc:lego|PT",
+   "cb:lego|lego|PT"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "PT",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "PT",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:FR",
+   "k:PT",
+   "c:bag",
+   "cc:bag|PT",
+   "cb:bag|louis vuitton|PT"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "GB",
+   "language": "da"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "GB",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:GB",
+   "c:book",
+   "cc:book|GB",
+   "cb:book|-|GB"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "GB",
+   "language": "de"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "GB",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:GB",
+   "c:coin",
+   "cc:coin|GB",
+   "cb:coin|-|GB"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "GB",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "GB",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:GB",
+   "c:phone",
+   "cc:phone|GB",
+   "cb:phone|apple|GB"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "GB",
+   "language": "es"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "GB",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:GB",
+   "c:art",
+   "cc:art|GB",
+   "cb:art|-|GB"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "GB",
+   "language": "it"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "GB",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:GB",
+   "c:shoe",
+   "cc:shoe|GB",
+   "cb:shoe|nike|GB"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "IE",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "IE",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:IE",
+   "c:watch",
+   "cc:watch|IE",
+   "cb:watch|rolex|IE"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "IE",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "IE",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:IE",
+   "c:guitar",
+   "cc:guitar|IE",
+   "cb:guitar|fender|IE"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "IE",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "IE",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:IE",
+   "c:furniture",
+   "cc:furniture|IE",
+   "cb:furniture|åhlén söner|IE"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "IE",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "IE",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:IE",
+   "c:vinyl",
+   "cc:vinyl|IE",
+   "cb:vinyl|beyoncé|IE"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "IE",
+   "language": "en"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "IE",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:GB",
+   "k:IE",
+   "c:camera",
+   "cc:camera|IE",
+   "cb:camera|canon|IE"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "PL",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "PL",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:PL",
+   "c:silver",
+   "cc:silver|PL",
+   "cb:silver|łódź silver|PL"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "PL",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "PL",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:PL",
+   "c:porcelain",
+   "cc:porcelain|PL",
+   "cb:porcelain|rörstrand|PL"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "PL",
+   "language": ""
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "PL",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:PL",
+   "c:camera",
+   "cc:camera|PL",
+   "cb:camera|ニコン|PL"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "PL",
+   "language": " "
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "PL",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:PL",
+   "c:lego",
+   "cc:lego|PL",
+   "cb:lego|lego|PL"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "PL",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "PL",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:PL",
+   "c:bag",
+   "cc:bag|PL",
+   "cb:bag|louis vuitton|PL"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "CZ",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "CZ",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:CZ",
+   "c:book",
+   "cc:book|CZ",
+   "cb:book|-|CZ"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "CZ",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "CZ",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:CZ",
+   "c:coin",
+   "cc:coin|CZ",
+   "cb:coin|-|CZ"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "CZ",
+   "language": "da"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "CZ",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:CZ",
+   "c:phone",
+   "cc:phone|CZ",
+   "cb:phone|apple|CZ"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "CZ",
+   "language": "de"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "CZ",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:CZ",
+   "c:art",
+   "cc:art|CZ",
+   "cb:art|-|CZ"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "CZ",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "CZ",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:CZ",
+   "c:shoe",
+   "cc:shoe|CZ",
+   "cb:shoe|nike|CZ"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "US",
+   "language": "es"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "US",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:watch",
+   "cc:watch|US",
+   "cb:watch|rolex|US"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "US",
+   "language": "it"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "US",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:guitar",
+   "cc:guitar|US",
+   "cb:guitar|fender|US"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "US",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "US",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:furniture",
+   "cc:furniture|US",
+   "cb:furniture|åhlén söner|US"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "US",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "US",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:vinyl",
+   "cc:vinyl|US",
+   "cb:vinyl|beyoncé|US"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "US",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "US",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:camera",
+   "cc:camera|US",
+   "cb:camera|canon|US"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "CA",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "CA",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:CA",
+   "c:silver",
+   "cc:silver|CA",
+   "cb:silver|łódź silver|CA"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "CA",
+   "language": "en"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "CA",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:CA",
+   "c:porcelain",
+   "cc:porcelain|CA",
+   "cb:porcelain|rörstrand|CA"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "CA",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "CA",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:CA",
+   "c:camera",
+   "cc:camera|CA",
+   "cb:camera|ニコン|CA"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "CA",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "CA",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:CA",
+   "c:lego",
+   "cc:lego|CA",
+   "cb:lego|lego|CA"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "CA",
+   "language": ""
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "CA",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:CA",
+   "c:bag",
+   "cc:bag|CA",
+   "cb:bag|louis vuitton|CA"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "AU",
+   "language": " "
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "AU",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:AU",
+   "c:book",
+   "cc:book|AU",
+   "cb:book|-|AU"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "AU",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "AU",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:AU",
+   "c:coin",
+   "cc:coin|AU",
+   "cb:coin|-|AU"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "AU",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "AU",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:AU",
+   "c:phone",
+   "cc:phone|AU",
+   "cb:phone|apple|AU"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "AU",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "AU",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:AU",
+   "c:art",
+   "cc:art|AU",
+   "cb:art|-|AU"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "AU",
+   "language": "da"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "AU",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:AU",
+   "c:shoe",
+   "cc:shoe|AU",
+   "cb:shoe|nike|AU"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "NZ",
+   "language": "de"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "NZ",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:NZ",
+   "c:watch",
+   "cc:watch|NZ",
+   "cb:watch|rolex|NZ"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "NZ",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "NZ",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:NZ",
+   "c:guitar",
+   "cc:guitar|NZ",
+   "cb:guitar|fender|NZ"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "NZ",
+   "language": "es"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "NZ",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:NZ",
+   "c:furniture",
+   "cc:furniture|NZ",
+   "cb:furniture|åhlén söner|NZ"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "NZ",
+   "language": "it"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "NZ",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:NZ",
+   "c:vinyl",
+   "cc:vinyl|NZ",
+   "cb:vinyl|beyoncé|NZ"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "NZ",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "NZ",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:AU",
+   "k:NZ",
+   "c:camera",
+   "cc:camera|NZ",
+   "cb:camera|canon|NZ"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "JP",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "JP",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:JP",
+   "c:silver",
+   "cc:silver|JP",
+   "cb:silver|łódź silver|JP"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "JP",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "JP",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:JP",
+   "c:porcelain",
+   "cc:porcelain|JP",
+   "cb:porcelain|rörstrand|JP"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "JP",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "JP",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:JP",
+   "c:camera",
+   "cc:camera|JP",
+   "cb:camera|ニコン|JP"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "JP",
+   "language": "en"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "JP",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:JP",
+   "c:lego",
+   "cc:lego|JP",
+   "cb:lego|lego|JP"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "JP",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "JP",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:JP",
+   "c:bag",
+   "cc:bag|JP",
+   "cb:bag|louis vuitton|JP"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "KR",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "KR",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:KR",
+   "c:book",
+   "cc:book|KR",
+   "cb:book|-|KR"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "KR",
+   "language": ""
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "KR",
+   "language": "ko"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:KR",
+   "c:coin",
+   "cc:coin|KR",
+   "cb:coin|-|KR"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "KR",
+   "language": " "
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "KR",
+   "language": "ko"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:KR",
+   "c:phone",
+   "cc:phone|KR",
+   "cb:phone|apple|KR"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "KR",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "KR",
+   "language": "ko"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:KR",
+   "c:art",
+   "cc:art|KR",
+   "cb:art|-|KR"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "KR",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "KR",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:JP",
+   "k:KR",
+   "c:shoe",
+   "cc:shoe|KR",
+   "cb:shoe|nike|KR"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "BR",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "BR",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:watch",
+   "cc:watch|BR",
+   "cb:watch|rolex|BR"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "BR",
+   "language": "da"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "BR",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:guitar",
+   "cc:guitar|BR",
+   "cb:guitar|fender|BR"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "BR",
+   "language": "de"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "BR",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:furniture",
+   "cc:furniture|BR",
+   "cb:furniture|åhlén söner|BR"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "BR",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "BR",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:vinyl",
+   "cc:vinyl|BR",
+   "cb:vinyl|beyoncé|BR"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "BR",
+   "language": "es"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "BR",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:camera",
+   "cc:camera|BR",
+   "cb:camera|canon|BR"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "MX",
+   "language": "it"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "MX",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:MX",
+   "c:silver",
+   "cc:silver|MX",
+   "cb:silver|łódź silver|MX"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "MX",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "MX",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:MX",
+   "c:porcelain",
+   "cc:porcelain|MX",
+   "cb:porcelain|rörstrand|MX"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "MX",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "MX",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:MX",
+   "c:camera",
+   "cc:camera|MX",
+   "cb:camera|ニコン|MX"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "MX",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "MX",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:MX",
+   "c:lego",
+   "cc:lego|MX",
+   "cb:lego|lego|MX"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "MX",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "MX",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:MX",
+   "c:bag",
+   "cc:bag|MX",
+   "cb:bag|louis vuitton|MX"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "IN",
+   "language": "en"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "IN",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:IN",
+   "k:IN",
+   "c:book",
+   "cc:book|IN",
+   "cb:book|-|IN"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "IN",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "IN",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:IN",
+   "k:IN",
+   "c:coin",
+   "cc:coin|IN",
+   "cb:coin|-|IN"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "IN",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "IN",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:IN",
+   "k:IN",
+   "c:phone",
+   "cc:phone|IN",
+   "cb:phone|apple|IN"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "IN",
+   "language": ""
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "IN",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:IN",
+   "k:IN",
+   "c:art",
+   "cc:art|IN",
+   "cb:art|-|IN"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "IN",
+   "language": " "
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "IN",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:IN",
+   "k:IN",
+   "c:shoe",
+   "cc:shoe|IN",
+   "cb:shoe|nike|IN"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "ZA",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "ZA",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:ZA",
+   "k:ZA",
+   "c:watch",
+   "cc:watch|ZA",
+   "cb:watch|rolex|ZA"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "ZA",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "ZA",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:ZA",
+   "k:ZA",
+   "c:guitar",
+   "cc:guitar|ZA",
+   "cb:guitar|fender|ZA"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "ZA",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "ZA",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "r:ZA",
+   "k:ZA",
+   "c:furniture",
+   "cc:furniture|ZA",
+   "cb:furniture|åhlén söner|ZA"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "ZA",
+   "language": "da"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "ZA",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "r:ZA",
+   "k:ZA",
+   "c:vinyl",
+   "cc:vinyl|ZA",
+   "cb:vinyl|beyoncé|ZA"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "ZA",
+   "language": "de"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "ZA",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:ZA",
+   "k:ZA",
+   "c:camera",
+   "cc:camera|ZA",
+   "cb:camera|canon|ZA"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "ZZ",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "ZZ",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "c:silver",
+   "cc:silver|ZZ",
+   "cb:silver|łódź silver|ZZ"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "ZZ",
+   "language": "es"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "ZZ",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "c:porcelain",
+   "cc:porcelain|ZZ",
+   "cb:porcelain|rörstrand|ZZ"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "ZZ",
+   "language": "it"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "ZZ",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "c:camera",
+   "cc:camera|ZZ",
+   "cb:camera|ニコン|ZZ"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "ZZ",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "ZZ",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "c:lego",
+   "cc:lego|ZZ",
+   "cb:lego|lego|ZZ"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "ZZ",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "ZZ",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "c:bag",
+   "cc:bag|ZZ",
+   "cb:bag|louis vuitton|ZZ"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "xx",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "XX",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "k:XX",
+   "c:book",
+   "cc:book|XX",
+   "cb:book|-|XX"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "xx",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "XX",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "k:XX",
+   "c:coin",
+   "cc:coin|XX",
+   "cb:coin|-|XX"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "xx",
+   "language": "en"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "XX",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "k:XX",
+   "c:phone",
+   "cc:phone|XX",
+   "cb:phone|apple|XX"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "xx",
+   "language": "pt-BR"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "XX",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "k:XX",
+   "c:art",
+   "cc:art|XX",
+   "cb:art|-|XX"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "xx",
+   "language": "EN"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "XX",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "k:XX",
+   "c:shoe",
+   "cc:shoe|XX",
+   "cb:shoe|nike|XX"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "Watch",
+   "brand": "Rolex",
+   "type": "Submariner Date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "s",
+   "language": ""
+  },
+  "clean": {
+   "category": "watch",
+   "brand": "rolex",
+   "type": "submariner date",
+   "model": "16610",
+   "era": "1990s",
+   "country": "ZZ",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "c:watch",
+   "cc:watch|ZZ",
+   "cb:watch|rolex|ZZ"
+  ],
+  "text": "rolex 16610"
+ },
+ {
+  "raw": {
+   "category": "Guitar",
+   "brand": "Fender",
+   "type": "Stratocaster",
+   "model": "American Standard",
+   "era": "1998",
+   "country": "s",
+   "language": " "
+  },
+  "clean": {
+   "category": "guitar",
+   "brand": "fender",
+   "type": "stratocaster",
+   "model": "american standard",
+   "era": "1998",
+   "country": "ZZ",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "c:guitar",
+   "cc:guitar|ZZ",
+   "cb:guitar|fender|ZZ"
+  ],
+  "text": "fender american standard"
+ },
+ {
+  "raw": {
+   "category": "Furniture",
+   "brand": "Åhlén & Söner",
+   "type": "Fåtölj / lounge",
+   "model": "Ö-24",
+   "era": "1960s",
+   "country": "s",
+   "language": "zz-yyyyy"
+  },
+  "clean": {
+   "category": "furniture",
+   "brand": "åhlén söner",
+   "type": "fåtölj lounge",
+   "model": "ö-24",
+   "era": "1960s",
+   "country": "ZZ",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "c:furniture",
+   "cc:furniture|ZZ",
+   "cb:furniture|åhlén söner|ZZ"
+  ],
+  "text": "åhlén söner ö-24"
+ },
+ {
+  "raw": {
+   "category": "Vinyl",
+   "brand": "Beyoncé",
+   "type": "L'album",
+   "model": "Lemonade 2xLP",
+   "era": "2016",
+   "country": "s",
+   "language": "sv"
+  },
+  "clean": {
+   "category": "vinyl",
+   "brand": "beyoncé",
+   "type": "l album",
+   "model": "lemonade 2xlp",
+   "era": "2016",
+   "country": "ZZ",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "c:vinyl",
+   "cc:vinyl|ZZ",
+   "cb:vinyl|beyoncé|ZZ"
+  ],
+  "text": "beyoncé lemonade 2xlp"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "Canon",
+   "type": "EOS 5D Mk II",
+   "model": "5D2",
+   "era": "",
+   "country": "s",
+   "language": "nb"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "canon",
+   "type": "eos 5d mk ii",
+   "model": "5d2",
+   "era": null,
+   "country": "ZZ",
+   "language": "nb"
+  },
+  "keys": [
+   "g",
+   "c:camera",
+   "cc:camera|ZZ",
+   "cb:camera|canon|ZZ"
+  ],
+  "text": "canon 5d2"
+ },
+ {
+  "raw": {
+   "category": "Silver",
+   "brand": "Łódź Silver",
+   "type": "Straße-Löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "",
+   "language": "da"
+  },
+  "clean": {
+   "category": "silver",
+   "brand": "łódź silver",
+   "type": "straße-löffel",
+   "model": "ß-1",
+   "era": "19th c.",
+   "country": "ZZ",
+   "language": "da"
+  },
+  "keys": [
+   "g",
+   "c:silver",
+   "cc:silver|ZZ",
+   "cb:silver|łódź silver|ZZ"
+  ],
+  "text": "łódź silver ß-1"
+ },
+ {
+  "raw": {
+   "category": "Porcelain",
+   "brand": "Rörstrand",
+   "type": "Kaffekanna",
+   "model": "Mon Amie",
+   "era": "1950",
+   "country": "",
+   "language": "de"
+  },
+  "clean": {
+   "category": "porcelain",
+   "brand": "rörstrand",
+   "type": "kaffekanna",
+   "model": "mon amie",
+   "era": "1950",
+   "country": "ZZ",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "c:porcelain",
+   "cc:porcelain|ZZ",
+   "cb:porcelain|rörstrand|ZZ"
+  ],
+  "text": "rörstrand mon amie"
+ },
+ {
+  "raw": {
+   "category": "Camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "F3",
+   "era": "昭和",
+   "country": "",
+   "language": "fr"
+  },
+  "clean": {
+   "category": "camera",
+   "brand": "ニコン",
+   "type": "フィルムカメラ",
+   "model": "f3",
+   "era": "昭和",
+   "country": "ZZ",
+   "language": "fr"
+  },
+  "keys": [
+   "g",
+   "c:camera",
+   "cc:camera|ZZ",
+   "cb:camera|ニコン|ZZ"
+  ],
+  "text": "ニコン f3"
+ },
+ {
+  "raw": {
+   "category": "Lego",
+   "brand": "LEGO",
+   "type": "Star Wars  Falcon\t7965",
+   "model": "7965",
+   "era": null,
+   "country": "",
+   "language": "es"
+  },
+  "clean": {
+   "category": "lego",
+   "brand": "lego",
+   "type": "star wars falcon 7965",
+   "model": "7965",
+   "era": null,
+   "country": "ZZ",
+   "language": "es"
+  },
+  "keys": [
+   "g",
+   "c:lego",
+   "cc:lego|ZZ",
+   "cb:lego|lego|ZZ"
+  ],
+  "text": "lego 7965"
+ },
+ {
+  "raw": {
+   "category": "Bag",
+   "brand": "Louis Vuitton",
+   "type": "Speedy 30",
+   "model": "M41526",
+   "era": "2005",
+   "country": "",
+   "language": "it"
+  },
+  "clean": {
+   "category": "bag",
+   "brand": "louis vuitton",
+   "type": "speedy 30",
+   "model": "m41526",
+   "era": "2005",
+   "country": "ZZ",
+   "language": "it"
+  },
+  "keys": [
+   "g",
+   "c:bag",
+   "cc:bag|ZZ",
+   "cb:bag|louis vuitton|ZZ"
+  ],
+  "text": "louis vuitton m41526"
+ },
+ {
+  "raw": {
+   "category": "Book",
+   "brand": "",
+   "type": "Första upplagan",
+   "model": "",
+   "era": "",
+   "country": "SG",
+   "language": "nl"
+  },
+  "clean": {
+   "category": "book",
+   "brand": null,
+   "type": "första upplagan",
+   "model": null,
+   "era": null,
+   "country": "SG",
+   "language": "nl"
+  },
+  "keys": [
+   "g",
+   "r:SG",
+   "k:SG",
+   "c:book",
+   "cc:book|SG",
+   "cb:book|-|SG"
+  ],
+  "text": "första upplagan"
+ },
+ {
+  "raw": {
+   "category": "Coin",
+   "brand": "",
+   "type": "5 öre 1907",
+   "model": "KM#10",
+   "era": "1907",
+   "country": "SG",
+   "language": "pt"
+  },
+  "clean": {
+   "category": "coin",
+   "brand": null,
+   "type": "5 öre 1907",
+   "model": "km 10",
+   "era": "1907",
+   "country": "SG",
+   "language": "pt"
+  },
+  "keys": [
+   "g",
+   "r:SG",
+   "k:SG",
+   "c:coin",
+   "cc:coin|SG",
+   "cb:coin|-|SG"
+  ],
+  "text": "km 10"
+ },
+ {
+  "raw": {
+   "category": "Phone",
+   "brand": "Apple",
+   "type": "iPhone 6s (A1688)",
+   "model": "",
+   "era": "2015",
+   "country": "SG",
+   "language": "pl"
+  },
+  "clean": {
+   "category": "phone",
+   "brand": "apple",
+   "type": "iphone 6s a1688",
+   "model": null,
+   "era": "2015",
+   "country": "SG",
+   "language": "pl"
+  },
+  "keys": [
+   "g",
+   "r:SG",
+   "k:SG",
+   "c:phone",
+   "cc:phone|SG",
+   "cb:phone|apple|SG"
+  ],
+  "text": "apple iphone 6s a1688"
+ },
+ {
+  "raw": {
+   "category": "Art",
+   "brand": "",
+   "type": "Oil painting 'Winter' (50x70cm)",
+   "model": "",
+   "era": "1920s",
+   "country": "SG",
+   "language": "ja"
+  },
+  "clean": {
+   "category": "art",
+   "brand": null,
+   "type": "oil painting winter 50x70cm",
+   "model": null,
+   "era": "1920s",
+   "country": "SG",
+   "language": "ja"
+  },
+  "keys": [
+   "g",
+   "r:SG",
+   "k:SG",
+   "c:art",
+   "cc:art|SG",
+   "cb:art|-|SG"
+  ],
+  "text": "oil painting winter 50x70cm"
+ },
+ {
+  "raw": {
+   "category": "Shoe",
+   "brand": "Nike",
+   "type": "Air Max 1/87",
+   "model": "",
+   "era": "1987",
+   "country": "SG",
+   "language": "en"
+  },
+  "clean": {
+   "category": "shoe",
+   "brand": "nike",
+   "type": "air max 1 87",
+   "model": null,
+   "era": "1987",
+   "country": "SG",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:SG",
+   "k:SG",
+   "c:shoe",
+   "cc:shoe|SG",
+   "cb:shoe|nike|SG"
+  ],
+  "text": "nike air max 1 87"
+ },
+ {
+  "raw": {
+   "category": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "type": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+   "brand": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+   "model": "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+   "era": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "country": "se"
+  },
+  "clean": {
+   "category": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "brand": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+   "type": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+   "model": "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+   "era": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "country": "SE",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "cc:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|SE",
+   "cb:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz|SE"
+  ],
+  "text": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+ },
+ {
+  "raw": {
+   "category": "",
+   "type": "",
+   "country": "SE"
+  },
+  "clean": null
+ },
+ {
+  "raw": {
+   "category": "",
+   "type": "Only type",
+   "country": "SE"
+  },
+  "clean": {
+   "category": "only type",
+   "brand": null,
+   "type": "only type",
+   "model": null,
+   "era": null,
+   "country": "SE",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:only type",
+   "cc:only type|SE",
+   "cb:only type|-|SE"
+  ],
+  "text": "only type"
+ },
+ {
+  "raw": {
+   "category": "Only cat",
+   "country": "SE"
+  },
+  "clean": {
+   "category": "only cat",
+   "brand": null,
+   "type": "only cat",
+   "model": null,
+   "era": null,
+   "country": "SE",
+   "language": "sv"
+  },
+  "keys": [
+   "g",
+   "r:SE",
+   "k:SE",
+   "c:only cat",
+   "cc:only cat|SE",
+   "cb:only cat|-|SE"
+  ],
+  "text": "only cat"
+ },
+ {
+  "raw": {
+   "category": 123,
+   "type": [
+    "a"
+   ],
+   "country": "SE"
+  },
+  "clean": null
+ },
+ {
+  "raw": {
+   "category": "a",
+   "country": 123
+  },
+  "clean": {
+   "category": "a",
+   "brand": null,
+   "type": "a",
+   "model": null,
+   "era": null,
+   "country": "ZZ",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "c:a",
+   "cc:a|ZZ",
+   "cb:a|-|ZZ"
+  ],
+  "text": "a"
+ },
+ {
+  "raw": {
+   "category": "a",
+   "country": "SSS"
+  },
+  "clean": {
+   "category": "a",
+   "brand": null,
+   "type": "a",
+   "model": null,
+   "era": null,
+   "country": "ZZ",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "c:a",
+   "cc:a|ZZ",
+   "cb:a|-|ZZ"
+  ],
+  "text": "a"
+ },
+ {
+  "raw": {
+   "category": "a",
+   "country": "ß"
+  },
+  "clean": {
+   "category": "a",
+   "brand": null,
+   "type": "a",
+   "model": null,
+   "era": null,
+   "country": "SS",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "k:SS",
+   "c:a",
+   "cc:a|SS",
+   "cb:a|-|SS"
+  ],
+  "text": "a"
+ },
+ {
+  "raw": {
+   "category": "😀 emoji 😀",
+   "brand": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+   "country": "US"
+  },
+  "clean": {
+   "category": "emoji",
+   "brand": null,
+   "type": "emoji",
+   "model": null,
+   "era": null,
+   "country": "US",
+   "language": "en"
+  },
+  "keys": [
+   "g",
+   "r:US",
+   "k:US",
+   "c:emoji",
+   "cc:emoji|US",
+   "cb:emoji|-|US"
+  ],
+  "text": "emoji"
+ },
+ {
+  "raw": {
+   "category": "a",
+   "language": "PT-br",
+   "country": "BR"
+  },
+  "clean": {
+   "category": "a",
+   "brand": null,
+   "type": "a",
+   "model": null,
+   "era": null,
+   "country": "BR",
+   "language": "pt-br"
+  },
+  "keys": [
+   "g",
+   "r:BR",
+   "k:BR",
+   "c:a",
+   "cc:a|BR",
+   "cb:a|-|BR"
+  ],
+  "text": "a"
+ },
+ {
+  "raw": {
+   "category": "a b cd\u001ce",
+   "country": "DE"
+  },
+  "clean": {
+   "category": "a b c d e",
+   "brand": null,
+   "type": "a b c d e",
+   "model": null,
+   "era": null,
+   "country": "DE",
+   "language": "de"
+  },
+  "keys": [
+   "g",
+   "r:DE",
+   "k:DE",
+   "c:a b c d e",
+   "cc:a b c d e|DE",
+   "cb:a b c d e|-|DE"
+  ],
+  "text": "a b c d e"
+ },
+ {
+  "raw": {
+   "category": "İstanbul ΣΑΣ",
+   "country": "TR"
+  },
+  "clean": {
+   "category": "i stanbul σας",
+   "brand": null,
+   "type": "i stanbul σας",
+   "model": null,
+   "era": null,
+   "country": "TR",
+   "language": "tr"
+  },
+  "keys": [
+   "g",
+   "r:PL",
+   "k:TR",
+   "c:i stanbul σας",
+   "cc:i stanbul σας|TR",
+   "cb:i stanbul σας|-|TR"
+  ],
+  "text": "i stanbul σας"
+ },
+ {
+  "raw": "not a dict",
+  "clean": null
+ },
+ {
+  "raw": null,
+  "clean": null
+ },
+ {
+  "raw": [],
+  "clean": null
+ },
+ {
+  "raw": 5,
+  "clean": null
+ }
+]

@@ -1,0 +1,1265 @@
+{
+ "norm": [
+  {
+   "value": "Hello, World!",
+   "limit": 80,
+   "out": "hello world"
+  },
+  {
+   "value": "Hello, World!",
+   "limit": 5,
+   "out": "hello"
+  },
+  {
+   "value": "Hello, World!",
+   "limit": 40,
+   "out": "hello world"
+  },
+  {
+   "value": "  a   b  ",
+   "limit": 80,
+   "out": "a b"
+  },
+  {
+   "value": "  a   b  ",
+   "limit": 5,
+   "out": "a b"
+  },
+  {
+   "value": "  a   b  ",
+   "limit": 40,
+   "out": "a b"
+  },
+  {
+   "value": "ÅÄÖ é ł ß",
+   "limit": 80,
+   "out": "åäö é ł ß"
+  },
+  {
+   "value": "ÅÄÖ é ł ß",
+   "limit": 5,
+   "out": "åäö é"
+  },
+  {
+   "value": "ÅÄÖ é ł ß",
+   "limit": 40,
+   "out": "åäö é ł ß"
+  },
+  {
+   "value": "a/b\\c'd\"e",
+   "limit": 80,
+   "out": "a b c d e"
+  },
+  {
+   "value": "a/b\\c'd\"e",
+   "limit": 5,
+   "out": "a b c"
+  },
+  {
+   "value": "a/b\\c'd\"e",
+   "limit": 40,
+   "out": "a b c d e"
+  },
+  {
+   "value": "落札 フィルム",
+   "limit": 80,
+   "out": "落札 フィルム"
+  },
+  {
+   "value": "落札 フィルム",
+   "limit": 5,
+   "out": "落札 フィ"
+  },
+  {
+   "value": "落札 フィルム",
+   "limit": 40,
+   "out": "落札 フィルム"
+  },
+  {
+   "value": "x.y-z_w",
+   "limit": 80,
+   "out": "x.y-z_w"
+  },
+  {
+   "value": "x.y-z_w",
+   "limit": 5,
+   "out": "x.y-z"
+  },
+  {
+   "value": "x.y-z_w",
+   "limit": 40,
+   "out": "x.y-z_w"
+  },
+  {
+   "value": "Ǆ İ",
+   "limit": 80,
+   "out": "ǆ i"
+  },
+  {
+   "value": "Ǆ İ",
+   "limit": 5,
+   "out": "ǆ i"
+  },
+  {
+   "value": "Ǆ İ",
+   "limit": 40,
+   "out": "ǆ i"
+  },
+  {
+   "value": null,
+   "limit": 80,
+   "out": ""
+  },
+  {
+   "value": null,
+   "limit": 5,
+   "out": ""
+  },
+  {
+   "value": null,
+   "limit": 40,
+   "out": ""
+  },
+  {
+   "value": 5,
+   "limit": 80,
+   "out": ""
+  },
+  {
+   "value": 5,
+   "limit": 5,
+   "out": ""
+  },
+  {
+   "value": 5,
+   "limit": 40,
+   "out": ""
+  },
+  {
+   "value": "😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀",
+   "limit": 80,
+   "out": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+  },
+  {
+   "value": "😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀",
+   "limit": 5,
+   "out": "a a a"
+  },
+  {
+   "value": "😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀😀a😀",
+   "limit": 40,
+   "out": "a a a a a a a a a a a a a a a a a a a a "
+  },
+  {
+   "value": "𠀀𠀁𠀂𠀃𠀄𠀅𠀆",
+   "limit": 80,
+   "out": "𠀀𠀁𠀂𠀃𠀄𠀅𠀆"
+  },
+  {
+   "value": "𠀀𠀁𠀂𠀃𠀄𠀅𠀆",
+   "limit": 5,
+   "out": "𠀀𠀁𠀂𠀃𠀄"
+  },
+  {
+   "value": "𠀀𠀁𠀂𠀃𠀄𠀅𠀆",
+   "limit": 40,
+   "out": "𠀀𠀁𠀂𠀃𠀄𠀅𠀆"
+  },
+  {
+   "value": "a𝒜b𝒜c𝒜d",
+   "limit": 80,
+   "out": "a𝒜b𝒜c𝒜d"
+  },
+  {
+   "value": "a𝒜b𝒜c𝒜d",
+   "limit": 5,
+   "out": "a𝒜b𝒜c"
+  },
+  {
+   "value": "a𝒜b𝒜c𝒜d",
+   "limit": 40,
+   "out": "a𝒜b𝒜c𝒜d"
+  },
+  {
+   "value": "tab\tnew\nline",
+   "limit": 80,
+   "out": "tab new line"
+  },
+  {
+   "value": "tab\tnew\nline",
+   "limit": 5,
+   "out": "tab n"
+  },
+  {
+   "value": "tab\tnew\nline",
+   "limit": 40,
+   "out": "tab new line"
+  }
+ ],
+ "data": {
+  "language_of": {
+   "": "en",
+   "AE": "en",
+   "AR": "es",
+   "AT": "de",
+   "AU": "en",
+   "BE": "nl",
+   "BR": "pt",
+   "CA": "en",
+   "CH": "de",
+   "CL": "es",
+   "CN": "zh-cn",
+   "CO": "es",
+   "CZ": "cs",
+   "DE": "de",
+   "DK": "da",
+   "ES": "es",
+   "FI": "fi",
+   "FR": "fr",
+   "GB": "en",
+   "GR": "el",
+   "HK": "en",
+   "HU": "hu",
+   "ID": "id",
+   "IE": "en",
+   "IL": "he",
+   "IN": "en",
+   "IS": "is",
+   "IT": "it",
+   "JP": "ja",
+   "KR": "ko",
+   "LU": "fr",
+   "MX": "es",
+   "MY": "en",
+   "NL": "nl",
+   "NO": "no",
+   "NZ": "en",
+   "PH": "en",
+   "PL": "pl",
+   "PT": "pt",
+   "RO": "ro",
+   "RU": "ru",
+   "SA": "ar",
+   "SE": "sv",
+   "SG": "en",
+   "TH": "th",
+   "TR": "tr",
+   "TW": "zh-tw",
+   "UA": "uk",
+   "US": "en",
+   "VN": "vi",
+   "XX": "en",
+   "ZA": "en",
+   "ZZ": "en",
+   "se": "sv",
+   "None": "en"
+  },
+  "marketplaces": {
+   "AE": [],
+   "AR": [],
+   "AT": [
+    "willhaben.at",
+    "ebay.at"
+   ],
+   "AU": [
+    "ebay.com.au",
+    "gumtree.com.au"
+   ],
+   "BE": [
+    "2dehands.be",
+    "ebay.be"
+   ],
+   "BR": [
+    "mercadolivre.com.br",
+    "olx.com.br"
+   ],
+   "CA": [
+    "ebay.ca",
+    "kijiji.ca"
+   ],
+   "CH": [
+    "ricardo.ch",
+    "ebay.ch"
+   ],
+   "CL": [],
+   "CN": [],
+   "CO": [],
+   "CZ": [
+    "bazos.cz",
+    "aukro.cz"
+   ],
+   "DE": [
+    "ebay.de",
+    "kleinanzeigen.de"
+   ],
+   "DK": [
+    "dba.dk",
+    "ebay.dk"
+   ],
+   "ES": [
+    "wallapop.com",
+    "ebay.es"
+   ],
+   "FI": [
+    "tori.fi",
+    "huuto.net"
+   ],
+   "FR": [
+    "leboncoin.fr",
+    "ebay.fr"
+   ],
+   "GB": [
+    "ebay.co.uk",
+    "gumtree.com"
+   ],
+   "GR": [],
+   "HK": [
+    "carousell.com.hk",
+    "ebay.com.hk"
+   ],
+   "HU": [],
+   "ID": [],
+   "IE": [
+    "donedeal.ie",
+    "ebay.ie"
+   ],
+   "IL": [],
+   "IN": [
+    "olx.in",
+    "ebay.in"
+   ],
+   "IS": [],
+   "IT": [
+    "subito.it",
+    "ebay.it"
+   ],
+   "JP": [
+    "auctions.yahoo.co.jp",
+    "mercari.com"
+   ],
+   "KR": [
+    "bunjang.co.kr",
+    "ebay.com"
+   ],
+   "LU": [],
+   "MX": [
+    "mercadolibre.com.mx",
+    "ebay.com.mx"
+   ],
+   "MY": [],
+   "NL": [
+    "marktplaats.nl",
+    "ebay.nl"
+   ],
+   "NO": [
+    "finn.no",
+    "ebay.no"
+   ],
+   "NZ": [
+    "trademe.co.nz",
+    "ebay.com.au"
+   ],
+   "PH": [],
+   "PL": [
+    "allegro.pl",
+    "olx.pl"
+   ],
+   "PT": [
+    "olx.pt",
+    "ebay.com"
+   ],
+   "RO": [],
+   "RU": [],
+   "SA": [],
+   "SE": [
+    "tradera.com",
+    "blocket.se",
+    "ebay.se"
+   ],
+   "SG": [
+    "carousell.sg",
+    "ebay.com.sg"
+   ],
+   "TH": [
+    "facebook.com/marketplace",
+    "ebay.com"
+   ],
+   "TR": [],
+   "TW": [
+    "ruten.com.tw",
+    "carousell.com"
+   ],
+   "UA": [],
+   "US": [
+    "ebay.com",
+    "offerup.com"
+   ],
+   "VN": [],
+   "XX": [],
+   "ZA": [],
+   "ZZ": [],
+   "se": [
+    "tradera.com",
+    "blocket.se",
+    "ebay.se"
+   ]
+  },
+  "region_of": {
+   "": null,
+   "AE": "AE",
+   "AR": "BR",
+   "AT": "DE",
+   "AU": "AU",
+   "BE": "DE",
+   "BR": "BR",
+   "CA": "US",
+   "CH": "DE",
+   "CL": "BR",
+   "CN": "JP",
+   "CO": "BR",
+   "CZ": "PL",
+   "DE": "DE",
+   "DK": "SE",
+   "ES": "FR",
+   "FI": "SE",
+   "FR": "FR",
+   "GB": "GB",
+   "GR": "PL",
+   "HK": "JP",
+   "HU": "PL",
+   "ID": "SG",
+   "IE": "GB",
+   "IL": "AE",
+   "IN": "IN",
+   "IS": "SE",
+   "IT": "FR",
+   "JP": "JP",
+   "KR": "JP",
+   "LU": "DE",
+   "MX": "BR",
+   "MY": "SG",
+   "NL": "DE",
+   "NO": "SE",
+   "NZ": "AU",
+   "PH": "SG",
+   "PL": "PL",
+   "PT": "FR",
+   "RO": "PL",
+   "RU": "RU",
+   "SA": "AE",
+   "SE": "SE",
+   "SG": "SG",
+   "TH": "SG",
+   "TR": "PL",
+   "TW": "JP",
+   "UA": "PL",
+   "US": "US",
+   "VN": "SG",
+   "XX": null,
+   "ZA": "ZA",
+   "ZZ": null,
+   "se": "SE",
+   "None": null
+  },
+  "regional_peers": {
+   "": [],
+   "AE": [],
+   "AR": [
+    "BR",
+    "MX"
+   ],
+   "AT": [
+    "DE",
+    "CH",
+    "NL",
+    "BE"
+   ],
+   "AU": [
+    "NZ"
+   ],
+   "BE": [
+    "DE",
+    "AT",
+    "CH",
+    "NL",
+    "FR",
+    "ES",
+    "IT",
+    "PT"
+   ],
+   "BR": [
+    "MX"
+   ],
+   "CA": [
+    "US",
+    "MX"
+   ],
+   "CH": [
+    "DE",
+    "AT",
+    "NL",
+    "BE"
+   ],
+   "CL": [
+    "BR",
+    "MX"
+   ],
+   "CN": [
+    "JP",
+    "KR",
+    "TW",
+    "HK"
+   ],
+   "CO": [
+    "BR",
+    "MX"
+   ],
+   "CZ": [
+    "PL"
+   ],
+   "DE": [
+    "AT",
+    "CH",
+    "NL",
+    "BE"
+   ],
+   "DK": [
+    "SE",
+    "NO",
+    "FI"
+   ],
+   "ES": [
+    "FR",
+    "BE",
+    "IT",
+    "PT"
+   ],
+   "FI": [
+    "SE",
+    "NO",
+    "DK"
+   ],
+   "FR": [
+    "BE",
+    "ES",
+    "IT",
+    "PT"
+   ],
+   "GB": [
+    "IE"
+   ],
+   "GR": [
+    "PL",
+    "CZ"
+   ],
+   "HK": [
+    "JP",
+    "KR",
+    "TW",
+    "SG",
+    "TH"
+   ],
+   "HU": [
+    "PL",
+    "CZ"
+   ],
+   "ID": [
+    "SG",
+    "TH",
+    "HK"
+   ],
+   "IE": [
+    "GB"
+   ],
+   "IL": [],
+   "IN": [
+    "SG"
+   ],
+   "IS": [
+    "SE",
+    "NO",
+    "DK",
+    "FI"
+   ],
+   "IT": [
+    "FR",
+    "BE",
+    "ES",
+    "PT"
+   ],
+   "JP": [
+    "KR",
+    "TW",
+    "HK"
+   ],
+   "KR": [
+    "JP",
+    "TW",
+    "HK"
+   ],
+   "LU": [
+    "DE",
+    "AT",
+    "CH",
+    "NL",
+    "BE",
+    "FR",
+    "ES",
+    "IT",
+    "PT"
+   ],
+   "MX": [
+    "BR",
+    "US",
+    "CA"
+   ],
+   "MY": [
+    "SG",
+    "TH",
+    "HK"
+   ],
+   "NL": [
+    "DE",
+    "AT",
+    "CH",
+    "BE"
+   ],
+   "NO": [
+    "SE",
+    "DK",
+    "FI"
+   ],
+   "NZ": [
+    "AU"
+   ],
+   "PH": [
+    "SG",
+    "TH",
+    "HK"
+   ],
+   "PL": [
+    "CZ"
+   ],
+   "PT": [
+    "FR",
+    "BE",
+    "ES",
+    "IT"
+   ],
+   "RO": [
+    "PL",
+    "CZ"
+   ],
+   "RU": [],
+   "SA": [],
+   "SE": [
+    "NO",
+    "DK",
+    "FI"
+   ],
+   "SG": [
+    "TH",
+    "HK",
+    "IN"
+   ],
+   "TH": [
+    "SG",
+    "HK"
+   ],
+   "TR": [
+    "PL",
+    "CZ"
+   ],
+   "TW": [
+    "JP",
+    "KR",
+    "HK"
+   ],
+   "UA": [
+    "PL",
+    "CZ"
+   ],
+   "US": [
+    "CA",
+    "MX"
+   ],
+   "VN": [
+    "SG",
+    "TH",
+    "HK"
+   ],
+   "XX": [],
+   "ZA": [],
+   "ZZ": [],
+   "se": [
+    "NO",
+    "DK",
+    "FI"
+   ],
+   "None": []
+  },
+  "tier_of_gl": {
+   "SE|": "local",
+   "SE|AE": "global",
+   "SE|AR": "global",
+   "SE|AT": "global",
+   "SE|AU": "global",
+   "SE|BE": "global",
+   "SE|BR": "global",
+   "SE|CA": "global",
+   "SE|CH": "global",
+   "SE|CL": "global",
+   "SE|CN": "global",
+   "SE|CO": "global",
+   "SE|CZ": "global",
+   "SE|DE": "global",
+   "SE|DK": "regional",
+   "SE|ES": "global",
+   "SE|FI": "regional",
+   "SE|FR": "global",
+   "SE|GB": "global",
+   "SE|GR": "global",
+   "SE|HK": "global",
+   "SE|HU": "global",
+   "SE|ID": "global",
+   "SE|IE": "global",
+   "SE|IL": "global",
+   "SE|IN": "global",
+   "SE|IS": "regional",
+   "SE|IT": "global",
+   "SE|JP": "global",
+   "SE|KR": "global",
+   "SE|LU": "global",
+   "SE|MX": "global",
+   "SE|MY": "global",
+   "SE|NL": "global",
+   "SE|NO": "regional",
+   "SE|NZ": "global",
+   "SE|PH": "global",
+   "SE|PL": "global",
+   "SE|PT": "global",
+   "SE|RO": "global",
+   "SE|RU": "global",
+   "SE|SA": "global",
+   "SE|SE": "local",
+   "SE|SG": "global",
+   "SE|TH": "global",
+   "SE|TR": "global",
+   "SE|TW": "global",
+   "SE|UA": "global",
+   "SE|US": "global",
+   "SE|VN": "global",
+   "SE|XX": "global",
+   "SE|ZA": "global",
+   "SE|ZZ": "local",
+   "SE|se": "local",
+   "NO|": "local",
+   "NO|AE": "global",
+   "NO|AR": "global",
+   "NO|AT": "global",
+   "NO|AU": "global",
+   "NO|BE": "global",
+   "NO|BR": "global",
+   "NO|CA": "global",
+   "NO|CH": "global",
+   "NO|CL": "global",
+   "NO|CN": "global",
+   "NO|CO": "global",
+   "NO|CZ": "global",
+   "NO|DE": "global",
+   "NO|DK": "regional",
+   "NO|ES": "global",
+   "NO|FI": "regional",
+   "NO|FR": "global",
+   "NO|GB": "global",
+   "NO|GR": "global",
+   "NO|HK": "global",
+   "NO|HU": "global",
+   "NO|ID": "global",
+   "NO|IE": "global",
+   "NO|IL": "global",
+   "NO|IN": "global",
+   "NO|IS": "regional",
+   "NO|IT": "global",
+   "NO|JP": "global",
+   "NO|KR": "global",
+   "NO|LU": "global",
+   "NO|MX": "global",
+   "NO|MY": "global",
+   "NO|NL": "global",
+   "NO|NO": "local",
+   "NO|NZ": "global",
+   "NO|PH": "global",
+   "NO|PL": "global",
+   "NO|PT": "global",
+   "NO|RO": "global",
+   "NO|RU": "global",
+   "NO|SA": "global",
+   "NO|SE": "regional",
+   "NO|SG": "global",
+   "NO|TH": "global",
+   "NO|TR": "global",
+   "NO|TW": "global",
+   "NO|UA": "global",
+   "NO|US": "global",
+   "NO|VN": "global",
+   "NO|XX": "global",
+   "NO|ZA": "global",
+   "NO|ZZ": "local",
+   "NO|se": "regional",
+   "DE|": "local",
+   "DE|AE": "global",
+   "DE|AR": "global",
+   "DE|AT": "regional",
+   "DE|AU": "global",
+   "DE|BE": "regional",
+   "DE|BR": "global",
+   "DE|CA": "global",
+   "DE|CH": "regional",
+   "DE|CL": "global",
+   "DE|CN": "global",
+   "DE|CO": "global",
+   "DE|CZ": "global",
+   "DE|DE": "local",
+   "DE|DK": "global",
+   "DE|ES": "global",
+   "DE|FI": "global",
+   "DE|FR": "global",
+   "DE|GB": "global",
+   "DE|GR": "global",
+   "DE|HK": "global",
+   "DE|HU": "global",
+   "DE|ID": "global",
+   "DE|IE": "global",
+   "DE|IL": "global",
+   "DE|IN": "global",
+   "DE|IS": "global",
+   "DE|IT": "global",
+   "DE|JP": "global",
+   "DE|KR": "global",
+   "DE|LU": "regional",
+   "DE|MX": "global",
+   "DE|MY": "global",
+   "DE|NL": "regional",
+   "DE|NO": "global",
+   "DE|NZ": "global",
+   "DE|PH": "global",
+   "DE|PL": "global",
+   "DE|PT": "global",
+   "DE|RO": "global",
+   "DE|RU": "global",
+   "DE|SA": "global",
+   "DE|SE": "global",
+   "DE|SG": "global",
+   "DE|TH": "global",
+   "DE|TR": "global",
+   "DE|TW": "global",
+   "DE|UA": "global",
+   "DE|US": "global",
+   "DE|VN": "global",
+   "DE|XX": "global",
+   "DE|ZA": "global",
+   "DE|ZZ": "local",
+   "DE|se": "global",
+   "US|": "local",
+   "US|AE": "global",
+   "US|AR": "global",
+   "US|AT": "global",
+   "US|AU": "global",
+   "US|BE": "global",
+   "US|BR": "global",
+   "US|CA": "regional",
+   "US|CH": "global",
+   "US|CL": "global",
+   "US|CN": "global",
+   "US|CO": "global",
+   "US|CZ": "global",
+   "US|DE": "global",
+   "US|DK": "global",
+   "US|ES": "global",
+   "US|FI": "global",
+   "US|FR": "global",
+   "US|GB": "global",
+   "US|GR": "global",
+   "US|HK": "global",
+   "US|HU": "global",
+   "US|ID": "global",
+   "US|IE": "global",
+   "US|IL": "global",
+   "US|IN": "global",
+   "US|IS": "global",
+   "US|IT": "global",
+   "US|JP": "global",
+   "US|KR": "global",
+   "US|LU": "global",
+   "US|MX": "regional",
+   "US|MY": "global",
+   "US|NL": "global",
+   "US|NO": "global",
+   "US|NZ": "global",
+   "US|PH": "global",
+   "US|PL": "global",
+   "US|PT": "global",
+   "US|RO": "global",
+   "US|RU": "global",
+   "US|SA": "global",
+   "US|SE": "global",
+   "US|SG": "global",
+   "US|TH": "global",
+   "US|TR": "global",
+   "US|TW": "global",
+   "US|UA": "global",
+   "US|US": "local",
+   "US|VN": "global",
+   "US|XX": "global",
+   "US|ZA": "global",
+   "US|ZZ": "local",
+   "US|se": "global",
+   "JP|": "local",
+   "JP|AE": "global",
+   "JP|AR": "global",
+   "JP|AT": "global",
+   "JP|AU": "global",
+   "JP|BE": "global",
+   "JP|BR": "global",
+   "JP|CA": "global",
+   "JP|CH": "global",
+   "JP|CL": "global",
+   "JP|CN": "regional",
+   "JP|CO": "global",
+   "JP|CZ": "global",
+   "JP|DE": "global",
+   "JP|DK": "global",
+   "JP|ES": "global",
+   "JP|FI": "global",
+   "JP|FR": "global",
+   "JP|GB": "global",
+   "JP|GR": "global",
+   "JP|HK": "regional",
+   "JP|HU": "global",
+   "JP|ID": "global",
+   "JP|IE": "global",
+   "JP|IL": "global",
+   "JP|IN": "global",
+   "JP|IS": "global",
+   "JP|IT": "global",
+   "JP|JP": "local",
+   "JP|KR": "regional",
+   "JP|LU": "global",
+   "JP|MX": "global",
+   "JP|MY": "global",
+   "JP|NL": "global",
+   "JP|NO": "global",
+   "JP|NZ": "global",
+   "JP|PH": "global",
+   "JP|PL": "global",
+   "JP|PT": "global",
+   "JP|RO": "global",
+   "JP|RU": "global",
+   "JP|SA": "global",
+   "JP|SE": "global",
+   "JP|SG": "global",
+   "JP|TH": "global",
+   "JP|TR": "global",
+   "JP|TW": "regional",
+   "JP|UA": "global",
+   "JP|US": "global",
+   "JP|VN": "global",
+   "JP|XX": "global",
+   "JP|ZA": "global",
+   "JP|ZZ": "local",
+   "JP|se": "global",
+   "ZZ|": "local",
+   "ZZ|AE": "global",
+   "ZZ|AR": "global",
+   "ZZ|AT": "global",
+   "ZZ|AU": "global",
+   "ZZ|BE": "global",
+   "ZZ|BR": "global",
+   "ZZ|CA": "global",
+   "ZZ|CH": "global",
+   "ZZ|CL": "global",
+   "ZZ|CN": "global",
+   "ZZ|CO": "global",
+   "ZZ|CZ": "global",
+   "ZZ|DE": "global",
+   "ZZ|DK": "global",
+   "ZZ|ES": "global",
+   "ZZ|FI": "global",
+   "ZZ|FR": "global",
+   "ZZ|GB": "global",
+   "ZZ|GR": "global",
+   "ZZ|HK": "global",
+   "ZZ|HU": "global",
+   "ZZ|ID": "global",
+   "ZZ|IE": "global",
+   "ZZ|IL": "global",
+   "ZZ|IN": "global",
+   "ZZ|IS": "global",
+   "ZZ|IT": "global",
+   "ZZ|JP": "global",
+   "ZZ|KR": "global",
+   "ZZ|LU": "global",
+   "ZZ|MX": "global",
+   "ZZ|MY": "global",
+   "ZZ|NL": "global",
+   "ZZ|NO": "global",
+   "ZZ|NZ": "global",
+   "ZZ|PH": "global",
+   "ZZ|PL": "global",
+   "ZZ|PT": "global",
+   "ZZ|RO": "global",
+   "ZZ|RU": "global",
+   "ZZ|SA": "global",
+   "ZZ|SE": "global",
+   "ZZ|SG": "global",
+   "ZZ|TH": "global",
+   "ZZ|TR": "global",
+   "ZZ|TW": "global",
+   "ZZ|UA": "global",
+   "ZZ|US": "global",
+   "ZZ|VN": "global",
+   "ZZ|XX": "global",
+   "ZZ|ZA": "global",
+   "ZZ|ZZ": "local",
+   "ZZ|se": "global",
+   "|": "local",
+   "|AE": "global",
+   "|AR": "global",
+   "|AT": "global",
+   "|AU": "global",
+   "|BE": "global",
+   "|BR": "global",
+   "|CA": "global",
+   "|CH": "global",
+   "|CL": "global",
+   "|CN": "global",
+   "|CO": "global",
+   "|CZ": "global",
+   "|DE": "global",
+   "|DK": "global",
+   "|ES": "global",
+   "|FI": "global",
+   "|FR": "global",
+   "|GB": "global",
+   "|GR": "global",
+   "|HK": "global",
+   "|HU": "global",
+   "|ID": "global",
+   "|IE": "global",
+   "|IL": "global",
+   "|IN": "global",
+   "|IS": "global",
+   "|IT": "global",
+   "|JP": "global",
+   "|KR": "global",
+   "|LU": "global",
+   "|MX": "global",
+   "|MY": "global",
+   "|NL": "global",
+   "|NO": "global",
+   "|NZ": "global",
+   "|PH": "global",
+   "|PL": "global",
+   "|PT": "global",
+   "|RO": "global",
+   "|RU": "global",
+   "|SA": "global",
+   "|SE": "global",
+   "|SG": "global",
+   "|TH": "global",
+   "|TR": "global",
+   "|TW": "global",
+   "|UA": "global",
+   "|US": "global",
+   "|VN": "global",
+   "|XX": "global",
+   "|ZA": "global",
+   "|ZZ": "local",
+   "|se": "global"
+  },
+  "sold_local": {
+   "sv": "såld slutpris",
+   "no": "solgt",
+   "da": "solgt",
+   "de": "verkauft",
+   "fr": "vendu",
+   "es": "vendido",
+   "it": "venduto",
+   "nl": "verkocht",
+   "pt": "vendido",
+   "pl": "sprzedane",
+   "ja": "落札",
+   "en": "sold",
+   "fi": "sold",
+   "ko": "sold",
+   "xx": "sold"
+  },
+  "sold_word": {
+   "sv": "såld slutpris",
+   "no": "solgt",
+   "da": "solgt",
+   "fi": "myyty",
+   "is": "selt",
+   "de": "verkauft",
+   "fr": "vendu",
+   "es": "vendido",
+   "it": "venduto",
+   "nl": "verkocht",
+   "pt": "vendido",
+   "pt-BR": "vendido",
+   "PT": "vendido",
+   "pl": "sprzedane",
+   "cs": "prodáno",
+   "hu": "eladva",
+   "ro": "vândut",
+   "el": "πωλήθηκε",
+   "tr": "satıldı",
+   "ja": "落札",
+   "ko": "판매완료",
+   "id": "terjual",
+   "vi": "đã bán",
+   "th": "ขายแล้ว",
+   "en": "sold",
+   "xx": "sold"
+  },
+  "specialist_for": {
+   "watch": "chrono24.com",
+   "Guitar amp": "reverb.com",
+   "sneaker": "stockx.com",
+   "camera lens": "mpb.com",
+   "car": "bringatrailer.com",
+   "phone": "swappa.com",
+   "book": "abebooks.com",
+   "antique": "invaluable.com",
+   "lego": "bricklink.com",
+   "video game": "pricecharting.com",
+   "vinyl record": "discogs.com",
+   "handbag": "vestiairecollective.com",
+   "coin": "numista.com",
+   "furniture": "invaluable.com",
+   "nothing here": null,
+   "WATCHES": "chrono24.com",
+   "watchmaker": null
+  },
+  "region_groups": [
+   [
+    "SE",
+    "NO",
+    "DK",
+    "FI",
+    "IS"
+   ],
+   [
+    "DE",
+    "AT",
+    "CH",
+    "NL",
+    "BE",
+    "LU"
+   ],
+   [
+    "FR",
+    "BE",
+    "LU",
+    "ES",
+    "IT",
+    "PT"
+   ],
+   [
+    "IT",
+    "ES",
+    "PT",
+    "FR"
+   ],
+   [
+    "GB",
+    "IE"
+   ],
+   [
+    "PL",
+    "CZ",
+    "HU",
+    "RO",
+    "GR",
+    "TR",
+    "UA"
+   ],
+   [
+    "US",
+    "CA"
+   ],
+   [
+    "CA",
+    "US"
+   ],
+   [
+    "AU",
+    "NZ"
+   ],
+   [
+    "JP",
+    "KR",
+    "TW",
+    "HK",
+    "CN"
+   ],
+   [
+    "SG",
+    "MY",
+    "TH",
+    "ID",
+    "VN",
+    "PH",
+    "HK"
+   ],
+   [
+    "BR",
+    "MX",
+    "AR",
+    "CL",
+    "CO"
+   ],
+   [
+    "MX",
+    "US",
+    "CA"
+   ],
+   [
+    "AE",
+    "SA",
+    "IL"
+   ],
+   [
+    "IN",
+    "SG"
+   ],
+   [
+    "ZA"
+   ],
+   [
+    "RU",
+    "UA"
+   ]
+  ],
+  "thresholds": {
+   "thin_below_sold_per_search": 1.2,
+   "high_sold_per_search": 2.0,
+   "country_stats_min_n": 30
+  },
+  "data_rich": [
+   "AT",
+   "AU",
+   "CA",
+   "DE",
+   "ES",
+   "FR",
+   "GB",
+   "IE",
+   "IT",
+   "JP",
+   "NL",
+   "US"
+  ]
+ }
+}
