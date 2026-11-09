@@ -14,6 +14,7 @@ import { extractMoney, hostOf, listingKind } from "./money.ts";
 import type { Finding, Fingerprint, MarketReport, PlannedSearch, SearchOutcome, SearchPlan, StopReason } from "./types.ts";
 import { clean, normalizeUrl } from "./validate.ts";
 import { analyzeFindings } from "./select-ads.ts";
+import { keepRelevant } from "./relevance.ts";
 import type { SourceBeliefs } from "../_shared/search-ai/beliefs.ts";
 
 const SERPER_URL = "https://google.serper.dev/search";
@@ -353,7 +354,10 @@ export async function runMarketLive(
   // Search AI + the statistics choose the Judge's ads together: its beliefs go in, the selector's inlier evidence comes back.
   // A problem with the learner must never cost an answer, so a failing belief falls back to the default prior.
   const sb = opts.sourceBeliefs;
-  const { chosen: findings, trace } = analyzeFindings(all, {
+  // First drop hits that are not about the item (category pages, other products): the selector below only looks at prices.
+  const relevant = keepRelevant(all, ran.map((s) => s.query));
+  if (relevant.removed > 0) deps.log("[Market] off-topic hits removed", { removed: relevant.removed, kept: relevant.kept.length });
+  const { chosen: findings, trace } = analyzeFindings(relevant.kept, {
     optimism: sb ? 0.5 : 0,
     belief: sb ? (f) => { try { return sb.belief(f); } catch { return undefined; } } : undefined,
   });

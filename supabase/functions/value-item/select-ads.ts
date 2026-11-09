@@ -36,7 +36,7 @@ import { tierRank } from "./market-tiers.ts";
 /** How many ads reach the Judge. ONE source of truth. */
 export const JUDGE_MAX_ADS = 7;
 /** T3-c: fewer ads when the Judge window is short (less input, less thinking, less output). Guess: tune from T5 data. */
-export const JUDGE_SHORT_WINDOW_MS = 3500;
+export const JUDGE_SHORT_WINDOW_MS = 2500;
 export const JUDGE_MAX_ADS_SHORT = 4;
 export function judgeMaxAds(judgeMs: number): number {
   return Number.isFinite(judgeMs) && judgeMs < JUDGE_SHORT_WINDOW_MS ? JUDGE_MAX_ADS_SHORT : JUDGE_MAX_ADS;
