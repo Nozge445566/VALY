@@ -8,17 +8,17 @@ import { HARD_CAPS } from "./config.ts";
 import type { Deps, BrainConfig } from "./config.ts";
 import { convertCurrency } from "./fx.ts";
 import { AbortedError, postJson } from "./http.ts";
-import { escalationSearches, effectiveSold, findingCountry, isThinData, nextTiers, tierOf, tierRank } from "./market-tiers.ts";
+import { escalationSearches, effectiveSold, findingCountry, isThinData, nextTiers, tierOf } from "./market-tiers.ts";
 import type { Tier } from "./market-tiers.ts";
 import { extractMoney, hostOf, listingKind } from "./money.ts";
 import type { Finding, Fingerprint, MarketReport, PlannedSearch, SearchOutcome, SearchPlan, StopReason } from "./types.ts";
 import { clean, normalizeUrl } from "./validate.ts";
+import { selectFindings } from "./select-ads.ts";
 
 const SERPER_URL = "https://google.serper.dev/search";
 const UA = "ValyValuation/4.0";
 
-/** The Judge sees at most this many findings. Sold ones come first. */
-export const MAX_FINDINGS = 16;
+export { MAX_FINDINGS, JUDGE_MAX_ADS, selectFindings, analyzeFindings } from "./select-ads.ts";
 
 export interface RawHit {
   title: string;
@@ -124,18 +124,6 @@ export function hitsToFindings(
     });
   }
   return { findings, dropped, ownSold };
-}
-
-/**
- * Sold findings first, then asking, capped. Inside each kind the user's own country comes first,
- * then the region, then the rest of the world (the sort is stable). Ids are assigned here: they are
- * what the Judge refers to.
- */
-export function selectFindings(all: Omit<Finding, "id">[]): Finding[] {
-  const byTier = (a: Omit<Finding, "id">, b: Omit<Finding, "id">) => tierRank(a.tier) - tierRank(b.tier);
-  const sold = all.filter((f) => f.kind === "sold").sort(byTier);
-  const asking = all.filter((f) => f.kind !== "sold").sort(byTier);
-  return [...sold, ...asking].slice(0, MAX_FINDINGS).map((f, i) => ({ ...f, id: i + 1 }));
 }
 
 /** E2 (overlap): at most this many link keys are kept per search. */
