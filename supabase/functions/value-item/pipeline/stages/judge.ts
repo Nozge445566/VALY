@@ -50,7 +50,9 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
 
   let verdict: JudgeVerdict | null = null;
   // Judge-A -> Judge: both are Haiku and fast; give Judge-A a short moment to finish so its labels reach the Judge. Late = missing.
-  // Only while the Judge keeps its minimum time, and BEFORE the Judge's time is measured, so the 7 s limit never moves.
+  // Only while the Judge keeps its minimum time. These waits (DETAIL_GRACE_MS 250 ms for the Detail eye, 250 ms for the Authenticity eye
+  // and JUDGE_A_GRACE_MS 400 ms for Judge-A, up to 0.9 s in total) all happen BEFORE judgeMs is calculated, so they are taken out of the
+  // Judge's time. The 7 s limit does not move, but the Judge gets less time.
   if (rs.judgeASeen === null && judgeEnd - elapsed() - JUDGE_A_GRACE_MS >= JUDGE_MIN_MS) await raceTimeout(judgeAP, JUDGE_A_GRACE_MS);
   const judgeMs = judgeEnd - elapsed();
   if (judgeMs >= JUDGE_MIN_MS) {
@@ -67,6 +69,7 @@ export async function judgeStage(rs: RunState): Promise<BrainRun | null> {
       memoryMaxAgeDays: softStored ? softStored.maxAgeDays : null,
     });
     const effortLog = { effort: effortPick.effort, effortAuto: effortPick.auto, effortReasons: effortPick.reasons };
+    deps.log("[Judge] start", { judgeMs, startedAtMs: elapsed(), ...effortLog });
     try {
       const outcome = await judge(deps, cfg, input, ident, details, findings, stats, judgeMs, softStored ? softStored.ageDays : null, authenticity, effortPick.effort, judgeALabels);
       verdict = outcome.verdict;

@@ -51,23 +51,16 @@ describe("pickEffort", () => {
   });
 
   const cases: [string, Partial<EffortSignals>, string][] = [
-    ["Identification failed or late", { ident: null }, "ident_missing"],
     ["Identification not identifiable", { ident: { ...identOk, identifiable: false } }, "ident_not_identifiable"],
     ["Identification certainty low", { ident: { ...identOk, confidence: 40 } }, "ident_certainty_low"],
-    ["Authenticity eye failed or late", { authenticity: null }, "authenticity_missing"],
     ["Authenticity eye risk medium", { authenticity: { ...authOk, risk_hint: "medium" } }, "authenticity_risk_medium"],
     ["Authenticity eye risk high", { authenticity: { ...authOk, risk_hint: "high" } }, "authenticity_risk_high"],
-    ["no sold ads", { findings: kanken(4, { kind: "asking" }) }, "no_sold_ads"],
-    ["no ads at all", { findings: [] }, "no_sold_ads"],
-    ["thin market (effectiveSold < 5)", { findings: kanken(4) }, "thin_market"],
-    ["thin market counted by tier (5 global sold are about 2.7)", { findings: kanken(5, { tier: "global" }) }, "thin_market"],
     ["watches", { ident: { ...identOk, category: "watch" } }, "high_value_category"],
     ["jewelry", { ident: { ...identOk, category: "jewellery" } }, "high_value_category"],
     ["art", { ident: { ...identOk, category: "oil painting" } }, "high_value_category"],
     ["antiques by category", { ident: { ...identOk, category: "antique clock" } }, "high_value_category"],
     ["antiques by age class", { ident: { ...identOk, age_class: "antique" } }, "high_value_category"],
     ["antiques by the Authenticity eye's era", { authenticity: { ...authOk, era: "Victorian" } }, "high_value_category"],
-    ["category cap >= 20000 (electronics)", { ident: { ...identOk, category: "electronics" } }, "high_value_cap"],
     ["Memory HIT older than half the max age", { memoryHit: true, memoryAgeDays: 16, memoryMaxAgeDays: 30 }, "memory_hit_old"],
   ];
   for (const [name, over, reason] of cases) {
@@ -78,6 +71,26 @@ describe("pickEffort", () => {
       assert.ok(!p.reasons.includes("default_medium"));
     });
   }
+
+  const mediumCases: [string, Partial<EffortSignals>][] = [
+    ["Identification failed or late", { ident: null }],
+    ["Authenticity eye failed or late", { authenticity: null }],
+    ["no sold ads (only asking ads)", { findings: kanken(4, { kind: "asking" }) }],
+    ["no ads at all", { findings: [] }],
+    ["thin market (fewer than 5 effective sold)", { findings: kanken(4) }],
+    ["thin market counted by tier (5 global sold are about 2.7)", { findings: kanken(5, { tier: "global" }) }],
+    ["electronics", { ident: { ...identOk, category: "electronics" } }],
+  ];
+  for (const [name, over] of mediumCases) {
+    it(`MEDIUM (default_medium): ${name}`, () => {
+      assert.deepEqual(pickEffort("auto", { ...easy(), ...over }), { effort: "medium", auto: true, reasons: ["default_medium"] });
+    });
+  }
+
+  it("everything missing at once (no Identification, no Authenticity eye, no ads) is still MEDIUM", () => {
+    const p = pickEffort("auto", { ident: null, authenticity: null, judgeA: null, findings: [], memoryHit: false, memoryAgeDays: null, memoryMaxAgeDays: null });
+    assert.deepEqual(p, { effort: "medium", auto: true, reasons: ["default_medium"] });
+  });
 
   it("a fresh Memory HIT (not older than half the max age) stays MEDIUM; a non-HIT age does not count", () => {
     assert.equal(pickEffort("auto", { ...easy(), memoryHit: true, memoryAgeDays: 14, memoryMaxAgeDays: 30 }).effort, "medium");
@@ -124,7 +137,6 @@ describe("pickEffort", () => {
     assert.deepEqual(adsConflict(kanken(6), identOk), [], "all ads agree");
     assert.deepEqual(adsConflict(sold(6, { title: "Eastpak Padded" }), identOk), [], "no ad agrees: that is another problem, not a split");
     assert.deepEqual(adsConflict(kanken(6), null), []);
-    assert.equal(EFFORT.thinSold, 5);
   });
 });
 
@@ -223,8 +235,8 @@ describe("pipeline: the effort is chosen before the Judge call and logged", () =
   });
 
   it("a manual JUDGE_EFFORT overrides auto for every scan", async () => {
-    const { out, judgeCall } = await run(route({}, { risk_hint: "high" }), { judgeEffort: "low" });
-    assert.deepEqual(judgeCall.body?.output_config, { effort: "low" });
+    const { out, judgeCall } = await run(route({}, { risk_hint: "high" }), { judgeEffort: "medium" });
+    assert.deepEqual(judgeCall.body?.output_config, { effort: "medium" });
     assert.deepEqual((out.steps.judgeTrace as Record<string, unknown>).effortReasons, ["manual"]);
   });
 

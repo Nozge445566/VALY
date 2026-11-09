@@ -70,6 +70,22 @@ describe("callClaudeStream", () => {
     assert.equal(r.outputTokens, 20);
   });
 
+  it("traces when thinking started and when the thinking block was closed", async () => {
+    const { deps } = makeDeps((_c, signal) => sseResponse("answer", signal, { pieces: 1, thinkingChars: 12 }));
+    const r = await callClaudeStream(deps, testConfig(), { ...baseReq, timeoutMs: 2000 });
+    assert.equal(r.text, "answer");
+    assert.equal(r.trace?.thinkingChars, 12);
+    assert.ok(r.trace?.thinkingStartMs !== null && r.trace?.thinkingEndMs !== null, JSON.stringify(r.trace));
+    assert.ok((r.trace?.thinkingEndMs as number) >= (r.trace?.thinkingStartMs as number));
+    assert.ok((r.trace?.firstTextMs as number) >= (r.trace?.thinkingEndMs as number));
+  });
+
+  it("thinkingEndMs is null when no thinking block was ever closed", async () => {
+    const { deps } = makeDeps((_c, signal) => sseResponse("answer", signal, { pieces: 1 }));
+    const r = await callClaudeStream(deps, testConfig(), { ...baseReq, timeoutMs: 2000 });
+    assert.equal(r.trace?.thinkingEndMs, null);
+  });
+
   it("stops at the deadline and returns what was written so far", async () => {
     const { deps } = makeDeps((_c, signal) => sseResponse("abcdefghij", signal, { stopAfterChars: 5, pieces: 1 }));
     const t0 = Date.now();
@@ -158,7 +174,8 @@ describe("judge() (labels only, Haiku)", () => {
     assert.ok(system.indexOf('"display_name"') < system.indexOf('"ads"'), "identity is written before any ad is labelled");
     assert.ok(system.indexOf('"identity_certainty"') < system.indexOf('"ads"'));
     assert.ok(system.indexOf('"ads"') < system.indexOf('"authenticity_risk"'));
-    assert.ok(full.includes("Think it through"));
+    assert.ok(!full.includes("Think it through"), "the prompt no longer asks for extra thinking");
+    assert.ok(full.includes("The reply is the JSON object and nothing else."));
   });
 
   it("the Judge never runs with thinking off; only medium and high exist; anything else means auto", async () => {

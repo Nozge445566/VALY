@@ -63,8 +63,9 @@ export async function eyesStage(rs: RunState): Promise<BrainRun | null> {
   const key = fp ? memoryKey(fp, input.lang) : null;
   steps.fingerprint = fp;
 
-  // Judge-A: the independent price anchor. Photo only, never sees ads. Starts now and runs beside Market Live;
-  // it ends before the Judge's time slice begins, so it can never delay the Judge. A failed call is simply a missing source.
+  // Judge-A: the independent price anchor. Photo only, never sees ads. Starts now and runs beside Market Live.
+  // The Judge waits up to JUDGE_A_GRACE_MS for Judge-A before its own time is calculated, and that wait is taken out of the Judge's time
+  // (the 7 s limit does not move, the Judge gets less time). A failed call is simply a missing source.
   // judgeASeen: what Judge-A had answered when the Judge call starts (pickEffort peeks, it never waits for Judge-A).
   const judgeAP: Promise<JudgeAReport | null> = ident
     ? judgeA(deps, cfg, input, ident, Math.max(600, Math.min(2500, judgeEnd - cfg.judgeTargetMs - elapsed() - 300))).then((r) => { marks.judge_a = elapsed(); rs.judgeASeen = r; return r; })

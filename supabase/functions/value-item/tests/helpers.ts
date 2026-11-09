@@ -360,6 +360,8 @@ export interface StreamOptions {
   pieces?: number;
   /** Send only this many characters, then go quiet (the model is "still thinking"). */
   stopAfterChars?: number;
+  /** Send a thinking block (index 0) with this many characters before the text block (index 1), and close it. */
+  thinkingChars?: number;
 }
 
 /** A server-sent-events answer like Anthropic's, with controllable speed. Stops when aborted. */
@@ -375,9 +377,16 @@ export function sseResponse(text: string, signal: AbortSignal | undefined, o: St
       const send = (obj: unknown) => controller.enqueue(enc.encode(`event: x\ndata: ${JSON.stringify(obj)}\n\n`));
       try {
         send({ type: "message_start", message: { usage: { input_tokens: 5 } } });
+        const textIndex = o.thinkingChars ? 1 : 0;
+        if (o.thinkingChars) {
+          send({ type: "content_block_start", index: 0, content_block: { type: "thinking", thinking: "" } });
+          send({ type: "content_block_delta", index: 0, delta: { type: "thinking_delta", thinking: "t".repeat(o.thinkingChars) } });
+          send({ type: "content_block_stop", index: 0 });
+          send({ type: "content_block_start", index: 1, content_block: { type: "text", text: "" } });
+        }
         for (let i = 0; i < body.length; i += size) {
           if (o.delayMs) await sleepMs(o.delayMs, signal);
-          send({ type: "content_block_delta", index: 0, delta: { type: "text_delta", text: body.slice(i, i + size) } });
+          send({ type: "content_block_delta", index: textIndex, delta: { type: "text_delta", text: body.slice(i, i + size) } });
         }
         if (o.stopAfterChars !== undefined) await sleepMs(60_000, signal); // goes quiet until cut off
         send({ type: "message_delta", delta: { stop_reason: "end_turn" }, usage: { output_tokens: 20 } });
