@@ -400,7 +400,7 @@ export function normalizeUrl(u: string): string {
 }
 
 
-import { consistentPSame, readIdentityCertainty, readPSame, readRelative, readReliability, readVariantDiffs } from "./judge-schema.ts";
+import { consistentPSame, expandCompactAd, readIdentityCertainty, readPSame, readRelative, readReliability, readVariantDiffs } from "./judge-schema.ts";
 import { oldConditionOf } from "./ad-calibration.ts";
 // ---------------------------------------------------------------- Judge (labels only) and Authenticity eye
 
@@ -441,7 +441,8 @@ export function validateJudgeLabels(raw: unknown, findingCount: number, partial 
   const ads: AdLabel[] = [];
   const seen = new Set<number>();
   if (Array.isArray(src["ads"])) {
-    for (const item of src["ads"]) {
+    for (const rawItem of src["ads"]) {
+      const item = typeof rawItem === "string" ? expandCompactAd(rawItem) : rawItem; // compact line or the old object: one path
       if (!isRec(item)) continue;
       const id = toNumber(item["id"]);
       if (id === null || !Number.isInteger(id) || id < 1 || id > findingCount || seen.has(id)) continue;

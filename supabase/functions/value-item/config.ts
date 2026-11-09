@@ -5,7 +5,7 @@ import { CONNECTOR_RULE_IDS } from "../_shared/connector-learn.ts";
 import type { ConnectorRuleId } from "../_shared/connector-learn.ts";
 
 /** Bump this when prompts or scoring change. */
-export const BRAIN_VERSION = "brain-5.2.0";
+export const BRAIN_VERSION = "brain-5.8.2";
 
 /**
  * Memory only trusts valuations made by a Brain at least this new. The stricter Memory rules (4.1.0) must not be
@@ -101,7 +101,7 @@ export type JudgeEffortSetting = JudgeEffort | "auto";
 /** JUDGE_EFFORT: "medium" and "high" are fixed levels for every scan. Anything else (unset, empty, unknown, and also "off" and "low", which are not supported) is treated as auto: code picks medium or high per scan. */
 export function judgeEffortOf(raw: string | undefined): JudgeEffortSetting {
   const v = (raw ?? "").trim().toLowerCase();
-  return v === "medium" || v === "high" ? v : "auto";
+  return v === "medium" || v === "high" ? v : v === "auto" ? "auto" : "medium";
 }
 
 export interface Deps {
@@ -145,7 +145,7 @@ export function loadConfig(get: (key: string) => string | undefined): BrainConfi
     memoryMinIdentConfidence: numberIn(get("MEMORY_MIN_IDENT_CONFIDENCE"), 80, 0, 100),
     memoryMinComps: Math.floor(numberIn(get("MEMORY_MIN_COMPS"), 3, 1, 10)),
     memoryMaxSpread: numberIn(get("MEMORY_MAX_SPREAD"), 3, 1.2, 20),
-    memoryDetailWaitMs: Math.floor(numberIn(get("MEMORY_DETAIL_WAIT_MS"), 2500, 500, 4000)),
+    memoryDetailWaitMs: Math.floor(numberIn(get("MEMORY_DETAIL_WAIT_MS"), 1200, 500, 4000)),
     memoryRequireCorroboration: (get("MEMORY_REQUIRE_CORROBORATION") ?? "").trim().toLowerCase() !== "false",
     marketMinMatch: numberIn(get("MARKET_MIN_MATCH"), 0.8, 0.5, 1),
     marketMinAds: Math.floor(numberIn(get("MARKET_MIN_ADS"), 2, 1, 3)),

@@ -50,8 +50,7 @@ const en = {
   memoryUnverified: "This item was valued before, but its condition looks different now and could not be re-checked in time, so confidence is lower.",
   needsPhoto: "I can't tell what this is. Take a clear, well-lit photo of the item on its own, close enough to see details.",
   closerPhoto: "Take a closer photo of any label, stamp, logo or model number.",
-  emergency: { unknown: "The listings were not checked against the photo.", reason: "Quick estimate from raw listing prices." },
-  estimate: { unknown: "Estimate without market data, based on marks, material and era.", reason: "No comparable listings were found, so this is a wide estimate from the item's typical new price, age, condition and rarity.", neighbourUnknown: "Estimate without market data, based on similar items valued before.", neighbourReason: "No comparable listings were found, so this is a very wide estimate from similar items valued before. A clearer photo of marks or a label would help a lot.", noAnchor: "No market data and unclear item. Take a clear photo of any maker's mark, hallmark, label or model number." },
+  estimate: { noAnchor: "No market data and unclear item. Take a clear photo of any maker's mark, hallmark, label or model number." },
   errors: {
     invalid: "Invalid request.",
     photoUnreadable: "The photo could not be read. Use a JPEG, PNG, WebP or GIF image.",
@@ -101,8 +100,7 @@ const sv: ServerTexts = {
   memoryUnverified: "Föremålet har värderats förut, men skicket ser annorlunda ut nu och hann inte kontrolleras på nytt, så tillförlitligheten är lägre.",
   needsPhoto: "Jag kan inte se vad det här är. Ta ett tydligt, välbelyst foto av enbart föremålet, så nära att detaljerna syns.",
   closerPhoto: "Ta ett närbildsfoto av en etikett, stämpel, logga eller ett modellnummer.",
-  emergency: { unknown: "Annonserna jämfördes inte med fotot.", reason: "Snabb uppskattning av råa annonspriser." },
-  estimate: { unknown: "Uppskattning utan marknadsdata, baserad på stämplar, material och tidsperiod.", reason: "Inga jämförbara annonser hittades, så det här är en bred uppskattning från nypris, ålder, skick och sällsynthet.", neighbourUnknown: "Uppskattning utan marknadsdata, baserad på liknande föremål som värderats tidigare.", neighbourReason: "Inga jämförbara annonser hittades, så det här är en mycket bred uppskattning från liknande föremål som värderats tidigare. Ett tydligare foto av stämplar eller etikett hjälper mycket.", noAnchor: "Ingen marknadsdata och oklart föremål. Ta ett tydligt foto av tillverkarstämpel, hallmärke, etikett eller modellnummer." },
+  estimate: { noAnchor: "Ingen marknadsdata och oklart föremål. Ta ett tydligt foto av tillverkarstämpel, hallmärke, etikett eller modellnummer." },
   errors: {
     invalid: "Ogiltig förfrågan.",
     photoUnreadable: "Fotot gick inte att läsa. Använd en JPEG-, PNG-, WebP- eller GIF-bild.",

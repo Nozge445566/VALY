@@ -16,7 +16,7 @@ export interface Evidence {
   keptAskingUsd: number[];
   /** Titles of kept findings, scanned for replica words. */
   keptTitles: string[];
-  /** false when no Judge answered (emergency answer) or the answer came from Memory. */
+  /** false when no Judge answered or the answer came from Memory. */
   judgeRan: boolean;
   /** true for a Memory hit: the evidence-based caps were applied when it was first valued. */
   fromMemory: boolean;

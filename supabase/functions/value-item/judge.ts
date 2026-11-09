@@ -46,6 +46,8 @@ export interface EffortSignals {
   memoryHit: boolean;
   memoryAgeDays: number | null;
   memoryMaxAgeDays: number | null;
+  /** Optional: the Detail eye report (null/missing = not available). */
+  details?: DetailReport | null;
 }
 
 export interface EffortPick {
@@ -78,8 +80,8 @@ export function adsConflict(findings: readonly Finding[], ident: Identification 
 /**
  * JUDGE_EFFORT=auto: the effort for THIS scan. Pure, no model call, decided before the Judge call from what is already known.
  * Only medium or high. MEDIUM is the default. HIGH only when the item is genuinely hard, i.e. when any of these triggers fires:
- * Identification says not identifiable or low certainty; the Authenticity eye reports medium or high risk; the item is a high-value kind (watches, jewellery, art, antiques); a Memory HIT
- * has old saved ads.
+ * the Authenticity eye reports medium or high risk; the item is a high-value kind or antique; damage/repair is seen; the eyes struggle on an interesting item;
+ * a Memory HIT has old saved ads. Low Identification certainty alone NEVER raises effort (logged as *_ignored).
  * A missing Identification or Authenticity eye, few or no sold ads, conflicting brands or models among the ads, and electronics do NOT raise the effort: missing evidence
  * means time is already short, and few ads make the labelling easier, not harder.
  * A manual setting (medium/high) is returned as is. The Judge itself never receives Identification: these signals only steer how long it thinks.
@@ -89,9 +91,11 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
   const reasons: string[] = [];
   const { ident, authenticity: au, findings } = s;
 
-  // Identification unsure
-  if (ident && !ident.identifiable) reasons.push("ident_not_identifiable");
-  else if (ident && !(ident.confidence >= EFFORT.identLowConfidence)) reasons.push("ident_certainty_low");
+  // Identification unsure: missing information, more thinking cannot create it. Logged only, never raises the effort.
+  const ignored: string[] = [];
+  if (ident && !ident.identifiable) ignored.push("ident_not_identifiable_ignored");
+  else if (ident && !(ident.confidence >= EFFORT.identLowConfidence)) ignored.push("ident_certainty_low_ignored");
+  const weakEyes = contradicts(ident, au); // a REAL conflict between the eyes; low Identification certainty never counts
 
   // Authenticity eye
   if (au && (au.risk_hint === "medium" || au.risk_hint === "high")) reasons.push(`authenticity_risk_${au.risk_hint}`);
@@ -103,12 +107,36 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
     if (HIGH_VALUE_WORDS.test(cat) || antique) reasons.push("high_value_category");
   }
 
+  // Damage / repair: same checks as memory.ts storableReason (repair, inconsistency/mismatched part) plus a poor/fair Detail grade with damage text.
+  const grade = s.details?.condition?.grade;
+  const damageNote = (s.details?.details ?? []).some((n) => n.kind === "damage" && n.text.trim().length > 0);
+  const damaged = (grade === "poor" || grade === "fair") && (damageNote || /\b(damage|damaged|crack|cracked|chip|chipped|broken|repair|repaired|restor|missing|stain|rust|tear|torn)/i.test(`${s.details?.condition?.details ?? ""} ${(s.details?.authenticity_signals ?? []).join(" ")}`));
+  if (au && au.signs.some((x) => x.kind === "repair" || x.kind === "inconsistency") || damaged) reasons.push("high_damage_or_repair");
+
+  // Eyes struggle on an interesting item: (a) weak/disagreeing eyes AND (b) something unusual or valuable.
+  if (weakEyes) {
+    const unusual = !!au && (au.rarity_hint === "rare" || au.rarity_hint === "very_rare" || au.signs.some((x) => x.kind === "rarity" || x.kind === "construction" || x.kind === "originality")
+      || /\b(handmade|hand-made|signed|limited|unusual)\b/i.test(au.signs.map((x) => x.text).join(" ")));
+    const antique = !!ident && (ident.age_class === "antique" || ageClassFromEra(eraOf(au, ident)) === "antique");
+    const highValue = !!ident && HIGH_VALUE_WORDS.test(ident.category.toLowerCase().trim());
+    const unresolvedMarks = !!ident && !ident.brand && !ident.model && (s.details?.details ?? []).some((n) => (n.kind === "stamp" || n.kind === "serial" || n.kind === "label") && n.text.trim().length > 0);
+    if (unusual || antique || highValue || unresolvedMarks) reasons.push("eyes_conflict_interesting");
+  }
+
   // Memory HIT with older saved ads
   if (s.memoryHit && s.memoryAgeDays !== null && s.memoryMaxAgeDays !== null && s.memoryAgeDays > s.memoryMaxAgeDays * EFFORT.memoryAgeShare) reasons.push("memory_hit_old");
 
   // Conflicting brands or models among the ads no longer raises the effort (it fired on almost every book and ran the Judge out of time).
 
-  return reasons.length > 0 ? { effort: "high", auto: true, reasons } : { effort: "medium", auto: true, reasons: ["default_medium"] };
+  if (reasons.length === 0) return { effort: "medium", auto: true, reasons: ["default_medium", ...ignored] };
+  return { effort: "high", auto: true, reasons: [...reasons, ...ignored] };
+}
+
+/** Ident era contradicts the Authenticity eye's era (different decade / century digits). */
+function contradicts(ident: Identification | null, au: AuthenticityReport | null): boolean {
+  const a = ident?.era?.match(/\d{3,4}/)?.[0], b = au?.era?.match(/\d{3,4}/)?.[0];
+  if (!a || !b) return false;
+  return Math.abs(parseInt(a.slice(0, 3), 10) - parseInt(b.slice(0, 3), 10)) >= 2;
 }
 
 function eraOf(au: AuthenticityReport | null, ident: Identification | null): string | null {

@@ -428,7 +428,7 @@ export async function handleRequest(req: Request, ctx: HandlerContext): Promise<
 
   const store = ctx.store;
   const memory = store
-    ? { find: (key: string, maxAgeMs: number) => store.findMemory(key, maxAgeMs), findNeighbours: store.findNeighbours ? (fp: { category: string; brand: string | null; model: string | null }, maxAgeMs: number) => store.findNeighbours!(fp, maxAgeMs) : undefined }
+    ? { find: (key: string, maxAgeMs: number) => store.findMemory(key, maxAgeMs) }
     : null;
 
   // ---- The Brain, inside the hard limit.

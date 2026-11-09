@@ -5,7 +5,7 @@
 // final price or a confidence: code does that (math.ts).
 
 import { judgeLanguageRule } from "./lang.ts";
-import { AD_FIELDS_TEXT } from "./judge-schema.ts";
+import { AD_COMPACT_TEXT } from "./judge-schema.ts";
 import type { AuthenticityReport, BrainInput, DetailReport, Finding } from "./types.ts";
 
 export function marketName(country: string | null): string {
@@ -40,7 +40,7 @@ export const JUDGE_SCHEMA = `{
   "category": string,
   "display_name": string,
   "identity_certainty": "high" | "medium" | "low",
-  "ads": [ ${AD_FIELDS_TEXT} ],
+  "ads": [ ${AD_COMPACT_TEXT}, ... ],
   "authenticity_risk": "low" | "medium" | "high",
   "condition": { "grade": "new" | "like-new" | "good" | "fair" | "poor", "details": string },
   "eye_text_mismatch": [ string ],
@@ -66,10 +66,19 @@ export function judgeSystemPrompt(input: BrainInput, stats: FindingStats, memory
 
 Target market: ${marketName(input.country)}.
 
+How to work: like an experienced appraiser's first impression, fast and sure. Look at the photo first and let your first impression of the item form. Then only CHECK, in this order, and think in short lines, not paragraphs:
+(a) What is it? One line, from the photo.
+(b) Does eye 1 fit the photo? Does eye 3? Note only what does NOT fit.
+(c) Run down the ads once: each fits, nearly fits or does not fit THE ITEM. Do not work out the item again for every ad.
+(d) Then write the JSON straight away.
+Keep your thinking brief: a few short lines. The answer has a hard time limit, and an answer that is not written is worth nothing. For a hard item (antique, jewellery, watch, art, visible damage or repair, doubtful authenticity, eyes that disagree) you may look a little longer, but still start writing as soon as you can. Keep your first impression unless something concrete in the photo or in an input contradicts it. Fast never means guessing: label only what you can support, and use null, "unknown" or "equal" when you cannot tell.
+
+Thinking rule: keep any thinking short and limited to the four inputs. Take one look at the photo, then check only the points where the photo, an eye or an ad disagree. Do not weigh every ad at length, do not re-derive what the eyes already report, and go straight to writing the JSON. Think longer only when the item is valuable or hard (antique, jewellery, watch, art, visible damage, doubt about authenticity), and even then stay with the four inputs.
+
 What to do, in this order:
-1. Decide exactly what the item is: brand, model, variant, size, colour, edition, era, material. Small differences can change the price a lot (reference numbers, limited editions, "made in" marks, hallmarks).
+1. Name the item as you see it in the photo: brand, model, variant, size, colour, edition, era, material. Small differences can change the price a lot (reference numbers, limited editions, "made in" marks, hallmarks), so check exactly those points against the eyes and the ads.
 2. For EVERY ad give "match": "same" (the very same brand, model and variant; another condition is fine), "similar" (same family but another variant, size, era, edition, bundle or lot) or "different" (parts or "for parts/repair", accessories, boxes or manuals alone, another product, a replica, a title and price that do not fit together).
-3. For every ad also give: "p_same" (how likely it is the very same variant: certain / likely / unsure / unlikely; a "different" ad needs none), "variant_diffs" (up to 3 short differences you see between the item and the ad: size, edition, colour, era, bundle; [] if none), "ad_reliability" ("low" if the price looks like a typo, a lot or bundle, or the text is vague; else "high" or "normal"). Bands only, never numbers. And "relative_value": how much more or less the item in the PHOTO would sell for than the item in that AD, judged only from condition, wear, completeness, box, papers and accessories (never from a different variant: that goes to p_same and variant_diffs). Nine bands from much_worse to much_better; "equal" is the middle. Use "slightly_" for a small difference, "clearly_" for a large one, "much_" for an extreme one. Use "equal" when you cannot tell from the photo and the ad text; never guess a big difference without a visible or written reason.
+3. Write every ad as ONE text line in the "ads" list, fields separated by "|": id|match|p_same|ad_reliability|relative_value|variant_diffs. "match" is the label from step 2. "p_same" is how likely it is the very same variant: certain / likely / unsure / unlikely; leave it EMPTY for a "different" ad. "ad_reliability" is "low" if the price looks like a typo, a lot or bundle, or the text is vague; else "high" or "normal". "variant_diffs" are up to 3 short differences you see between the item and the ad (size, edition, colour, era, bundle), separated by ";", EMPTY if none. Bands only, never numbers. Examples of lines: 1|same|likely|normal|equal|  and  2|similar|unsure|low|slightly_worse|size 44 vs 42; box missing  and  3|different||normal|equal|  . "relative_value" is how much more or less the item in the PHOTO would sell for than the item in that AD, judged only from condition, wear, completeness, box, papers and accessories (never from a different variant: that goes to p_same and variant_diffs). Nine bands from much_worse to much_better; "equal" is the middle. Use "slightly_" for a small difference, "clearly_" for a large one, "much_" for an extreme one. Use "equal" when you cannot tell from the photo and the ad text; never guess a big difference without a visible or written reason.
 4. authenticity_risk: "low", "medium" or "high": the risk that this is a fake or replica, from the photo, eye 1, eye 3 and from ads that are suspiciously cheap or mention replicas. Only "high" when you can point to a concrete sign.
 5. identity_certainty: how sure you are of the exact variant of the item in the photo (high, medium, low).
 5b. eye_text_mismatch: check every piece of text the Detail eye says it read (logos, stamps, serials, marks) against the photo. List, in a few words each, any that you cannot see or that you read differently. [] when all match.

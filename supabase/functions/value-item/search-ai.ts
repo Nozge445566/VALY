@@ -70,7 +70,8 @@ export async function planSearches(
     return { plan: checked.value, fallbackReason: null, ms: deps.now() - started };
   } catch (e) {
     const timedOut = e instanceof Error && /timed out/i.test(e.message);
-    deps.log("search ai failed", e instanceof Error ? e.message : String(e));
+    if (timedOut) deps.log(`[Brain] search ai skipped (budget ${PLAN_BUDGET_MS} ms), using fixed templates`);
+    else deps.log("search ai failed", e instanceof Error ? e.message : String(e));
     return fixed(timedOut ? "search_ai_slow" : "search_ai_error");
   }
 }

@@ -362,9 +362,9 @@ export interface StorableArgs {
 
 /** Runs that went wrong in some way, or that rest on a stand-in. Their price is an answer for today, never a fact to reuse. */
 const NEVER_STORE_IF = [
-  "judge_partial", "judge_emergency", "authenticity_eye_failed", "authenticity_eye_late", "judge_failed", "judge_no_time",
+  "judge_partial", "authenticity_eye_failed", "authenticity_eye_late", "judge_failed",
   "detail_eye_failed", "detail_eye_late", "identification_failed",
-  "no_market_estimate", "fx_fallback", "memory_judged", "memory_condition_unverified",
+  "fx_fallback", "memory_judged", "memory_condition_unverified",
 ];
 
 /**

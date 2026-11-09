@@ -9,8 +9,6 @@
 
 import { createClient } from "npm:@supabase/supabase-js@2";
 import type { StoredValuation } from "./memory.ts";
-import { MAX_NEIGHBOURS } from "./neighbour-prior.ts";
-import type { NeighbourRow } from "./neighbour-prior.ts";
 import { parseCountryStats } from "./market-tiers.ts";
 import type { CountryStat } from "./market-tiers.ts";
 import { parseOffsetRows } from "../_shared/offsets.ts";
@@ -50,11 +48,6 @@ export interface Store extends UsageStore {
    * Which one may answer is decided by memory.ts::selectStored, never here.
    */
   findMemory(key: string, maxAgeMs: number): Promise<StoredValuation[]>;
-  /**
-   * Past kept results of SIMILAR items (same category and brand), newest first, for the neighbour prior. The store converts each
-   * result's mid price to USD with the rate saved with that run; a row it cannot convert has midUsd null. Optional.
-   */
-  findNeighbours?(fp: { category: string; brand: string | null; model: string | null; mode?: string }, maxAgeMs: number): Promise<NeighbourRow[]>;
   saveRun(run: SaveRunInput): Promise<string | null>;
   logSearches(rows: SearchLogRow[]): Promise<void>;
   /** The nightly calibration table (l_calibration): one width multiplier k per bucket. */
@@ -165,38 +158,6 @@ export function createStore(url: string, serviceKey: string): Store {
     async markCounted(attemptId) {
       const { error } = await db.from("l_usage").update({ counted: true }).eq("id", attemptId);
       if (error) throw new Error(error.message);
-    },
-
-    async findNeighbours(fp, maxAgeMs) {
-      if (!fp.brand) return []; // category alone is too loose a neighbourhood
-      const since = new Date(Date.now() - maxAgeMs).toISOString();
-      let q = db
-        .from("l_runs")
-        .select("result, created_at, brain_version, fingerprint, fx_currency, fx_rate_used")
-        .eq("memory_eligible", true)
-        .eq("fingerprint->>category", fp.category)
-        .eq("fingerprint->>brand", fp.brand)
-        .gte("created_at", since);
-      // Neighbours by mode: a non-resale item sees only its own mode; resale sees rows with no mode (all old rows), as before.
-      q = fp.mode ? q.eq("fingerprint->>mode", fp.mode) : q.is("fingerprint->>mode", null);
-      const { data, error } = await q
-        .order("created_at", { ascending: false })
-        .limit(MAX_NEIGHBOURS);
-      if (error) throw new Error(error.message);
-      type Row = { result?: { mid?: unknown; confidenceScore?: unknown; currency?: unknown }; created_at: string; brain_version: string | null; fingerprint?: { model?: string | null }; fx_currency?: string | null; fx_rate_used?: number | string | null };
-      return ((data ?? []) as Row[]).map((r) => {
-        const mid = Number(r.result?.mid);
-        const cur = String(r.result?.currency ?? "").toUpperCase();
-        const rate = cur === "USD" ? 1 : r.fx_currency?.toUpperCase() === cur ? Number(r.fx_rate_used) : NaN;
-        const conf = Number(r.result?.confidenceScore);
-        return {
-          midUsd: Number.isFinite(mid) && mid > 0 && Number.isFinite(rate) && rate > 0 ? mid / rate : null,
-          confidence: Number.isFinite(conf) ? conf : null,
-          createdAt: r.created_at,
-          brainVersion: r.brain_version,
-          sameModel: !!fp.model && r.fingerprint?.model === fp.model,
-        };
-      });
     },
 
     async saveRun(run) {
