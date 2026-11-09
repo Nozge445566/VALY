@@ -26,5 +26,5 @@ jobs:
       - name: Deploy functions
         run: |
           if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then echo "Secret SUPABASE_ACCESS_TOKEN is not set."; exit 1; fi
-          supabase functions deploy value-item connector-learn calibrate explain-item create-checkout customer-portal plan-prices --project-ref "$PROJECT_REF"
-          supabase functions deploy stripe-webhook --no-verify-jwt --project-ref "$PROJECT_REF"
+                    supabase functions deploy value-item connector-learn calibrate explain-item create-checkout customer-portal plan-prices --project-ref "$PROJECT_REF" --yes
+          supabase functions deploy stripe-webhook --no-verify-jwt --project-ref "$PROJECT_REF" --yes
