@@ -107,11 +107,10 @@ describe("pickEffort", () => {
     assert.equal(pickEffort("auto", { ...easy(), ident: { ...identOk, new_price_usd: null, new_price_basis: "none" }, judgeA: ja(500) }).effort, "medium", "Identification without an anchor: no signal");
   });
 
-  it("conflicting brands or models among the ads is HIGH", () => {
+  it("conflicting brands or models among the ads no longer raise the effort: MEDIUM", () => {
     const mixed = [...kanken(3), ...sold(3, { title: "Eastpak Padded backpack" })].map((f, i) => ({ ...f, id: i + 1 }));
-    const p = pickEffort("auto", { ...easy(), findings: mixed });
-    assert.ok(p.reasons.includes("ads_conflict_brand") && p.reasons.includes("ads_conflict_model"), p.reasons.join(","));
-    assert.equal(p.effort, "high");
+    assert.ok(adsConflict(mixed, identOk).length > 0, "the ads really do conflict");
+    assert.deepEqual(pickEffort("auto", { ...easy(), findings: mixed }), { effort: "medium", auto: true, reasons: ["default_medium"] });
   });
 
   it("auto NEVER returns off or low, whatever the signals", () => {

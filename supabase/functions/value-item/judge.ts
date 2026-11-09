@@ -85,8 +85,8 @@ export function adsConflict(findings: readonly Finding[], ident: Identification 
  * Only medium or high. MEDIUM is the default. HIGH only when the item is genuinely hard, i.e. when any of these triggers fires:
  * Identification says not identifiable or low certainty; the Authenticity eye reports medium or high risk; Identification and
  * Judge-A disagree strongly on the price anchor; the item is a high-value kind (watches, jewellery, art, antiques); a Memory HIT
- * has old saved ads; the ads conflict on brand or model.
- * A missing Identification or Authenticity eye, few or no sold ads, and electronics do NOT raise the effort: missing evidence
+ * has old saved ads.
+ * A missing Identification or Authenticity eye, few or no sold ads, conflicting brands or models among the ads, and electronics do NOT raise the effort: missing evidence
  * means time is already short, and few ads make the labelling easier, not harder.
  * A manual setting (medium/high) is returned as is. The Judge itself never receives Identification: these signals only steer how long it thinks.
  */
@@ -121,8 +121,7 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
   // Memory HIT with older saved ads
   if (s.memoryHit && s.memoryAgeDays !== null && s.memoryMaxAgeDays !== null && s.memoryAgeDays > s.memoryMaxAgeDays * EFFORT.memoryAgeShare) reasons.push("memory_hit_old");
 
-  // Conflicting brands or models among the ads
-  for (const k of adsConflict(findings, ident)) reasons.push(`ads_conflict_${k}`);
+  // Conflicting brands or models among the ads no longer raises the effort (it fired on almost every book and ran the Judge out of time).
 
   return reasons.length > 0 ? { effort: "high", auto: true, reasons } : { effort: "medium", auto: true, reasons: ["default_medium"] };
 }
