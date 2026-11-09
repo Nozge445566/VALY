@@ -7,7 +7,6 @@ import type { StreamTrace } from "./claude.ts";
 import type { BrainConfig, Deps, JudgeEffort, JudgeEffortSetting } from "./config.ts";
 import * as C from "./interval.config.ts";
 import { ageClassFromEra } from "./anchor.ts";
-import type { JudgeAReport } from "./judge-a.ts";
 import { judgeSystemPrompt, judgeUserText } from "./judge-prompt.ts";
 import type { FindingStats } from "./judge-prompt.ts";
 import { parseTruncatedObject } from "./json.ts";
@@ -27,8 +26,6 @@ export const JUDGE_THINKING_MAX_TOKENS = 8000;
 export const EFFORT = {
   /** Identification confidence (0-100) below this counts as "certainty low". */
   identLowConfidence: 60,
-  /** Identification's and Judge-A's typical-new-price anchors that differ by this factor or more disagree strongly. */
-  anchorRatio: 2,
   /** A Memory HIT whose saved ads are older than this share of the maximum age is judged hard. */
   memoryAgeShare: 0.5,
   /** Ads conflict when at least this share of them agree with Identification's brand/model AND at least this share do not. */
@@ -44,8 +41,6 @@ export interface EffortSignals {
   ident: Identification | null;
   /** null = the Authenticity eye failed or was late. */
   authenticity: AuthenticityReport | null;
-  /** null = Judge-A failed or had not finished (never waited for): no signal either way. */
-  judgeA: JudgeAReport | null;
   findings: readonly Finding[];
   /** The ads come from a Memory HIT, with their age and the maximum age for this kind of item. */
   memoryHit: boolean;
@@ -83,8 +78,7 @@ export function adsConflict(findings: readonly Finding[], ident: Identification 
 /**
  * JUDGE_EFFORT=auto: the effort for THIS scan. Pure, no model call, decided before the Judge call from what is already known.
  * Only medium or high. MEDIUM is the default. HIGH only when the item is genuinely hard, i.e. when any of these triggers fires:
- * Identification says not identifiable or low certainty; the Authenticity eye reports medium or high risk; Identification and
- * Judge-A disagree strongly on the price anchor; the item is a high-value kind (watches, jewellery, art, antiques); a Memory HIT
+ * Identification says not identifiable or low certainty; the Authenticity eye reports medium or high risk; the item is a high-value kind (watches, jewellery, art, antiques); a Memory HIT
  * has old saved ads.
  * A missing Identification or Authenticity eye, few or no sold ads, conflicting brands or models among the ads, and electronics do NOT raise the effort: missing evidence
  * means time is already short, and few ads make the labelling easier, not harder.
@@ -93,7 +87,7 @@ export function adsConflict(findings: readonly Finding[], ident: Identification 
 export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): EffortPick {
   if (setting !== "auto") return { effort: setting, auto: false, reasons: ["manual"] };
   const reasons: string[] = [];
-  const { ident, authenticity: au, judgeA: ja, findings } = s;
+  const { ident, authenticity: au, findings } = s;
 
   // Identification unsure
   if (ident && !ident.identifiable) reasons.push("ident_not_identifiable");
@@ -101,15 +95,6 @@ export function pickEffort(setting: JudgeEffortSetting, s: EffortSignals): Effor
 
   // Authenticity eye
   if (au && (au.risk_hint === "medium" || au.risk_hint === "high")) reasons.push(`authenticity_risk_${au.risk_hint}`);
-
-  // Identification and Judge-A disagree strongly on the price anchor (both photo-only, both without ads)
-  if (ident && ja) {
-    const a = ident.new_price_usd;
-    const b = ja.new_price_usd;
-    const okA = typeof a === "number" && a > 0 && ident.new_price_basis != null && ident.new_price_basis !== "none";
-    const okB = typeof b === "number" && b > 0 && ja.new_price_basis !== "none";
-    if (okA && okB && Math.max(a as number, b as number) / Math.min(a as number, b as number) >= EFFORT.anchorRatio) reasons.push("anchor_disagree");
-  }
 
   // High-value kinds of item
   if (ident) {
@@ -166,8 +151,6 @@ export async function judge(
   authenticity: AuthenticityReport | null = null,
   /** The effort for this call (pickEffort). Missing: the configured level, and "high" when the setting is "auto" (the safe, old default). */
   effortIn?: JudgeEffort,
-  /** Judge-A's photo-only LABELS (no price, no band). Optional: a failed or late Judge-A is simply missing. */
-  judgeALabels: JudgeAReport | null = null,
 ): Promise<JudgeOutcome> {
   const started = deps.now();
   const effort: JudgeEffort = effortIn ?? (cfg.judgeEffort === "auto" ? "high" : cfg.judgeEffort);
@@ -175,7 +158,7 @@ export async function judge(
     model: cfg.judgeModel, // Claude Haiku 5.5
     system: judgeSystemPrompt(input, stats, memoryAgeDays),
     // Input 1: the full photo, direct. Nothing in between.
-    content: [imageBlock(input.imageMediaType, input.imageBase64), textBlock(judgeUserText(details, findings, memoryAgeDays !== null, authenticity, judgeALabels))],
+    content: [imageBlock(input.imageMediaType, input.imageBase64), textBlock(judgeUserText(details, findings, memoryAgeDays !== null, authenticity))],
     // The Judge's labels drive all the maths, so it THINKS first (adaptive thinking, steered by effort; Haiku 5.5 takes no
     // token budget). Thinking tokens count toward maxTokens, so the cap leaves room for thinking AND the JSON (about 1300).
     // The Judge only ever runs at medium or high effort (thinking is never off).

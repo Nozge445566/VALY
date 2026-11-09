@@ -48,7 +48,7 @@ function tokens(s: string | null | undefined): string[] {
 }
 
 /**
- * @param anchorUsd optional independent anchor (Judge-A) used for the price-sanity rule. When null that rule is skipped.
+ * @param anchorUsd optional independent anchor (Identification) used for the price-sanity rule. When null that rule is skipped.
  */
 export function adjudicate(verdict: JudgeVerdict, findings: Finding[], ident: Identification | null, auth: AuthenticityReport | null, anchorUsd: number | null = null): Adjudicated {
   const byId = new Map(findings.map((f) => [f.id, f]));

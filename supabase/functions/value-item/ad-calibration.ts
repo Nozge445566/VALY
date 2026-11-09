@@ -68,7 +68,7 @@ export function adNoise(a: AdNoiseInput): number | null {
 /**
  * Shared-bias floor input, 0..1: how unsure the exact variant is. Unlike per-ad noise it does NOT shrink with more ads.
  * Inputs are all optional: identification confidence 0..100, whether identity is only similar, share of ads labelled similar,
- * and Judge-A's certainty. The result is the larger of the signals plus a small mix, clamped.
+ * and an optional certainty. The result is the larger of the signals plus a small mix, clamped.
  */
 export function variantAmbiguityOf(o: { identConfidence?: number | null; identitySimilar?: boolean; similarShare?: number | null; diffShare?: number | null; certainty?: "high" | "medium" | "low" | null }): number {
   const f = (x: unknown) => (typeof x === "number" && Number.isFinite(x) ? x : null);

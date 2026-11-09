@@ -24,16 +24,16 @@ export interface AnchorResult {
 }
 
 /** True when the item is valued as a collectible or rare object, not as ordinary resale goods: the new-price anchors of ordinary goods are then a weak yardstick for its listings. Pure. */
-export function isCollectorLike(ident: { age_class?: string | null; rarity?: string | null; new_price_basis?: string | null } | null | undefined, judgeABasis?: string | null): boolean {
-  if (!ident) return judgeABasis === "comparable_objects";
-  return ident.age_class === "vintage" || ident.age_class === "antique" || ident.rarity === "rare" || ident.rarity === "very_rare" || ident.new_price_basis === "comparable_objects" || judgeABasis === "comparable_objects";
+export function isCollectorLike(ident: { age_class?: string | null; rarity?: string | null; new_price_basis?: string | null } | null | undefined): boolean {
+  if (!ident) return false;
+  return ident.age_class === "vintage" || ident.age_class === "antique" || ident.rarity === "rare" || ident.rarity === "very_rare" || ident.new_price_basis === "comparable_objects";
 }
 
 /** Valuation mode of an item: "retail" (new), "auction" (collectible / rare / antique / reference-priced), else "resale". Pure; resale is the default and never changes behaviour. */
 export type ValuationMode = "resale" | "retail" | "auction";
-export function valuationModeOf(ident: { age_class?: string | null; rarity?: string | null; new_price_basis?: string | null } | null | undefined, judgeABasis?: string | null): ValuationMode {
+export function valuationModeOf(ident: { age_class?: string | null; rarity?: string | null; new_price_basis?: string | null } | null | undefined): ValuationMode {
   if (!ident) return "resale";
-  if (isCollectorLike(ident, judgeABasis)) return "auction";
+  if (isCollectorLike(ident)) return "auction";
   return ident.age_class === "new" ? "retail" : "resale";
 }
 

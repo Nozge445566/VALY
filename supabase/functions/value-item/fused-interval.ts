@@ -9,7 +9,7 @@ import type { FusionAd, FusionSource } from "./fusion.ts";
 import { basisOf, bucketOf, foreignStdOf, safeShift, scoreFromWidth, strengthOf, t90 } from "./interval.ts";
 import type { IntervalInput, IntervalOutput, WidthDriver } from "./interval.ts";
 
-/** One independent source (Judge-A, Identification anchor, later the neighbour prior), as stored in the recipe. */
+/** One independent source (Identification anchor, neighbour prior), as stored in the recipe. */
 export interface RecipeSource {
   name: string;
   /** ln USD */

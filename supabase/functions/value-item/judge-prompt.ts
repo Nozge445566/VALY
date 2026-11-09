@@ -7,7 +7,6 @@
 import { judgeLanguageRule } from "./lang.ts";
 import { AD_FIELDS_TEXT } from "./judge-schema.ts";
 import type { AuthenticityReport, BrainInput, DetailReport, Finding } from "./types.ts";
-import type { JudgeAReport } from "./judge-a.ts";
 
 export function marketName(country: string | null): string {
   if (country) {
@@ -63,7 +62,6 @@ export function judgeSystemPrompt(input: BrainInput, stats: FindingStats, memory
 1. The full photo (look at it yourself, closely).
 2. Eye 1, the Detail eye: logos, stamps, seams, condition. It may be wrong: check it against the photo.
 3. The Authenticity eye: signs of a fake or replica, era and age from construction, repaired or replaced parts, rarity, original versus later-made, inconsistencies, material and quality cues, and its own risk hint. It does not read text and does not name the item (eye 1 and the photo do that). It may be wrong: check it against the photo.
-3b. Judge-A, a second Haiku that looked at the photo alone (no ads): its labels for rarity, age class, material and its own certainty. NO price from it. It is an independent second opinion: where it disagrees with you, look again at the photo and decide for yourself; never just copy it. It may be wrong.
 4. The ads: numbered listings found by code (${stats.findingCount} of them, ${stats.soldCount} sold). They may be wrong, mislabelled or misleading.
 
 Target market: ${marketName(input.country)}.
@@ -105,14 +103,12 @@ function oneLine(f: Finding): string {
   });
 }
 
-export function judgeUserText(details: DetailReport | null, findings: Finding[], fromMemory = false, authenticity: AuthenticityReport | null = null, judgeALabels: JudgeAReport | null = null): string {
+export function judgeUserText(details: DetailReport | null, findings: Finding[], fromMemory = false, authenticity: AuthenticityReport | null = null): string {
   const d = details
     ? JSON.stringify({ details: details.details, condition: details.condition, authenticity_signals: details.authenticity_signals })
     : "not available";
   const a = authenticity ? JSON.stringify(authenticity) : "not available";
-  // Judge-A -> Judge: labels only. The price anchor (new price, used band) stays out on purpose: it is the independent anchor for the maths.
-  const ja = judgeALabels ? JSON.stringify({ rarity: judgeALabels.rarity, age_class: judgeALabels.age_class, material: judgeALabels.material, certainty: judgeALabels.certainty }) : "not available";
   const f = findings.length > 0 ? findings.map((x) => oneLine(x)).join("\n") : "none found";
   const heading = fromMemory ? `ADS (${findings.length} saved ads from an earlier valuation, not searched today, sold first, one per line)` : `ADS (${findings.length}, sold first, one per line)`;
-  return `EYE 1, DETAIL EYE:\n${d}\n\nEYE 3, AUTHENTICITY EYE:\n${a}\n\nJUDGE-A (photo-only labels):\n${ja}\n\n${heading}:\n${f}\n\nLabel the ads and judge the item in the photo.`;
+  return `EYE 1, DETAIL EYE:\n${d}\n\nEYE 3, AUTHENTICITY EYE:\n${a}\n\n${heading}:\n${f}\n\nLabel the ads and judge the item in the photo.`;
 }
